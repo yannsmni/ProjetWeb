@@ -1,28 +1,61 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
-            <img src="images/logo_navbar.png">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse ml-4" id="navbarSupportedContent">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  {% block stylesheets %}{% endblock %}
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="https://blackrockdigital.github.io/startbootstrap-simple-sidebar/css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="border-right" id="sidebar-wrapper" style="background-color: black;">
+      <div class="sidebar-heading text-white text-center font-weight-bold text-white">Produits</div>
+      <div class="list-group list-group-flush">
+        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">T-Shirt</a>
+        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Pulls</a>
+        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Goodies</a>
+        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Autres</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-dark border-bottom" style="background-color: black;">
+      
+        <button class="btn btn-secondary mr-4" id="menu-toggle">Produits</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse ml-4" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link h5" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link h5" href="{{ path('accueil') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link h5" href="{{ path('evenements') }}">Evénements</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link h5" href="{{ path('boutique') }}">Boutique</a>
+                    <li class="nav-item active">
+                        <a class="nav-link h5" href="{{ path('boutique') }}">Boutique <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link h5" href="{{ path('photos') }}">Photos</a>
@@ -50,9 +83,14 @@
                 </ul>
             </div>
         </nav>
+      <div class="container-fluid">
         {% block body %}{% endblock %}
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
 
-    <footer class="page-footer font-small text-white pt-4" style="background-color: black;">
+  </div>
+  <footer class="page-footer font-small text-white pt-4" style="background-color: black;">
 
         <div class="container text-center text-md-left">
       
@@ -116,9 +154,20 @@
           </div>
         </div>
     </footer>
-        {% block javascripts %}{% endblock %}
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
+  <!-- /#wrapper -->
+  {% block javascripts %}{% endblock %}
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
 </html>
