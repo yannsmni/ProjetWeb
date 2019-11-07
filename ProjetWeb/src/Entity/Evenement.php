@@ -36,17 +36,17 @@ class Evenement
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
      */
-    private $participants;
+    private $Participants;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="Evenement")
      */
-    private $commentaires;
+    private $Commentaires;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="Evenement")
      */
-    private $images;
+    private $Images;
 
     /**
      * @ORM\Column(type="datetime")
@@ -57,6 +57,16 @@ class Evenement
      * @ORM\Column(type="boolean")
      */
     private $Visible;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Gratuite;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $Statut;
 
     public function __construct()
     {

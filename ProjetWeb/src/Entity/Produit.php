@@ -42,6 +42,11 @@ class Produit
      */
     private $Image_chemin;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
+     */
+    private $Acheteur;
+
     public function getId(): ?int
     {
         return $this->id;
