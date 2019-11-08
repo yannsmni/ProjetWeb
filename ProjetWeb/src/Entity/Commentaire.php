@@ -33,7 +33,7 @@ class Commentaire
     private $Visible;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $Auteur;
