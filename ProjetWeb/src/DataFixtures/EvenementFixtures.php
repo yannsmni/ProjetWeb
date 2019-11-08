@@ -21,7 +21,7 @@ class EvenementFixtures extends Fixture
             $utilisateur->setId($j);
             $manager->persist($utilisateur);
 
-            for ($i = 0; $i < 15; $i++) {
+            for ($i = 0; $i < 3; $i++) {
                 $evenement = new Evenement();
     
                 $chance = random_int(0, 1);
