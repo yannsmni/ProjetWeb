@@ -27,21 +27,21 @@ boutique/accueil:
   path: /boutique/accueil
   controller: App\Controller\ShopController::index
 
-boutique/categorie/tshirts:
-  path: /boutique/tshirts
-  controller: App\Controller\ShopController::tshirts
+boutique/categorie/habits:
+  path: /boutique/habits
+  controller: App\Controller\ShopController::habits
 
-boutique/categorie/pulls:
-  path: /boutique/pulls
-  controller: App\Controller\ShopController::pulls
+boutique/categorie/produits-IT:
+  path: /boutique/produits-IT
+  controller: App\Controller\ShopController::produitsIT
 
 boutique/categorie/goodies:
   path: /boutique/goodies
   controller: App\Controller\ShopController::goodies
 
-boutique/categorie/autres:
-  path: /autres
-  controller: App\Controller\ShopController::autres
+boutique/categorie/reduction:
+  path: /reduction
+  controller: App\Controller\ShopController::reduction
 
 #boutique/categorie/index:
   #path: /boutique/accueil
