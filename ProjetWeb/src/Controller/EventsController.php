@@ -41,7 +41,7 @@ class EventsController extends AbstractController {
     public function month(): Response 
     {       
         $date = new \DateTime();
-        $formattedDate = $date->format('M-y');
+        $formattedDate = $date->format('Y-m');
         $monthlyEvents = $this->repository->findMonthlyEvents($formattedDate);
 
         return $this->render('publicPages/evenements/evenements_mois.html.twig', [
