@@ -26,7 +26,7 @@ class EvenementRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.Date LIKE :val')
-            ->setParameter('val', $formattedDate)
+            ->setParameter('val', $formattedDate.'%')
             ->orderBy('e.Date', 'ASC')
             ->getQuery()
             ->getResult()
@@ -70,7 +70,7 @@ class EvenementRepository extends ServiceEntityRepository
             ->andWhere('e.Date < :val')
             ->setParameter('val', $date)
             ->orderBy('e.Date', 'DESC')
-            ->setMaxResults(5)
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;

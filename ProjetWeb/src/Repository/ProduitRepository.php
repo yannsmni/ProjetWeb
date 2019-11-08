@@ -19,6 +19,37 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    public function findClothes() {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.categorie_id = 1')
+            ->orderBy('a.prix', 'ASC')
+            ->getQuery()
+            ->getResult()
+    }
+
+    public function findITProducts() {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.categorie_id = 3')
+            ->orderBy('a.prix', 'ASC')
+            ->getQuery()
+            ->getResult()
+    }
+
+    public function findGoodies() {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.categorie_id = 2')
+            ->orderBy('a.prix', 'ASC')
+            ->getQuery()
+            ->getResult()
+    }
+
+    public function findReductions() {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.categorie_id = 4')
+            ->orderBy('a.prix', 'ASC')
+            ->getQuery()
+            ->getResult()
+    }
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

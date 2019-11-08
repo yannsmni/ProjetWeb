@@ -21,38 +21,18 @@
     <h1 class="display-4">Prochains événements</h1>
     <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
     Vous pouvez également poster vos idées, n'hésitez pas !</p>
-    <div class="card-deck">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </div>
+    <div class="row">
+        {% for evenement in upcommingEvents %}
+        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ evenement.nom }}</h5>
+            <p class="card-text">{{ evenement.description }}</p>
+            <p class="card-text"><small class="text-muted">{{ evenement.date|date("m/d/Y")}}</small></p>
             </div>
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </div>
-            </div>
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </div>
-            </div>
-          </div>
+        </div>
+        {% endfor %}
+    </div>
     <hr class="my-4">
     <p>Accédez à tous les événements du mois en cliquant sur le lien</p>
     <p class="lead">
@@ -64,38 +44,18 @@
     <h1 class="display-4">Derniers événements</h1>
     <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
     Vous pouvez également poster vos idées, n'hésitez pas !</p>
-    <div class="card-deck">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </div>
+    <div class="row">
+        {% for evenement in latestEvents %}
+        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ evenement.nom }}</h5>
+            <p class="card-text">{{ evenement.description }}</p>
+            <p class="card-text"><small class="text-muted">Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</small></p>
             </div>
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </div>
-            </div>
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </div>
-            </div>
-          </div>
+        </div>
+        {% endfor %}
+    </div>
     <hr class="my-4">
     <p>Retrouvez tous les événements directement en cliquant sur le lien.</p>
     <p class="lead">
