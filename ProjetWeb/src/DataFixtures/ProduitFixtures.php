@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Produit;
+use App\Entity\Categorie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -9,76 +11,116 @@ class ProduitFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = \Faker\Factory::create('fr_FR');
+        //$faker = \Faker\Factory::create('fr_FR');
 
-        for($i=0; $i<4; $i++){
+        for ($i = 0; $i < 4; $i++) {
             $categorie = new Categorie();
-            if($i=0){
+
+            if ($i == 0) {
                 $categorie->setNom('Habit');
                 $manager->persist($categorie);
-                for($j=0; $j<3; $j++){
-                    $produit = new Categorie();
-                    if($i=0){
-                        $produit->setCategorie($categorie);
-                        $produit->setNom('Tshirt');
-                        $produit->setDescription('Tshirt à l\'effigie du BDE du CESI');
-                        $produit->setPrix(15);
-                        $produit->setImageChemin('./public/image/tshirt.png');
-                    }
-                    else if($i=1){
 
+                for ($j = 0; $j < 3; $j++) {
+                    $produit = new Produit();
+                    if ($j == 0) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Tshirt')
+                            ->setDescription('Tshirt à l\'effigie du BDE du CESI')
+                            ->setPrix(15)
+                            ->setImageChemin('./public/image/tshirt.png');
+                    } else if ($j == 1) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Hoodie')
+                            ->setDescription('Hoodie à l\'effigie du BDE du CESI')
+                            ->setPrix(35)
+                            ->setImageChemin('./public/image/hoodie.png');
+                    } else if ($j == 2) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Sweatshirt')
+                            ->setDescription('Sweatshirt à l\'effigie du BDE du CESI')
+                            ->setPrix(25)
+                            ->setImageChemin('./public/image/sweatshirt.png');
                     }
-                    else if($i=2){
 
-                    }
+                    $manager->persist($produit);
                 }
-            }
-            else if($i=1){
+            } else if ($i == 1) {
                 $categorie->setNom('Goodies');
                 $manager->persist($categorie);
-                for($j=0; $j<3; $j++){
+
+                for ($k = 0; $k < 3; $k++) {
                     $produit = new Produit();
-                    if($i=0){
-
+                    if ($k == 0) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Sticker BDE')
+                            ->setDescription('Sticker reprrenant le logo du BDE pour vos PC')
+                            ->setPrix(7)
+                            ->setImageChemin('./public/image/sticker.png');
+                    } else if ($k == 1) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Porte-clé')
+                            ->setDescription('Porte-clé reprrenant le logo du BDE')
+                            ->setPrix(4)
+                            ->setImageChemin('./public/image/porte_cle.png');
+                    } else if ($k == 2) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Peluche')
+                            ->setDescription('Peluche cygogne du BDE')
+                            ->setPrix(5)
+                            ->setImageChemin('./public/image/peluche.png');
                     }
-                    else if($i=1){
 
-                    }
-                    else if($i=2){
-
-                    }
+                    $manager->persist($produit);
                 }
-            }
-            else if($i=2){
-                $categorie->setNomVALUES ('Produit IT');
+            } else if ($i == 2) {
+                $categorie->setNom('Produit IT');
                 $manager->persist($categorie);
-                for($j=0; $j<3; $j++){
+
+                for ($p = 0; $p < 3; $p++) {
                     $produit = new Produit();
-                    if($i=0){
-
+                    if ($p == 0) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Ventilateur USB')
+                            ->setDescription('Ventilateur USB pour l\'été')
+                            ->setPrix(13)
+                            ->setImageChemin('./public/image/ventilateur.png');
+                    } else if ($p == 1) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Clavier')
+                            ->setDescription('Clavier BDE méchanique pour les plus grands G@merz')
+                            ->setPrix(50)
+                            ->setImageChemin('./public/image/clavier.png');
+                    } else if ($p == 2) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('RGBDE')
+                            ->setDescription('Set RGB pour plus de style')
+                            ->setPrix(52)
+                            ->setImageChemin('./public/image/rgbde.png');
                     }
-                    else if($i=1){
 
-                    }
-                    else if($i=2){
-
-                    }
+                    $manager->persist($produit);
                 }
-            }
-            else if($i=3){
+            } else if ($i == 3) {
                 $categorie->setNom('Réduction');
                 $manager->persist($categorie);
-                for($j=0; $j<3; $j++){
+
+                for ($l = 0; $l < 2; $l++) {
                     $produit = new Produit();
-                    if($i=0){
-
+                    if ($l == 0) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Offre Bar')
+                            ->setDescription('En partenariat avec les bars de Strasbourg')
+                            ->setPrix(14)
+                            ->setImageChemin('./public/image/offre_bar.png');
+                    } else if ($l == 1) {
+                        $produit->setCategorie($categorie)
+                            ->setNom('Offre IT')
+                            ->setDescription('En partenariat avec les entreprises IT de Strasbourg')
+                            ->setPrix(90)
+                            ->setImageChemin('./public/image/offre_it.png');
                     }
-                    else if($i=1){
 
-                    }
-                    else if($i=2){
-
-                    }
+                    $manager->persist($produit);
                 }
             }
         }

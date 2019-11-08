@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Evenement;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Evenement|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +19,62 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
-    // /**
-    //  * @return Evenement[] Returns an array of Evenement objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+    * @return Evenement[] Returns an array of Evenement objects
+    */
+    public function findMonthlyEvents($formattedDate)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('e.Date LIKE :val')
+            ->setParameter('val', $formattedDate)
+            ->orderBy('e.Date', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
+
+    /**
+    * @return Evenement[] Returns an array of Evenement objects
     */
+    public function findUpcommingEvents($date)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.Date > :val')
+            ->setParameter('val', $date)
+            ->orderBy('e.Date', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+    * @return Evenement[] Returns an array of Evenement objects
+    */
+    public function findBestEvents()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.id', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+    * @return Evenement[] Returns an array of Evenement objects
+    */
+    public function findLatestEvents($date)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.Date < :val')
+            ->setParameter('val', $date)
+            ->orderBy('e.Date', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Evenement

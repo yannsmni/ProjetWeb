@@ -7,7 +7,7 @@ use App\Repository\EvenementRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventsController extends AbstractController {
+class EventsController extends AbstractController {  
 
     public function __construct(EvenementRepository $repository) {
         $this->repository = $repository;
@@ -15,18 +15,46 @@ class EventsController extends AbstractController {
 
     public function index(): Response 
     {        
+        $date = new \DateTime();
         $allEvents = $this->repository->findAll();
-        //$latestEvents = $this->repository->findLatestEvents();
-        //$upcommingEvents = $this->repository->findUpcommingEvents();
-        //$monthlyEvents = $this->repository->findMonthlyEvents();
-        //$bestEvents = $this->repository->findBestEvents();
+        $latestEvents = $this->repository->findLatestEvents($date);
+        $upcommingEvents = $this->repository->findUpcommingEvents($date);
+        $bestEvents = $this->repository->findBestEvents();
 
-        return $this->render('publicPages/evenements.html.twig', [
+        return $this->render('publicPages/evenements/evenements_home.html.twig', [
+            'allEvents' => $allEvents,
+            'latestEvents' => $latestEvents,
+            'upcommingEvents' => $upcommingEvents,
+            'bestEvents' => $bestEvents
+        ]);
+    }
+
+    public function all(): Response 
+    {        
+        $allEvents = $this->repository->findAll();
+
+        return $this->render('publicPages/evenements/evenements_tous.html.twig', [
             'allEvents' => $allEvents
-        //    'latestEvents' => $latestEvents,
-        //    'upcommingEvents' => $upcommingEvents,
-        //    'monthlyEvents' => $monthlyEvents,
-        //    'bestEvents' => $bestEvents
+        ]);
+    }
+
+    public function month(): Response 
+    {       
+        $date = new \DateTime();
+        $formattedDate = $date->format('M-y');
+        $monthlyEvents = $this->repository->findMonthlyEvents($formattedDate);
+
+        return $this->render('publicPages/evenements/evenements_mois.html.twig', [
+            'monthlyEvents' => $monthlyEvents
+        ]);
+    }
+
+    public function my(): Response 
+    {        
+        //$myEvents = $this->repository->findMyEvents();
+
+        return $this->render('publicPages/evenements/evenements_perso.html.twig', [
+            //'myEvents' => $myEvents
         ]);
     }
 }

@@ -8,8 +8,24 @@ accueil:
   controller: App\Controller\HomeController::index
 
 evenements:
-  path: /evenements
+  path: /evenements/accueil
   controller: App\Controller\EventsController::index
+
+evenementsAll:
+  path: /evenements/tous
+  controller: App\Controller\EventsController::all
+
+evenementsMois:
+  path: /evenements/mois
+  controller: App\Controller\EventsController::month
+
+evenementsPerso:
+  path: /evenements/mes_evenements
+  controller: App\Controller\EventsController::my
+
+#boutique:
+  #path: /boutique
+  #controller: App\Controller\ShopController::index
 
 boutique/accueil:
   path: /boutique/accueil

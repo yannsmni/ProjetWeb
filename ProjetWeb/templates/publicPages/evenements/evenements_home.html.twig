@@ -1,0 +1,106 @@
+{% extends 'events.html.twig' %}
+
+{% block title %}Evénements - Accueil{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron jumbotron-fluid" style="background-color: #00a490;">
+    <div class="container">
+        <h1 class="display-4">Evénements du BDE !</h1>
+        <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
+        Vous pouvez également poster vos idées, n'hésitez pas !</p>
+        <hr class="my-4">
+        <p>Retrouvez tous les événements directement en cliquant sur le lien.</p>
+        <p class="lead">
+        <a class="btn btn-dark btn-lg" href="{{ path('evenementsAll') }}" role="button">Tous les événements</a>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <h1 class="display-4">Prochains événements</h1>
+    <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
+    Vous pouvez également poster vos idées, n'hésitez pas !</p>
+    <div class="card-deck">
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+    <hr class="my-4">
+    <p>Accédez à tous les événements du mois en cliquant sur le lien</p>
+    <p class="lead">
+    <a class="btn btn-dark btn-lg" href="{{ path('evenementsMois') }}" role="button">Evénements ce mois-ci</a>
+    </p>
+</div>
+
+<div class="container">
+    <h1 class="display-4">Derniers événements</h1>
+    <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
+    Vous pouvez également poster vos idées, n'hésitez pas !</p>
+    <div class="card-deck">
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+    <hr class="my-4">
+    <p>Retrouvez tous les événements directement en cliquant sur le lien.</p>
+    <p class="lead">
+    <a class="btn btn-dark btn-lg" href="{{ path('evenementsAll') }}" role="button">Tous les événements</a>
+    </p>
+</div>
+
+{% endblock %}
