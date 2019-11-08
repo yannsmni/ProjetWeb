@@ -11,10 +11,35 @@ evenements:
   path: /evenements
   controller: App\Controller\EventsController::index
 
-boutique:
-  path: /boutique
+boutique/accueil:
+  path: /boutique/accueil
   controller: App\Controller\ShopController::index
+
+boutique/categorie/tshirts:
+  path: /boutique/tshirts
+  controller: App\Controller\ShopController::tshirts
+
+boutique/categorie/pulls:
+  path: /boutique/pulls
+  controller: App\Controller\ShopController::pulls
+
+boutique/categorie/goodies:
+  path: /boutique/goodies
+  controller: App\Controller\ShopController::goodies
+
+boutique/categorie/autres:
+  path: /autres
+  controller: App\Controller\ShopController::autres
+
+#boutique/categorie/index:
+  #path: /boutique/accueil
+  #controller: App\Controller\ShopController::index
+
+#boutique/categorie/{nom}:
+  #path: /boutique/{nom}
+  #controller: App\Controller\ShopController::categorie
 
 photos:
   path: /photos
   controller: App\Controller\PhotosController::index
+

@@ -21,4 +21,36 @@ class ShopController extends AbstractController {
             'allProducts' => $allProducts
         ]);
     }
+
+    public function goodies() : Response
+    {
+        $allProducts = $this->repository->findAll();
+        return $this->render('publicPages/boutique.goodies.html.twig', [
+            'allProducts' => $allProducts
+        ]);
+    }
+
+    public function tshirts() : Response
+    {
+        $allProducts = $this->repository->findAll();
+        return $this->render('publicPages/boutique.tshirts.html.twig', [
+            'allProducts' => $allProducts
+        ]);
+    }
+
+    public function pulls() : Response
+    {
+        $allProducts = $this->repository->findAll();
+        return $this->render('publicPages/boutique.pulls.html.twig', [
+            'allProducts' => $allProducts
+        ]);
+    }
+
+    public function autres() : Response
+    {
+        $allProducts = $this->repository->findAll();
+        return $this->render('publicPages/boutique.autres.html.twig', [
+            'allProducts' => $allProducts
+        ]);
+    }
 }
