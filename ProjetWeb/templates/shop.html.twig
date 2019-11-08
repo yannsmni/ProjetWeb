@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -25,12 +25,13 @@
 
     <!-- Sidebar -->
     <div class="border-right" id="sidebar-wrapper" style="background-color: black;">
-      <div class="sidebar-heading text-white text-center font-weight-bold text-white">Produits</div>
+      <div class="sidebar-heading text-white text-center font-weight-bold text-white">
+      <a href="{{ path('boutique/accueil') }}">Produits </a> </div>
       <div class="list-group list-group-flush">
-        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">T-Shirt</a>
-        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Pulls</a>
-        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Goodies</a>
-        <a href="{{ path('boutique') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Autres</a>
+        <a href="{{ path('boutique/categorie/tshirts') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">T-Shirt</a>
+        <a href="{{ path('boutique/categorie/pulls') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Pulls</a>
+        <a href="{{ path('boutique/categorie/goodies') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Goodies</a>
+        <a href="{{ path('boutique/categorie/autres') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Autres</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -55,7 +56,7 @@
                         <a class="nav-link h5" href="{{ path('evenements') }}">Evénements</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link h5" href="{{ path('boutique') }}">Boutique <span class="sr-only">(current)</span></a>
+                        <a class="nav-link h5" href="{{ path('boutique/accueil') }}">Boutique <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link h5" href="{{ path('photos') }}">Photos</a>
@@ -70,7 +71,7 @@
                 <ul class="nav justify-content-end">
                     {% if app.user %}
                     <li class="nav-item">
-                        <p class="nav-link text-white h5">  </span></p>
+                        <p class="nav-link text-white h5"></p>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger h5" href="">Déconnexion</a>
@@ -98,7 +99,7 @@
       
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
               <h6 class="text-uppercase mb-4 font-weight-bold text-white">Bde Cesi</h6>
-              <img src="images/logo.png">
+              <!--<img src="images/logo.png" alt="image du logo">-->
             </div>
             <hr class="w-100 clearfix d-md-none">
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
