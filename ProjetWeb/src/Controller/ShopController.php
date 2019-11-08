@@ -13,6 +13,9 @@ class ShopController extends AbstractController {
         $this->repository = $repository;
     }
 
+    /**
+     * @return Response
+     */
     public function index(): Response 
     {        
         $allProducts = $this->repository->findAll();
@@ -22,6 +25,9 @@ class ShopController extends AbstractController {
         ]);
     }
 
+    /**
+     * @return Response
+     */
     public function goodies() : Response
     {
         $allProducts = $this->repository->findAll();
@@ -30,6 +36,9 @@ class ShopController extends AbstractController {
         ]);
     }
 
+    /**
+     * @return Response
+     */
     public function tshirts() : Response
     {
         $allProducts = $this->repository->findAll();
@@ -38,6 +47,9 @@ class ShopController extends AbstractController {
         ]);
     }
 
+    /**
+     * @return Response
+     */
     public function pulls() : Response
     {
         $allProducts = $this->repository->findAll();
@@ -46,6 +58,9 @@ class ShopController extends AbstractController {
         ]);
     }
 
+    /**
+     * @return Response
+     */
     public function autres() : Response
     {
         $allProducts = $this->repository->findAll();

@@ -23,10 +23,6 @@ evenementsPerso:
   path: /evenements/mes_evenements
   controller: App\Controller\EventsController::my
 
-#boutique:
-  #path: /boutique
-  #controller: App\Controller\ShopController::index
-
 boutique/accueil:
   path: /boutique/accueil
   controller: App\Controller\ShopController::index
