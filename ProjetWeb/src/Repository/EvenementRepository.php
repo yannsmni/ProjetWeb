@@ -22,13 +22,11 @@ class EvenementRepository extends ServiceEntityRepository
     /**
     * @return Evenement[] Returns an array of Evenement objects
     */
-    public function findMonthlyEvents($mois)
+    public function findMonthlyEvents($formattedDate)
     {
         return $this->createQueryBuilder('e')
-            ->where(
-                $this->expr()->like('e.Date', ':val')
-            )
-            ->setParameter('val', $mois)
+            ->andWhere('e.Date LIKE :val')
+            ->setParameter('val', $formattedDate)
             ->orderBy('e.Date', 'ASC')
             ->getQuery()
             ->getResult()
@@ -66,11 +64,11 @@ class EvenementRepository extends ServiceEntityRepository
     /**
     * @return Evenement[] Returns an array of Evenement objects
     */
-    public function findLatestEvents($value)
+    public function findLatestEvents($date)
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.Date < :val')
-            ->setParameter('val', $value)
+            ->setParameter('val', $date)
             ->orderBy('e.Date', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
