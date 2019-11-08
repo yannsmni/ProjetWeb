@@ -47,6 +47,11 @@ class Produit
      */
     private $Acheteur;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Quantite_vendu;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,4 +116,18 @@ class Produit
 
         return $this;
     }
+
+    public function getQuantiteVendu(): ?int
+    {
+        return $this->Quantite_Vendu;
+    }
+
+    public function setQuantiteVendu(int $Quantite_Vendu): self
+    {
+        $this->Quantite_Vendu = $Quantite_Vendu;
+
+        return $this;
+    }
+
+
 }

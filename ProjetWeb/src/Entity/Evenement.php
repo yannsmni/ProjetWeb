@@ -59,9 +59,9 @@ class Evenement
     private $Visible;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer")
      */
-    private $Gratuite;
+    private $Prix;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -117,14 +117,14 @@ class Evenement
     }
 
     /**
-     * @return Collection|Participants[]
+     * @return Collection|Utilisateur[]
      */
     public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    public function addParticipant(Participant $participant): self
+    public function addParticipant(Utilisateur $participant): self
     {
         if (!$this->participants->contains($participant)) {
             $this->participants[] = $participant;
@@ -134,7 +134,7 @@ class Evenement
         return $this;
     }
 
-    public function removeParticipant(Participant $participant): self
+    public function removeParticipant(Utilisateur $participant): self
     {
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
@@ -229,6 +229,30 @@ class Evenement
     public function setVisible(bool $Visible): self
     {
         $this->Visible = $Visible;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->Prix;
+    }
+
+    public function setPrix(int $Prix): self
+    {
+        $this->Prix = $Prix;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->Statut;
+    }
+
+    public function setStatut(string $Statut): self
+    {
+        $this->Statut = $Statut;
 
         return $this;
     }

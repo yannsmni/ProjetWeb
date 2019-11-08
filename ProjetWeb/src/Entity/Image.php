@@ -37,11 +37,6 @@ class Image
      */
     private $Visible;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Statut;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -91,18 +86,6 @@ class Image
     public function setVisible(bool $Visible): self
     {
         $this->Visible = $Visible;
-
-        return $this;
-    }
-
-    public function getStatut(): ?string
-    {
-        return $this->Statut;
-    }
-
-    public function setStatut(string $Statut): self
-    {
-        $this->Statut = $Statut;
 
         return $this;
     }
