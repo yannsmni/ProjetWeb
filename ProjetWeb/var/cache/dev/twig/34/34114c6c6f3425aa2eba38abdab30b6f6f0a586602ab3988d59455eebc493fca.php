@@ -67,11 +67,11 @@ class __TwigTemplate_e6e2331ba347511252d4445a39f3bd83032643e2fdda9bbe9a68c906e15
         echo "
                     <span class=\"icon icon-close\">";
         // line 10
-        echo twig_include($this->env, $context, "@Twig/images/icon-minus-square-o.svg");
+        echo twig_include($this->env, $context, "@Twig/image/icon-minus-square-o.svg");
         echo "</span>
                     <span class=\"icon icon-open\">";
         // line 11
-        echo twig_include($this->env, $context, "@Twig/images/icon-plus-square-o.svg");
+        echo twig_include($this->env, $context, "@Twig/image/icon-plus-square-o.svg");
         echo "</span>
                 </h3>
             </th>
@@ -140,8 +140,8 @@ class __TwigTemplate_e6e2331ba347511252d4445a39f3bd83032643e2fdda9bbe9a68c906e15
                         <span class=\"text-muted\">[{{ num_exceptions - index + 1 }}/{{ num_exceptions }}]</span>
                     {% endif %}
                     {{ exception.class|split('\\\\')|last }}
-                    <span class=\"icon icon-close\">{{ include('@Twig/images/icon-minus-square-o.svg') }}</span>
-                    <span class=\"icon icon-open\">{{ include('@Twig/images/icon-plus-square-o.svg') }}</span>
+                    <span class=\"icon icon-close\">{{ include('@Twig/image/icon-minus-square-o.svg') }}</span>
+                    <span class=\"icon icon-open\">{{ include('@Twig/image/icon-plus-square-o.svg') }}</span>
                 </h3>
             </th>
         </tr>

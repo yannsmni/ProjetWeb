@@ -718,7 +718,7 @@ class Crawler implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Selects links by name or alt value for clickable images.
+     * Selects links by name or alt value for clickable image.
      *
      * @param string $value The link text
      *
@@ -732,7 +732,7 @@ class Crawler implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Selects images by alt value.
+     * Selects image by alt value.
      *
      * @param string $value The image alt
      *
@@ -746,7 +746,7 @@ class Crawler implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Selects a button by name or alt value for images.
+     * Selects a button by name or alt value for image.
      *
      * @param string $value The button text
      *

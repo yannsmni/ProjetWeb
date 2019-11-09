@@ -3,8 +3,8 @@
         <div class="trace-head">
             <span class="sf-toggle" data-toggle-selector="#trace-html-{{ index }}" data-toggle-initial="{{ expand ? 'display' }}">
                 <h3 class="trace-class">
-                    <span class="icon icon-close">{{ include('@Twig/images/icon-minus-square-o.svg') }}</span>
-                    <span class="icon icon-open">{{ include('@Twig/images/icon-plus-square-o.svg') }}</span>
+                    <span class="icon icon-close">{{ include('@Twig/image/icon-minus-square-o.svg') }}</span>
+                    <span class="icon icon-open">{{ include('@Twig/image/icon-plus-square-o.svg') }}</span>
 
                     <span class="trace-namespace">
                         {{ exception.class|split('\\')|slice(0, -1)|join('\\') }}

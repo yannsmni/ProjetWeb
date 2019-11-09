@@ -31,6 +31,10 @@ boutique/accueil:
   path: /boutique/accueil
   controller: App\Controller\ShopController::index
 
+boutique/produits:
+  path: /boutique/tous-nos-produits
+  controller: App\Controller\ShopController::tousProduits
+
 boutique/categorie/habits:
   path: /boutique/habits
   controller: App\Controller\ShopController::habits
@@ -43,7 +47,7 @@ boutique/categorie/goodies:
   path: /boutique/goodies
   controller: App\Controller\ShopController::goodies
 
-boutique/categorie/reduction:
+boutique/categorie/reductions:
   path: /reduction
   controller: App\Controller\ShopController::reduction
 

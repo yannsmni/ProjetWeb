@@ -1222,7 +1222,7 @@ class srcApp_KernelDevDebugContainer extends Container
             'security.firewall.map.context.dev' => '?',
             'security.firewall.map.context.main' => '?',
         ]), new RewindableGenerator(function () {
-            yield 'security.firewall.map.context.dev' => ($this->privates['.security.request_matcher.Iy.T22O'] ?? ($this->privates['.security.request_matcher.Iy.T22O'] = new \Symfony\Component\HttpFoundation\RequestMatcher('^/(_(profiler|wdt)|css|images|js)/')));
+            yield 'security.firewall.map.context.dev' => ($this->privates['.security.request_matcher.Iy.T22O'] ?? ($this->privates['.security.request_matcher.Iy.T22O'] = new \Symfony\Component\HttpFoundation\RequestMatcher('^/(_(profiler|wdt)|css|image|js)/')));
             yield 'security.firewall.map.context.main' => NULL;
         }, 2));
     }

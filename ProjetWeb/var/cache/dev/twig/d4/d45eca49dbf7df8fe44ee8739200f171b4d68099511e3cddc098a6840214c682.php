@@ -184,7 +184,7 @@ class __TwigTemplate_e50a7b8bc2fd63aba0f181c8e1f0708246b77a49dbb9bca8d151fb92239
       
             <div class=\"col-md-3 col-lg-3 col-xl-3 mx-auto mt-3\">
               <h6 class=\"text-uppercase mb-4 font-weight-bold text-white\">Bde Cesi</h6>
-              <img src=\"images/logo.png\">
+              <img src=\"image/logo.png\">
             </div>
             <hr class=\"w-100 clearfix d-md-none\">
             <div class=\"col-md-2 col-lg-2 col-xl-2 mx-auto mt-3\">
@@ -459,7 +459,7 @@ class __TwigTemplate_e50a7b8bc2fd63aba0f181c8e1f0708246b77a49dbb9bca8d151fb92239
       
             <div class=\"col-md-3 col-lg-3 col-xl-3 mx-auto mt-3\">
               <h6 class=\"text-uppercase mb-4 font-weight-bold text-white\">Bde Cesi</h6>
-              <img src=\"images/logo.png\">
+              <img src=\"image/logo.png\">
             </div>
             <hr class=\"w-100 clearfix d-md-none\">
             <div class=\"col-md-2 col-lg-2 col-xl-2 mx-auto mt-3\">

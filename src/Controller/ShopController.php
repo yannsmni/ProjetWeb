@@ -46,7 +46,13 @@ class ShopController extends AbstractController {
             'goodies' => $goodies
         ]);
     }
-
+    public function tousProduits() : Response
+    {
+        $allProducts = $this->repository->findAll();
+        return $this->render('publicPages/boutique.all.html.twig', [
+            'allProducts' => $allProducts
+        ]);
+    }
     /**
      * @return Response
      */

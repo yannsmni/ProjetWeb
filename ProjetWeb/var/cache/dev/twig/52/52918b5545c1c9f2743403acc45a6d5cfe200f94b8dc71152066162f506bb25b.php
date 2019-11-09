@@ -72,7 +72,7 @@ class __TwigTemplate_b633be49da3747a1acf877164fd22179c0977a1e5702a6e499111b393dd
             echo "</a>
                     <span class=\"icon\">";
             // line 7
-            echo twig_include($this->env, $context, "@Twig/images/chevron-right.svg");
+            echo twig_include($this->env, $context, "@Twig/image/chevron-right.svg");
             echo "</span>
                 ";
             ++$context['loop']['index0'];
@@ -117,7 +117,7 @@ class __TwigTemplate_b633be49da3747a1acf877164fd22179c0977a1e5702a6e499111b393dd
             <div class=\"exception-illustration hidden-xs-down\">
                 ";
         // line 24
-        echo twig_include($this->env, $context, "@Twig/images/symfony-ghost.svg");
+        echo twig_include($this->env, $context, "@Twig/image/symfony-ghost.svg");
         echo "
             </div>
         </div>
@@ -394,7 +394,7 @@ class __TwigTemplate_b633be49da3747a1acf877164fd22179c0977a1e5702a6e499111b393dd
             <h2 class=\"exception-hierarchy\">
                 {% for previousException in exception.allPrevious|reverse %}
                     <a href=\"#trace-box-{{ loop.revindex + 1 }}\">{{ previousException.class|abbr_class }}</a>
-                    <span class=\"icon\">{{ include('@Twig/images/chevron-right.svg') }}</span>
+                    <span class=\"icon\">{{ include('@Twig/image/chevron-right.svg') }}</span>
                 {% endfor %}
                 <a href=\"#trace-box-1\">{{ exception.class|abbr_class }}</a>
             </h2>
@@ -411,7 +411,7 @@ class __TwigTemplate_b633be49da3747a1acf877164fd22179c0977a1e5702a6e499111b393dd
             </h1>
 
             <div class=\"exception-illustration hidden-xs-down\">
-                {{ include('@Twig/images/symfony-ghost.svg') }}
+                {{ include('@Twig/image/symfony-ghost.svg') }}
             </div>
         </div>
     </div>
