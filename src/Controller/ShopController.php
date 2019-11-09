@@ -32,7 +32,8 @@ class ShopController extends AbstractController {
             'goodies' => $goodies,
             'clothes' => $clothes,
             'reductions' => $reductions,
-            'IT-Products' => $ITProducts
+            'IT-Products' => $ITProducts,
+            'allProducts' => $allProducts
         ]);
     }
 
@@ -46,7 +47,13 @@ class ShopController extends AbstractController {
             'goodies' => $goodies
         ]);
     }
-
+    public function tousProduits() : Response
+    {
+        $allProducts = $this->repository->findAll();
+        return $this->render('publicPages/boutique.all.html.twig', [
+            'All-Products' => $allProducts
+        ]);
+    }
     /**
      * @return Response
      */

@@ -21,32 +21,32 @@ class ProduitRepository extends ServiceEntityRepository
 
     public function findClothes() {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.categorie_id = 1')
-            ->orderBy('a.prix', 'ASC')
+            ->andWhere('a.Categorie = 1')
+            ->orderBy('a.Prix', 'ASC')
             ->getQuery()
             ->getResult();
     }
 
     public function findITProducts() {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.categorie_id = 3')
-            ->orderBy('a.prix', 'ASC')
+            ->andWhere('a.Categorie = 3')
+            ->orderBy('a.Prix', 'ASC')
             ->getQuery()
             ->getResult();
     }
 
     public function findGoodies() {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.categorie_id = 2')
-            ->orderBy('a.prix', 'ASC')
+            ->andWhere('a.Categorie = 2')
+            ->orderBy('a.Prix', 'ASC')
             ->getQuery()
             ->getResult();
     }
 
     public function findReductions() {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.categorie_id = 4')
-            ->orderBy('a.prix', 'ASC')
+            ->andWhere('a.Categorie = 4')
+            ->orderBy('a.Prix', 'ASC')
             ->getQuery()
             ->getResult();
     }

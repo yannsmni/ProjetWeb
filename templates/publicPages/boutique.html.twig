@@ -1,20 +1,56 @@
 {% extends 'shop.html.twig' %}
 
-{% block title %}Boutique{% endblock %}
+{% block title %}Boutique - Accueil{% endblock %}
 
 {% block body %}
 
-<div class="container my-4">
-    <h1>Nos produits</h1>
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-    </p>
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-    </p>
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+<div class="jumbotron jumbotron-fluid" style="background-color: #5c88da;">
+    <div class="container">
+        <h1 class="display-4">Venez découvrir nos produits !</h1>
+        <p class="lead"> Découvrez tous les produits mis en vente par le BDE ! <br/>
+            De quoi représenter notre école et porter nos couleurs fièrement. <br />
+            Ces ventes permettent également de financer nos événements, donc n'hésitez pas !
+        </p>
+        <hr class="mr-4">
+        <p>Retrouvez tous nos produits en vente en cliquant sur le lien suivant :</p>
+        <p class="lead">
+            <a class="btn btn-dark btn-lg" href="{{ path('boutique/produits') }}" role="button"> Tous les produits</a>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <h1 class="display-4">Nos habits</h1>
+    <p class="lead"> Les habits sont le meilleur moyen de donner une visibilité à l'école. <br/>
+    On propose régulièrement de nouveaux modèles, et toutes les tailles sont disponibles. <br/>
+    Venez y faire un tour !</p>
+    <hr class="mr-4">
+    <p>Retrouvez tous nos habits : </p>
+    <p class="lead">
+        <a class="btn btn-dark btn-lg" href="{{ path('boutique/categorie/habits') }}" role="button">Nos habits</a>
     </p>
 </div>
 
+<div class="container">
+    <h1 class="display-4">Nos goodies</h1>
+    <p class="lead"> Venez soutenir nos événements en achetant nos goodies ! <br/>
+    On vous propose régulièrement de nouveaux goodies, en fonction de vos envies.</p>
+    <hr class="mr-4">
+    <p>Retrouvez tous nos goodies : </p>
+    <p class="lead">
+        <a class="btn btn-dark btn-lg" href="{{ path('boutique/categorie/goodies') }}" role="button">Nos goodies</a>
+    </p>
+</div>
+
+<div class="container">
+    <h1 class="display-4">Vos avantages étudiant</h1>
+    <p class="lead">En tant qu'étudiant, vous avez accès à des avantages et réductions sur divers produits IT. <br/>
+    Nous faisons au mieux pour vous en proposer toujours plus. </p>
+    <hr class="mr-4">
+    <p>Retrouvez vos avantages étudiants en cliquant sur les liens suivants : </p>
+    <p class="lead">
+        <a class="btn btn-dark btn-lg" href="{{ path('boutique/categorie/reductions') }}" role="button">Nos réductions</a>
+        <a class="btn btn-dark btn-lg" href="{{ path('boutique/categorie/produits-IT') }}" role="button">Produits IT</a>
+    </p>
+</div>
 {% endblock %}
