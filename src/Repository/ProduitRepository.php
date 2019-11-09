@@ -24,7 +24,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('a.categorie_id = 1')
             ->orderBy('a.prix', 'ASC')
             ->getQuery()
-            ->getResult()
+            ->getResult();
     }
 
     public function findITProducts() {
@@ -32,7 +32,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('a.categorie_id = 3')
             ->orderBy('a.prix', 'ASC')
             ->getQuery()
-            ->getResult()
+            ->getResult();
     }
 
     public function findGoodies() {
@@ -40,7 +40,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('a.categorie_id = 2')
             ->orderBy('a.prix', 'ASC')
             ->getQuery()
-            ->getResult()
+            ->getResult();
     }
 
     public function findReductions() {
@@ -48,7 +48,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('a.categorie_id = 4')
             ->orderBy('a.prix', 'ASC')
             ->getQuery()
-            ->getResult()
+            ->getResult();
     }
     // /**
     //  * @return Produit[] Returns an array of Produit objects
