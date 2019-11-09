@@ -8,7 +8,7 @@
         <h1>Tous nos produits</h1>
         {% for produit in allProducts %}
         <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
-            <img src="assets/image/tshirt.jpeg" class="card-img-top" alt="{{ produit.description }}">
+            <img src="{{ produit.image_chemin }}" class="card-img-top" alt="{{ produit.description }}">
             <div class="card-body">
                 <h4 class="card-title">{{ produit.nom }}</h4>
                 <p class="card-text"> {{ produit.description }}</p>
