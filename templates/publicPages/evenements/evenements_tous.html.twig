@@ -14,6 +14,9 @@
             <h5 class="card-title">{{ evenement.nom }}</h5>
             <p class="card-text">{{ evenement.description }}</p>
             <p class="card-text"><small class="text-muted">Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</small></p>
+                <div>
+                    <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
+                </div>
             </div>
         </div>
         {% endfor %}
