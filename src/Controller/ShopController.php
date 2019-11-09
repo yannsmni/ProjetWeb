@@ -16,6 +16,9 @@ class ShopController extends AbstractController {
     /**
      * @return Response
      */
+    /*
+     * Index comprenant tous les types possibles de filtres
+     */
     public function index(): Response 
     {        
         $allProducts = $this->repository->findAll();
