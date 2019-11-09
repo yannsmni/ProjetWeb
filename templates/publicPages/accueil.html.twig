@@ -34,32 +34,18 @@
                 <h1 class="display-4 font-weight-bold">Evénements</h1>
                 <p class="lead">Ouais ouais ouais</p>
                 <hr class="my-4">
-                <div class="card-deck">
-                    <div class="card">
+                <div class="row">
+                  {% for evenement in upcommingEvents %}
+                  <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
                       <img src="..." class="card-img-top" alt="...">
                       <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      <h5 class="card-title">{{ evenement.nom }}</h5>
+                      <p class="card-text">{{ evenement.description }}</p>
+                      <p class="card-text"><small class="text-muted">{{ evenement.date|date("m/d/Y")}}</small></p>
                       </div>
-                    </div>
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
                   </div>
+                  {% endfor %}
+              </div>
               </div>
           </div>
       </div>

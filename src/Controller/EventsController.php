@@ -29,6 +29,13 @@ class EventsController extends AbstractController {
         ]);
     }
 
+    public function show(Evenement $evenement): Response
+    {
+        return $this->render('publicPages/evenements/evenements_show.html.twig', [
+            'evenement' => $evenement
+        ]);
+    }
+
     public function all(): Response 
     {        
         $allEvents = $this->repository->findAll();

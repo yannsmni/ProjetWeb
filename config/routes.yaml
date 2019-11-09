@@ -11,6 +11,10 @@ evenements:
   path: /evenements/accueil
   controller: App\Controller\EventsController::index
 
+evenementId:
+  path: /evenements/{id}/description
+  controller: App\Controller\EventsController::show
+
 evenementsAll:
   path: /evenements/tous
   controller: App\Controller\EventsController::all
