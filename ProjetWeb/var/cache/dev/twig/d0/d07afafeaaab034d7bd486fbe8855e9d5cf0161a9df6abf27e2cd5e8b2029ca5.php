@@ -54,11 +54,11 @@ class __TwigTemplate_c27ca202655015d3e0f951e00c93d136f91672862256b5d5d6e09cd8361
         if (((twig_get_attribute($this->env, $this->source, ($context["trace"] ?? null), "file", [], "any", true, true, false, 2)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, ($context["trace"] ?? null), "file", [], "any", false, false, false, 2), false)) : (false))) {
             // line 3
             echo "        <span class=\"icon icon-close\">";
-            echo twig_include($this->env, $context, "@Twig/images/icon-minus-square.svg");
+            echo twig_include($this->env, $context, "@Twig/image/icon-minus-square.svg");
             echo "</span>
         <span class=\"icon icon-open\">";
             // line 4
-            echo twig_include($this->env, $context, "@Twig/images/icon-plus-square.svg");
+            echo twig_include($this->env, $context, "@Twig/image/icon-plus-square.svg");
             echo "</span>
     ";
         }
@@ -172,8 +172,8 @@ class __TwigTemplate_c27ca202655015d3e0f951e00c93d136f91672862256b5d5d6e09cd8361
     {
         return new Source("<div class=\"trace-line-header break-long-words {{ trace.file|default(false) ? 'sf-toggle' }}\" data-toggle-selector=\"#trace-html-{{ prefix }}-{{ i }}\" data-toggle-initial=\"{{ style == 'expanded' ? 'display' }}\">
     {% if trace.file|default(false) %}
-        <span class=\"icon icon-close\">{{ include('@Twig/images/icon-minus-square.svg') }}</span>
-        <span class=\"icon icon-open\">{{ include('@Twig/images/icon-plus-square.svg') }}</span>
+        <span class=\"icon icon-close\">{{ include('@Twig/image/icon-minus-square.svg') }}</span>
+        <span class=\"icon icon-open\">{{ include('@Twig/image/icon-plus-square.svg') }}</span>
     {% endif %}
 
     {% if style != 'compact' and trace.function %}

@@ -54,11 +54,11 @@ class __TwigTemplate_1a9eb0a401a41bd850fee98802c4e62913cdc81c6371acc93bf8c6e2a60
                 <h3 class=\"trace-class\">
                     <span class=\"icon icon-close\">";
         // line 6
-        echo twig_include($this->env, $context, "@Twig/images/icon-minus-square-o.svg");
+        echo twig_include($this->env, $context, "@Twig/image/icon-minus-square-o.svg");
         echo "</span>
                     <span class=\"icon icon-open\">";
         // line 7
-        echo twig_include($this->env, $context, "@Twig/images/icon-plus-square-o.svg");
+        echo twig_include($this->env, $context, "@Twig/image/icon-plus-square-o.svg");
         echo "</span>
 
                     <span class=\"trace-namespace\">
@@ -160,8 +160,8 @@ class __TwigTemplate_1a9eb0a401a41bd850fee98802c4e62913cdc81c6371acc93bf8c6e2a60
         <div class=\"trace-head\">
             <span class=\"sf-toggle\" data-toggle-selector=\"#trace-html-{{ index }}\" data-toggle-initial=\"{{ expand ? 'display' }}\">
                 <h3 class=\"trace-class\">
-                    <span class=\"icon icon-close\">{{ include('@Twig/images/icon-minus-square-o.svg') }}</span>
-                    <span class=\"icon icon-open\">{{ include('@Twig/images/icon-plus-square-o.svg') }}</span>
+                    <span class=\"icon icon-close\">{{ include('@Twig/image/icon-minus-square-o.svg') }}</span>
+                    <span class=\"icon icon-open\">{{ include('@Twig/image/icon-plus-square-o.svg') }}</span>
 
                     <span class=\"trace-namespace\">
                         {{ exception.class|split('\\\\')|slice(0, -1)|join('\\\\') }}

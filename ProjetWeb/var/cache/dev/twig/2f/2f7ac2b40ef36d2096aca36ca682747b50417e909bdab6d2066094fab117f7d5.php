@@ -58,7 +58,7 @@ class __TwigTemplate_266a6212a1d69d48c6ea2025df42704cdbbf1d2d9f436501ad4d773cecf
         echo "</title>
         <link rel=\"icon\" type=\"image/png\" href=\"";
         // line 8
-        echo twig_include($this->env, $context, "@Twig/images/favicon.png.base64");
+        echo twig_include($this->env, $context, "@Twig/image/favicon.png.base64");
         echo "\">
         <style>";
         // line 9
@@ -74,7 +74,7 @@ class __TwigTemplate_266a6212a1d69d48c6ea2025df42704cdbbf1d2d9f436501ad4d773cecf
             <div class=\"container\">
                 <h1 class=\"logo\">";
         // line 15
-        echo twig_include($this->env, $context, "@Twig/images/symfony-logo.svg");
+        echo twig_include($this->env, $context, "@Twig/image/symfony-logo.svg");
         echo " Symfony Exception</h1>
 
                 <div class=\"help-link\">
@@ -84,7 +84,7 @@ class __TwigTemplate_266a6212a1d69d48c6ea2025df42704cdbbf1d2d9f436501ad4d773cecf
         echo "/index.html\">
                         <span class=\"icon\">";
         // line 19
-        echo twig_include($this->env, $context, "@Twig/images/icon-book.svg");
+        echo twig_include($this->env, $context, "@Twig/image/icon-book.svg");
         echo "</span>
                         <span class=\"hidden-xs-down\">Symfony</span> Docs
                     </a>
@@ -94,7 +94,7 @@ class __TwigTemplate_266a6212a1d69d48c6ea2025df42704cdbbf1d2d9f436501ad4d773cecf
                     <a href=\"https://symfony.com/support\">
                         <span class=\"icon\">";
         // line 26
-        echo twig_include($this->env, $context, "@Twig/images/icon-support.svg");
+        echo twig_include($this->env, $context, "@Twig/image/icon-support.svg");
         echo "</span>
                         <span class=\"hidden-xs-down\">Symfony</span> Support
                     </a>
@@ -198,25 +198,25 @@ class __TwigTemplate_266a6212a1d69d48c6ea2025df42704cdbbf1d2d9f436501ad4d773cecf
         <meta name=\"robots\" content=\"noindex,nofollow\" />
         <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />
         <title>{% block title %}{% endblock %}</title>
-        <link rel=\"icon\" type=\"image/png\" href=\"{{ include('@Twig/images/favicon.png.base64') }}\">
+        <link rel=\"icon\" type=\"image/png\" href=\"{{ include('@Twig/image/favicon.png.base64') }}\">
         <style>{{ include('@Twig/exception.css.twig') }}</style>
         {% block head %}{% endblock %}
     </head>
     <body>
         <header>
             <div class=\"container\">
-                <h1 class=\"logo\">{{ include('@Twig/images/symfony-logo.svg') }} Symfony Exception</h1>
+                <h1 class=\"logo\">{{ include('@Twig/image/symfony-logo.svg') }} Symfony Exception</h1>
 
                 <div class=\"help-link\">
                     <a href=\"https://symfony.com/doc/{{ constant('Symfony\\\\Component\\\\HttpKernel\\\\Kernel::VERSION') }}/index.html\">
-                        <span class=\"icon\">{{ include('@Twig/images/icon-book.svg') }}</span>
+                        <span class=\"icon\">{{ include('@Twig/image/icon-book.svg') }}</span>
                         <span class=\"hidden-xs-down\">Symfony</span> Docs
                     </a>
                 </div>
 
                 <div class=\"help-link\">
                     <a href=\"https://symfony.com/support\">
-                        <span class=\"icon\">{{ include('@Twig/images/icon-support.svg') }}</span>
+                        <span class=\"icon\">{{ include('@Twig/image/icon-support.svg') }}</span>
                         <span class=\"hidden-xs-down\">Symfony</span> Support
                     </a>
                 </div>

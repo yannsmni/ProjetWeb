@@ -249,7 +249,7 @@ EOT;
     chosen by them; to perform the Work to the public by any means or
     process and the communication to the public of the performances of the
     Work, including by public digital performance; to broadcast and
-    rebroadcast the Work by any means including signs, sounds or images.
+    rebroadcast the Work by any means including signs, sounds or image.
     "Reproduce" means to make copies of the Work by any means including
     without limitation by sound or visual recordings and the right of
     fixation and reproducing fixations of the Work, including storage of a

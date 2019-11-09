@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* @Twig/images/chevron-right.svg */
+/* @Twig/image/chevron-right.svg */
 class __TwigTemplate_63fef8a35aa281e4bb26e5300d0675185943a0c2df4421e4719763b1951e828d extends \Twig\Template
 {
     private $source;
@@ -34,10 +34,10 @@ class __TwigTemplate_63fef8a35aa281e4bb26e5300d0675185943a0c2df4421e4719763b1951
     {
         $macros = $this->macros;
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Twig/images/chevron-right.svg"));
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Twig/image/chevron-right.svg"));
 
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Twig/images/chevron-right.svg"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Twig/image/chevron-right.svg"));
 
         // line 1
         echo "<svg width=\"1792\" height=\"1792\" viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#FFF\" d=\"M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45L531 45q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z\"/></svg>
@@ -52,7 +52,7 @@ class __TwigTemplate_63fef8a35aa281e4bb26e5300d0675185943a0c2df4421e4719763b1951
 
     public function getTemplateName()
     {
-        return "@Twig/images/chevron-right.svg";
+        return "@Twig/image/chevron-right.svg";
     }
 
     public function getDebugInfo()
@@ -63,6 +63,6 @@ class __TwigTemplate_63fef8a35aa281e4bb26e5300d0675185943a0c2df4421e4719763b1951
     public function getSourceContext()
     {
         return new Source("<svg width=\"1792\" height=\"1792\" viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#FFF\" d=\"M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45L531 45q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z\"/></svg>
-", "@Twig/images/chevron-right.svg", "C:\\Users\\Clément\\Documents\\CESI\\3eme_semestre\\BLOC_2\\ProjetWebBDE\\ProjetWeb\\ProjetWeb\\vendor\\symfony\\twig-bundle\\Resources\\views\\images\\chevron-right.svg");
+", "@Twig/image/chevron-right.svg", "C:\\Users\\Clément\\Documents\\CESI\\3eme_semestre\\BLOC_2\\ProjetWebBDE\\ProjetWeb\\ProjetWeb\\vendor\\symfony\\twig-bundle\\Resources\\views\\image\\chevron-right.svg");
     }
 }

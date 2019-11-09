@@ -32,8 +32,7 @@ class ShopController extends AbstractController {
             'goodies' => $goodies,
             'clothes' => $clothes,
             'reductions' => $reductions,
-            'IT-Products' => $ITProducts,
-            'allProducts' => $allProducts
+            'IT-Products' => $ITProducts
         ]);
     }
 
@@ -51,7 +50,7 @@ class ShopController extends AbstractController {
     {
         $allProducts = $this->repository->findAll();
         return $this->render('publicPages/boutique.all.html.twig', [
-            'All-Products' => $allProducts
+            'allProducts' => $allProducts
         ]);
     }
     /**

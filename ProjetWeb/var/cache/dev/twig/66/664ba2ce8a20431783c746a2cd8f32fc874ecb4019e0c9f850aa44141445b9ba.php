@@ -60,7 +60,7 @@ class __TwigTemplate_9134126f713de810597717e21ecf0fe902b47e6335b68cf156c1eccd9d3
     </head>
     <body>
         <nav class=\"navbar navbar-expand-lg navbar-dark\" style=\"background-color: black;\">
-            <img src=\"images/logo_navbar.png\">
+            <img src=\"image/logo_navbar.png\">
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
             </button>
@@ -134,7 +134,7 @@ class __TwigTemplate_9134126f713de810597717e21ecf0fe902b47e6335b68cf156c1eccd9d3
       
             <div class=\"col-md-3 col-lg-3 col-xl-3 mx-auto mt-3\">
               <h6 class=\"text-uppercase mb-4 font-weight-bold text-white\">Bde Cesi</h6>
-              <img src=\"images/logo.png\">
+              <img src=\"image/logo.png\">
             </div>
             <hr class=\"w-100 clearfix d-md-none\">
             <div class=\"col-md-2 col-lg-2 col-xl-2 mx-auto mt-3\">
@@ -308,7 +308,7 @@ class __TwigTemplate_9134126f713de810597717e21ecf0fe902b47e6335b68cf156c1eccd9d3
     </head>
     <body>
         <nav class=\"navbar navbar-expand-lg navbar-dark\" style=\"background-color: black;\">
-            <img src=\"images/logo_navbar.png\">
+            <img src=\"image/logo_navbar.png\">
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
             </button>
@@ -360,7 +360,7 @@ class __TwigTemplate_9134126f713de810597717e21ecf0fe902b47e6335b68cf156c1eccd9d3
       
             <div class=\"col-md-3 col-lg-3 col-xl-3 mx-auto mt-3\">
               <h6 class=\"text-uppercase mb-4 font-weight-bold text-white\">Bde Cesi</h6>
-              <img src=\"images/logo.png\">
+              <img src=\"image/logo.png\">
             </div>
             <hr class=\"w-100 clearfix d-md-none\">
             <div class=\"col-md-2 col-lg-2 col-xl-2 mx-auto mt-3\">
