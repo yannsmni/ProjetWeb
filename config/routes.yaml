@@ -19,6 +19,10 @@ evenementsAll:
   path: /evenements/tous
   controller: App\Controller\EventsController::all
 
+legislation:
+  path: /legislation
+  controller: App\Controller\HomeController::legislation
+
 evenementsMois:
   path: /evenements/mois
   controller: App\Controller\EventsController::month
@@ -48,7 +52,7 @@ boutique/categorie/goodies:
   controller: App\Controller\ShopController::goodies
 
 boutique/categorie/reductions:
-  path: /reduction
+  path: /boutique/reduction
   controller: App\Controller\ShopController::reduction
 
 adminEventsHome:
