@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use App\Entity\Evenement;
+use App\Entity\EvenementFiltre;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -17,6 +20,45 @@ class EvenementRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Evenement::class);
+    }
+
+    public function findVisibleEvents(): QueryBuilder
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
+        ;
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllBySearch(EvenementFiltre $search): Query
+    {
+        $query = $this->findVisibleEvents();
+
+        if ($search->getPrixMin()) {
+            $query = $query
+                ->andWhere('e.Prix >= :prixMin')
+                ->setParameter('prixMin', $search->getPrixMin())
+            ;
+        }
+
+        if ($search->getPrixMax()) {
+            $query = $query
+                ->andWhere('e.Prix <= :prixMax')
+                ->setParameter('prixMax', $search->getPrixMax())
+            ;
+        }
+
+        if ($search->getStatut()) {
+            $query = $query
+                ->andWhere('e.Statut = :statut')
+                ->setParameter('statut', $search->getStatut())
+            ;
+        }
+
+        return $query->getQuery();
+        ;
     }
 
     /**

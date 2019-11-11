@@ -1,0 +1,63 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Administration des événements{% endblock %}
+
+{% block body %}
+
+<h1 class="mt-4">Gestion des événements</h1>
+
+<a href="{{ path('adminEventsAdd')}}" class="btn btn-success">Ajouter un événenement</a>
+
+<div class="container mt-4">
+        {{ form_start(form) }}
+        <div class="form-row">
+            <div class="col">
+                {{ form_row(form.prixMin) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.prixMax) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.statut) }}
+            </div>
+            <div class="col">
+                <button class="btn btn-primary">Filtrer</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+</div>
+                     
+<table class="table table-striped mt-4 text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th>Evénement</th>
+            <th>Prix</th>
+            <th>Type</th>
+            <th>Date de l'événement</th>
+            <th>Date de création</th>
+            <th>Administration</th>
+        </tr>
+    </thead>
+            
+    {% for evenement in allEvents %}
+        <tr>
+            <td class="font-weight-bold">{{ evenement.nom }}</td>
+            <td>
+                {% if evenement.prix == 0 %}
+                    <p class="text-success font-weight-bold">Gratuit</p>
+                {% else %}
+                    <p class="font-weight-bold">{{ evenement.prix }} €</p>
+                {% endif %}
+            </td>
+            <td>{{ evenement.statut }}</td>
+            <td>{{ evenement.date|date("d M Y")}}</td>
+            <td>{{ evenement.getDateCreation()|date("d M Y")}}</td>
+            <td>
+                <a href="{{ path('adminEventsEdit', {id: evenement.id}) }}" class="btn btn-primary">Modifier</a>
+                <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+    
+{% endblock %}

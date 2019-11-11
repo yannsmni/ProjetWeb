@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  {% block stylesheets %}{% endblock %}
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="https://blackrockdigital.github.io/startbootstrap-simple-sidebar/css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="border-right" id="sidebar-wrapper" style="background-color: black;">
+      <div class="sidebar-heading text-white text-center font-weight-bold text-white">Administration</div>
+      <div class="list-group list-group-flush">
+        <a href="{{ path('evenements') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Dashboard</a>
+        <a href="{{ path('evenementsMois') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Evénements</a>
+        <a href="{{ path('evenementsAll') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Produits</a>
+        <a href="{{ path('evenementsPerso') }}" class="list-group-item list-group-item-action text-white" style="background-color: black;">Catégories</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-dark border-bottom" style="background-color: black;">
+      
+        <button class="btn btn-secondary mr-4" id="menu-toggle">Administration</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse ml-4" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link h5" href="{{ path('accueil') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link h5" href="{{ path('evenements') }}">Evénements <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link h5" href="{{ path('boutique/accueil') }}">Boutique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link h5" href="{{ path('photos') }}">Photos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link h5" href="">Boîte à idées</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link h5" href="">Contact</a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                    {% if app.user %}
+                    <li class="nav-item">
+                        <p class="nav-link text-white h5">  </span></p>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger h5" href="">Déconnexion</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-success h5" href="">Connexion</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <footer class="page-footer font-small text-white pt-4" style="background-color: black;">
+
+        <div class="container text-center text-md-left">
+      
+          <div class="row text-center text-md-left mt-3 pb-3">
+      
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">Bde Cesi</h6>
+              <img src="images/logo.png">
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold text-white">Navigation</h6>
+                <p><a href="#" class="text-white">Evenements</a></p>
+                <p><a href="" class="text-white">Boutique</a></p>
+                <p><a href="" class="text-white">Photos</a></p>
+                <p><a href="" class="text-white">Boîte à idées</a></p>
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold text-white">Compte</h6>
+                <p><a href="#" class="text-white">Profil</a></p>
+                <p><a href="" class="text-white">Connexion</a></p>
+                <p><a href="" class="text-white">Inscription</a></p>
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
+                <p>Ville</p>
+                <p>Mail</p>
+                <p>Téléphone</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8">
+              <p class="text-center text-md-left">© 2019 Copyright :
+                  <strong>BDE CESI</strong>
+              </p>
+            </div>
+            <div class="col-md-5 col-lg-4 ml-lg-0">
+              <div class="text-center text-md-right">
+                <ul class="list-unstyled list-inline">
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                            <i class="fab fa-facebook-f">Mentions légales</i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                            <i class="fab fa-facebook-f">Facebook</i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                            <i class="fab fa-twitter">Twitter</i>
+                        </a>
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </footer>
+  <!-- /#wrapper -->
+  {% block javascripts %}{% endblock %}
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

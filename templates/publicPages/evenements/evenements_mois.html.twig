@@ -13,7 +13,12 @@
                 <div class="card-body">
                 <h5 class="card-title">{{ evenement.nom }}</h5>
                 <p class="card-text">{{ evenement.description }}</p>
-                <p class="card-text"><small class="text-muted">Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</small></p>
+                <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
+                <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
+                <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>                    
+                    <div>
+                        <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
+                    </div>
                 </div>
             </div>
             {% endfor %}

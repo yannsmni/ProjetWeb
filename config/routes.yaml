@@ -51,6 +51,22 @@ boutique/categorie/reductions:
   path: /reduction
   controller: App\Controller\ShopController::reduction
 
+adminEventsHome:
+  path: /administration/evenements
+  controller: App\Controller\Admin\AdminEventsController::index
+
+adminEventsAdd:
+  path: /administration/evenements/add
+  controller: App\Controller\Admin\AdminEventsController::add
+
+adminEventsEdit:
+  path: /administration/evenements/update/{id}
+  controller: App\Controller\Admin\AdminEventsController::update
+
+adminEventsDelete:
+  path: /administration/evenements/delete/{id}
+  controller: App\Controller\Admin\AdminEventsController::delete
+
 #boutique/categorie/index:
   #path: /boutique/accueil
   #controller: App\Controller\ShopController::index
