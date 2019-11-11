@@ -22,4 +22,9 @@ class HomeController extends AbstractController {
             'upcommingEvents' => $upcommingEvents
         ]);
     }
+
+    public function legislation(): Response
+    {
+        return $this->render('publicPages/legislation.home.html.twig');
+    }
 }
