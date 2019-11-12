@@ -18,13 +18,15 @@
         <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
         <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>
     </div>
-    <hr class="my-4">
-    <div>
-        <button class="btn btn-success" type="submit">M'inscrire</button>
-        <button class="btn btn-primary" type="submit">Ajouter une photo</button>
-        <a class="btn btn-primary" type="submit" href="#commentaires">Commenter</a>
-        <button class="btn btn-danger" type="submit">Signaler</button>
-    </div>
+    {% if app.user %}
+        <hr class="my-4">
+        <div>
+            <button class="btn btn-success" type="submit">M'inscrire</button>
+            <button class="btn btn-primary" type="submit">Ajouter une photo</button>
+            <button class="btn btn-primary" type="submit">Commenter</button>
+            <button class="btn btn-danger" type="submit">Signaler</button>
+        </div>
+    {% endif %}
     <hr class="my-4">
     <div>
         <h1>Photos de l'événement ({{ evenement.images | length }})</h1>
