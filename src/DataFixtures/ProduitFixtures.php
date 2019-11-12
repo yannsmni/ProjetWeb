@@ -57,7 +57,7 @@ class ProduitFixtures extends Fixture
                                 ->setNom('Sticker BDE')
                                 ->setDescription('Sticker reprrenant le logo du BDE pour vos PC')
                                 ->setPrix(7)
-                                ->setImageChemin('/assets/image/sticker.png')
+                                ->setImageChemin('/assets/image/logo.png')
                                 ->setQuantiteVendu(0);
                     } else if ($k == 1) {
                         $produit->setCategorie($categorie)
