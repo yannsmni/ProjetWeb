@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\EvenementFiltre;
+use App\Form\EvenementFiltreType;
 use App\Repository\EvenementRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -36,12 +40,21 @@ class EventsController extends AbstractController {
         ]);
     }
 
-    public function all(): Response 
+    public function all(PaginatorInterface $paginator, Request $request): Response 
     {        
-        $allEvents = $this->repository->findAll();
+        $search = new EvenementFiltre();
+        $form = $this->createForm(EvenementFiltreType::class, $search);
+        $form->handleRequest($request);
+
+        $allEvents = $paginator->paginate(
+            $this->repository->findAllBySearch($search),
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('publicPages/evenements/evenements_tous.html.twig', [
-            'allEvents' => $allEvents
+            'allEvents' => $allEvents,
+            'form' => $form->createView()
         ]);
     }
 
