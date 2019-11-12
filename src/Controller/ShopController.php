@@ -29,7 +29,7 @@ class ShopController extends AbstractController {
         $clothes = $this->repository->findClothes();
         $reductions = $this->repository->findReductions();
 
-        return $this->render('publicPages/boutique.html.twig', [
+        return $this->render('publicPages/boutique/boutique.html.twig', [
             'allProducts' => $allProducts,
             'goodies' => $goodies,
             'clothes' => $clothes,
@@ -41,7 +41,7 @@ class ShopController extends AbstractController {
    public function show(Produit $produit) : Response
     {
         //$produit = $this->repository->findByID($id);
-        return $this->render('publicPages/boutique.show.html.twig', [
+        return $this->render('publicPages/boutique/boutique.show.html.twig', [
             'produit' => $produit
         ]);
     }
@@ -49,7 +49,7 @@ class ShopController extends AbstractController {
     public function all(PaginatorInterface $paginator, Request $request) : Response
     {
         $allProducts = $paginator->paginate($this->repository->findVisibleProducts(), $request->query->getInt('page', 1), 10);
-        return $this->render('publicPages/boutique.all.html.twig', [
+        return $this->render('publicPages/boutique/boutique.all.html.twig', [
             'allProducts' => $allProducts
         ]);
     }
@@ -60,14 +60,14 @@ class ShopController extends AbstractController {
     public function goodies() : Response
     {
         $goodies = $this->repository->findGoodies();
-        return $this->render('publicPages/boutique.goodies.html.twig', [
+        return $this->render('publicPages/boutique/boutique.goodies.html.twig', [
             'goodies' => $goodies
         ]);
     }
     /*public function tousProduits() : Response
     {
         $allProducts = $this->repository->findAll();
-        return $this->render('publicPages/boutique.all.html.twig', [
+        return $this->render('publicPages/boutique/boutique.all.html.twig', [
             'allProducts' => $allProducts
         ]);
     }*/
@@ -77,7 +77,7 @@ class ShopController extends AbstractController {
     public function produitsIT() : Response
     {
         $ITProducts = $this->repository->findITProducts();
-        return $this->render('publicPages/boutique.produitsIT.html.twig', [
+        return $this->render('publicPages/boutique/boutique.produitsIT.html.twig', [
             'ITProducts' => $ITProducts
         ]);
     }
@@ -88,7 +88,7 @@ class ShopController extends AbstractController {
     public function habits() : Response
     {
         $clothes = $this->repository->findClothes();
-        return $this->render('publicPages/boutique.habits.html.twig', [
+        return $this->render('publicPages/boutique/boutique.habits.html.twig', [
             'clothes' => $clothes
         ]);
     }
@@ -99,7 +99,7 @@ class ShopController extends AbstractController {
     public function reduction() : Response
     {
         $reductions = $this->repository->findReductions();
-        return $this->render('publicPages/boutique.reduction.html.twig', [
+        return $this->render('publicPages/boutique/boutique.reduction.html.twig', [
             'reductions' => $reductions
         ]);
     }
