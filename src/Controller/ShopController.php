@@ -24,12 +24,14 @@ class ShopController extends AbstractController {
      * Index comprenant tous les types possibles de filtres
      */
     public function index(): Response 
-    {        
+    {
+        $search = new ProduitFiltre();
+
         $allProducts = $this->repository->findAll();
-        $ITProducts = $this->repository->findITProducts();
-        $goodies = $this->repository->findGoodies();
-        $clothes = $this->repository->findClothes();
-        $reductions = $this->repository->findReductions();
+        $ITProducts = $this->repository->findITProducts($search);
+        $goodies = $this->repository->findGoodies($search);
+        $clothes = $this->repository->findClothes($search);
+        $reductions = $this->repository->findReductions($search);
 
         return $this->render('publicPages/boutique/boutique.html.twig', [
             'allProducts' => $allProducts,
