@@ -43,6 +43,12 @@ class Commentaire
      */
     private $Date;
 
+    public function __construct()
+    {
+        $this->Date_creation = new \DateTime();
+        $this->Visible = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
