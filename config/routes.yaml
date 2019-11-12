@@ -83,3 +83,10 @@ photos:
   path: /photos
   controller: App\Controller\PhotosController::index
 
+security_connexion:
+  path: /connexion
+  controller: App\Controller\SecurityController::login
+
+security_inscription:
+  path: /inscription
+  controller: App\Controller\SecurityController::inscription
