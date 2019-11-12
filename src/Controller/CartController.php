@@ -74,4 +74,24 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute("cart_index");
     }
+
+    public function email($name, \Swift_Mailer $mailer)
+    {
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('l.antoni@hotmail.fr')
+            ->setTo('l.antoni@hotmail.fr')
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/registration.html.twig
+                    'emails/registration.html.twig',
+                    ['name' => $name]
+                ),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
+
+        return $this->redirectToRoute("cart_index");
+    }
 }
