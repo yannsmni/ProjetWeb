@@ -1,13 +1,13 @@
 {% extends 'shop.html.twig' %}
 
-{% block title %}Nos réductions{% endblock %}
+{% block title %}Nos habits{% endblock %}
 
 {% block body %}
 
     <div class="container-fluid my-4">
-        <h1>Nos réductions</h1>
+        <h1>Nos habits</h1>
         <div class="row">
-            {% for produit in reductions %}
+            {% for produit in clothes %}
                 <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
                     <br/><img src="{{ produit.getImageChemin() }}" class="card-img-top" alt="{{ produit.description }}">
                     <div class="card-body">
@@ -15,8 +15,18 @@
                         <p class="card-text"> {{ produit.description }}</p>
                         <p class="card-text"><small class="text-muted">Prix : {{ produit.prix }}€</small></p>
                         <div>
-                            <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Plus d'infos</a>
+                            <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Voir le produit</a>
                         </div>
+                        </br>
+                        {% if app.user %}
+                        <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">
+                                Ajouter au panier
+                        </a>
+                        {% else %}
+                        <a href="#" class="btn btn-danger">
+                                Se connecter
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
