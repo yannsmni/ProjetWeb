@@ -15,7 +15,7 @@
                 <p class="card-text"> {{ produit.description }}</p>
                 <p class="card-text"><small class="text-muted">Prix : {{ produit.prix }}€</small></p>
                 <div>
-                    <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Acheter</a>
+                    <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Plus d'infos</a>
                 </div>
                 </br>
                 <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">
