@@ -36,7 +36,7 @@ class Evenement
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
      */
-    private $Participants;
+    private $participants;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="Evenement")

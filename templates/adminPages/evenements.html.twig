@@ -34,6 +34,9 @@
                 <th>Evénement</th>
                 <th>Prix</th>
                 <th>Type</th>
+                <th>Participants</th>
+                <th>Photos</th>
+                <th>Commentaires</th>
                 <th>Date de l'événement</th>
                 <th>Date de création</th>
                 <th>Administration</th>
@@ -51,6 +54,9 @@
                     {% endif %}
                 </td>
                 <td>{{ evenement.statut }}</td>
+                <td>{{ evenement.participants | length }}</td>
+                <td>{{ evenement.images | length }}</td>
+                <td>{{ evenement.commentaire | length }}</td>
                 <td>{{ evenement.date|date("d M Y")}}</td>
                 <td>{{ evenement.getDateCreation()|date("d M Y")}}</td>
                 <td>

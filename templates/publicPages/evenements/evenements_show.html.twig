@@ -17,16 +17,28 @@
         <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
         <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
         <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>
+        <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participants | length }}</p>
     </div>
-    {% if app.user %}
         <hr class="my-4">
         <div>
-            <button class="btn btn-success" type="submit">M'inscrire</button>
+            <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
             <button class="btn btn-primary" type="submit">Ajouter une photo</button>
             <button class="btn btn-primary" type="submit">Commenter</button>
             <button class="btn btn-danger" type="submit">Signaler</button>
         </div>
-    {% endif %}
+    <hr class="my-4">
+    <div>
+        <h1>Participants ({{ evenement.participants | length }})</h1>
+        <div class="col">
+            {% for participant in evenement.participants %}
+                <div class="card">
+                    <div class="card-body">
+                        <p>{{ participant.nom }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     <hr class="my-4">
     <div>
         <h1>Photos de l'événement ({{ evenement.images | length }})</h1>
@@ -43,9 +55,9 @@
     <div>
         <h1>Commentaires ({{ evenement.commentaire | length }})</h1>
     </div>
-    <div class="container my-4" id="commentaires">
+    <div class="container my-4">
         {% for commentaire in evenement.commentaire %}
-        <div>
+        <div class="mt-3">
             <div class="row">
                 <div class="col-3">
                      (<small>Le {{ commentaire.date|date("d M Y")}} à {{ commentaire.date|date("G")}}h{{ commentaire.date|date("i")}}</small>)
@@ -56,15 +68,13 @@
             </div>
         </div>
         {% endfor %}
-            {% if app.user %}
+        <div class="my-4">
             {{ form_start(form) }}
-                <p>{{ app.user.username }}</p>
-                {{ form_row(form.contenu, {'attr' : {'placeholder': "Votre commentaire"}}) }}
-                <button type="submit" class="btn btn-succes">Commenter</button>
+                {{ form_rest(form) }}
+                <button type="submit" class="btn btn-primary">Poster</button>
             {{ form_end(form) }}
-            {% else %}
             <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster un commentaire</p>
-        {% endif %}
+        </div>
     </div>
 </div>
 
