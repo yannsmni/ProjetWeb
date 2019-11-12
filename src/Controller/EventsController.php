@@ -93,4 +93,16 @@ class EventsController extends AbstractController {
             //'myEvents' => $myEvents
         ]);
     }
+
+    public function register(Evenement $evenement, ObjectManager $manager): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $evenement->addParticipants($user);
+        $manager->persist($evenement);
+        $manager->flush();
+
+        return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
+    }
 }

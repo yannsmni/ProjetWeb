@@ -29,6 +29,9 @@ evenementsPerso:
   path: /evenements/mes_evenements
   controller: App\Controller\EventsController::my
 
+evenementsRegisterId:
+  path: /evenements/{id}/register
+  controller: App\Controller\EventsController::register
 
 #chemin relatif à la législation
 

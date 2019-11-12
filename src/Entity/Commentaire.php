@@ -45,7 +45,7 @@ class Commentaire
 
     public function __construct()
     {
-        $this->Date_creation = new \DateTime();
+        $this->Date = new \DateTime();
         $this->Visible = true;
     }
 
