@@ -36,6 +36,14 @@ class ShopController extends AbstractController {
         ]);
     }
 
+   /* public function show(Produit $produit) : Response
+    {
+        $produit = $this->repository->findByID($id);
+        return $this->render('publicPages/boutique.show.html.twig', [
+            'produit' => $produit
+        ]);
+    }*/
+
     /**
      * @return Response
      */

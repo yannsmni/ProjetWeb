@@ -25,10 +25,26 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /*public function findByID($id) {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :ID')
+            ->setParameter('ID', $id)
+            ->getQuery()
+            ->getResult();
+    }*/
+
     public function findClothes() {
         return $this->createQueryBuilder('a')
             ->andWhere('a.Categorie = 1')
             ->orderBy('a.Prix', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findBestProducts() {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.Quantite_vendu', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }
