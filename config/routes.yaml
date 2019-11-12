@@ -45,7 +45,7 @@ boutique/accueil:
 
 boutique/produits:
   path: /boutique/tous-nos-produits
-  controller: App\Controller\ShopController::tousProduits
+  controller: App\Controller\ShopController::all
 
 boutique/categorie/habits:
   path: /boutique/habits
