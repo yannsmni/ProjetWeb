@@ -17,6 +17,10 @@
                 <div>
                     <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Acheter</a>
                 </div>
+                </br>
+                <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">
+                        Ajouter au panier
+                </a>
             </div>
         </div>
         {% endfor %}

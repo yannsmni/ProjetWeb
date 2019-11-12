@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\Commentaire;
 use App\Entity\EvenementFiltre;
 use App\Form\EvenementFiltreType;
+use App\Form\CommentaireType;
 use App\Repository\EvenementRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,10 +36,23 @@ class EventsController extends AbstractController {
         ]);
     }
 
-    public function show(Evenement $evenement): Response
+    public function show(Evenement $evenement, Request $request, ObjectManager $manager): Response
     {
+        $commentaire = new Commentaire();
+        $form=$this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $commentaire->setEvenement($evenement);
+            $manager->persist($commentaire);
+            $manager->flush();
+
+            return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
+        }
+
         return $this->render('publicPages/evenements/evenements_show.html.twig', [
-            'evenement' => $evenement
+            'evenement' => $evenement,
+            'form' => $form->createView()
         ]);
     }
 
