@@ -26,6 +26,7 @@ class EvenementRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.Visible = true')
+            ->orderBy('e.Date', 'DESC')
         ;
     }
 
@@ -67,6 +68,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findMonthlyEvents($formattedDate)
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->andWhere('e.Date LIKE :val')
             ->setParameter('val', $formattedDate.'%')
             ->orderBy('e.Date', 'ASC')
@@ -81,6 +83,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findUpcommingEvents($date)
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->andWhere('e.Date > :val')
             ->setParameter('val', $date)
             ->orderBy('e.Date', 'ASC')
@@ -96,6 +99,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findBestEvents()
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->orderBy('e.id', 'ASC')
             ->setMaxResults(5)
             ->getQuery()
@@ -109,6 +113,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findLatestEvents($date)
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->andWhere('e.Date < :val')
             ->setParameter('val', $date)
             ->orderBy('e.Date', 'DESC')

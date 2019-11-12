@@ -63,10 +63,13 @@ boutique/categorie/reductions:
   path: /boutique/reduction
   controller: App\Controller\ShopController::reduction
 
+administration:
+  path: /administration
+  controller: App\Controller\Admin\AdminHomeController::index
+
 boutique/ID:
   path: boutique/{ID}/description
   controller: App\Controller\ShopController::show
-
 
 adminEventsHome:
   path: /administration/evenements
@@ -83,6 +86,30 @@ adminEventsEdit:
 adminEventsDelete:
   path: /administration/evenements/delete/{id}
   controller: App\Controller\Admin\AdminEventsController::delete
+
+adminCategoryHome:
+  path: /administration/categories
+  controller: App\Controller\Admin\AdminCategoryController::index
+
+adminCategoryAdd:
+  path: /administration/categories
+  controller: App\Controller\Admin\AdminCategoryController::add
+
+adminCategoryEdit:
+  path: /administration/categories/edit/{id}
+  controller: App\Controller\Admin\AdminCategoryController::edit
+
+adminCategoryDelete:
+  path: /administration/categories/delete/{id}
+  controller: App\Controller\Admin\AdminCategoryController::delete
+
+#boutique/categorie/index:
+  #path: /boutique/accueil
+  #controller: App\Controller\ShopController::index
+
+#boutique/categorie/{nom}:
+  #path: /boutique/{nom}
+  #controller: App\Controller\ShopController::categorie
 
 photos:
   path: /photos
