@@ -15,11 +15,18 @@
                         <p class="card-text"> {{ produit.description }}</p>
                         <p class="card-text"><small class="text-muted">Prix : {{ produit.prix }}€</small></p>
                         <div>
-                            <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Plus d'infos</a>
+                            <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Voir le produit</a>
                         </div>
-                        <a href="#" class="btn btn-success">
-                            Ajouter au panier
+                        </br>
+                        {% if app.user %}
+                        <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">
+                                Ajouter au panier
                         </a>
+                        {% else %}
+                        <a href="#" class="btn btn-danger">
+                                Se connecter
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
