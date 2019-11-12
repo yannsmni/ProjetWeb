@@ -64,8 +64,8 @@ adminEventsAdd:
   controller: App\Controller\Admin\AdminEventsController::add
 
 adminEventsEdit:
-  path: /administration/evenements/update/{id}
-  controller: App\Controller\Admin\AdminEventsController::update
+  path: /administration/evenements/edit/{id}
+  controller: App\Controller\Admin\AdminEventsController::edit
 
 adminEventsDelete:
   path: /administration/evenements/delete/{id}

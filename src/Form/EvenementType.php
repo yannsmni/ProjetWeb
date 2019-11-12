@@ -15,11 +15,10 @@ class EvenementType extends AbstractType
             ->add('Nom')
             ->add('Description')
             ->add('Date')
-            ->add('Date_creation')
             ->add('Visible')
             ->add('Prix')
             ->add('Statut')
-            ->add('Participants')
+            //->add('Participants')
         ;
     }
 

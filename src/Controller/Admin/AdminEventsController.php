@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Evenement;
-use App\Form\EvenementType;
 use App\Entity\EvenementFiltre;
+use App\Form\EvenementType;
 use App\Form\EvenementFiltreType;
 use App\Repository\EvenementRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -25,11 +25,11 @@ class AdminEventsController extends AbstractController {
         $search = new EvenementFiltre();
         $form = $this->createForm(EvenementFiltreType::class, $search);
         $form->handleRequest($request);
-        
+
         $allEvents = $paginator->paginate(
-            $this->repository->findAllVisible(),
+            $this->repository->findAllBySearch($search),
             $request->query->getInt('page', 1),
-            20
+            10
         );
 
         return $this->render('adminPages/evenements.html.twig', [
@@ -38,7 +38,7 @@ class AdminEventsController extends AbstractController {
         ]);
     }
 
-    /*public function add(Request $request)
+    public function add(Request $request)
     {        
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
@@ -50,15 +50,15 @@ class AdminEventsController extends AbstractController {
             return $this->redirectToRoute('adminEventsHome');
         }
 
-        return $this->render('adminPages/evenement_add.html.twig', [
+        return $this->render('adminPages/evenements_add.html.twig', [
             'Evenement' => $evenement,
             'form' => $form->createView()
-        ]);    
+        ]);   
     }
 
     public function edit(Evenement $evenement, Request $request)
     {        
-        $form = $this->createForm(EvenementtType::class, $evenement);
+        $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form-> isValid()) {
@@ -66,7 +66,7 @@ class AdminEventsController extends AbstractController {
             return $this->redirectToRoute('adminEventsHome');
         }
 
-        return $this->render('adminPages/evenement_update.html.twig', [
+        return $this->render('adminPages/evenements_edit.html.twig', [
             'Evenement' => $evenement,
             'form' => $form->createView()
         ]);
@@ -78,6 +78,6 @@ class AdminEventsController extends AbstractController {
         $this->em->flush();
 
         return $this->redirectToRoute('adminEventsHome');
-    }*/
+    }
 
 }

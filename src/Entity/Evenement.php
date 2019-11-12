@@ -70,6 +70,8 @@ class Evenement
 
     public function __construct()
     {
+        $this->Date_creation = new \DateTime();
+        $this->Visible = true;
         $this->commentaires = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->participants = new ArrayCollection();

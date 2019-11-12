@@ -27,37 +27,43 @@
         {{ form_end(form) }}
 </div>
                      
-<table class="table table-striped mt-4 text-center">
-    <thead class="thead-dark">
-        <tr>
-            <th>Evénement</th>
-            <th>Prix</th>
-            <th>Type</th>
-            <th>Date de l'événement</th>
-            <th>Date de création</th>
-            <th>Administration</th>
-        </tr>
-    </thead>
-            
-    {% for evenement in allEvents %}
-        <tr>
-            <td class="font-weight-bold">{{ evenement.nom }}</td>
-            <td>
-                {% if evenement.prix == 0 %}
-                    <p class="text-success font-weight-bold">Gratuit</p>
-                {% else %}
-                    <p class="font-weight-bold">{{ evenement.prix }} €</p>
-                {% endif %}
-            </td>
-            <td>{{ evenement.statut }}</td>
-            <td>{{ evenement.date|date("d M Y")}}</td>
-            <td>{{ evenement.getDateCreation()|date("d M Y")}}</td>
-            <td>
-                <a href="{{ path('adminEventsEdit', {id: evenement.id}) }}" class="btn btn-primary">Modifier</a>
-                <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
+<div class="container-fluid mt-4">
+    <table class="table table-striped text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th>Evénement</th>
+                <th>Prix</th>
+                <th>Type</th>
+                <th>Date de l'événement</th>
+                <th>Date de création</th>
+                <th>Administration</th>
+            </tr>
+        </thead>
+                
+        {% for evenement in allEvents %}
+            <tr>
+                <td class="font-weight-bold">{{ evenement.nom }}</td>
+                <td>
+                    {% if evenement.prix == 0 %}
+                        <p class="text-success font-weight-bold">Gratuit</p>
+                    {% else %}
+                        <p class="font-weight-bold">{{ evenement.prix }} €</p>
+                    {% endif %}
+                </td>
+                <td>{{ evenement.statut }}</td>
+                <td>{{ evenement.date|date("d M Y")}}</td>
+                <td>{{ evenement.getDateCreation()|date("d M Y")}}</td>
+                <td>
+                    <a href="{{ path('adminEventsEdit', {id: evenement.id}) }}" class="btn btn-primary">Modifier</a>
+                    <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="pagination">
+    {{ knp_pagination_render(allEvents) }}
+</div>
     
 {% endblock %}
