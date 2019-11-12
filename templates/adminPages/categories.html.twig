@@ -1,0 +1,32 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Administration des catégories{% endblock %}
+
+{% block body %}
+
+<h1 class="mt-4">Gestion des catégories</h1>
+
+<a href="{{ path('adminCategoryAdd')}}" class="btn btn-success">Ajouter une catégorie</a>
+                     
+<div class="container-fluid mt-4">
+    <table class="table table-striped text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th>Catégorie</th>
+                <th>Administration</th>
+            </tr>
+        </thead>
+                
+        {% for categorie in allCategorie %}
+            <tr>
+                <td class="font-weight-bold">{{ categorie.nom }}</td>
+                <td>
+                    <a href="{{ path('adminCategoryEdit', {id: categorie.id}) }}" class="btn btn-primary">Modifier</a>
+                    <a href="{{ path('adminCategoryDelete', {id: categorie.id}) }}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+    
+{% endblock %}
