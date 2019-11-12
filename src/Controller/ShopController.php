@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Repository\ProduitRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -36,6 +38,22 @@ class ShopController extends AbstractController {
         ]);
     }
 
+   public function show(Produit $produit) : Response
+    {
+        //$produit = $this->repository->findByID($id);
+        return $this->render('publicPages/boutique.show.html.twig', [
+            'produit' => $produit
+        ]);
+    }
+
+    public function all(PaginatorInterface $paginator, Request $request) : Response
+    {
+        $allProducts = $paginator->paginate($this->repository->findVisibleProducts(), $request->query->getInt('page', 1), 10);
+        return $this->render('publicPages/boutique.all.html.twig', [
+            'allProducts' => $allProducts
+        ]);
+    }
+
     /**
      * @return Response
      */
@@ -46,13 +64,13 @@ class ShopController extends AbstractController {
             'goodies' => $goodies
         ]);
     }
-    public function tousProduits() : Response
+    /*public function tousProduits() : Response
     {
         $allProducts = $this->repository->findAll();
         return $this->render('publicPages/boutique.all.html.twig', [
             'allProducts' => $allProducts
         ]);
-    }
+    }*/
     /**
      * @return Response
      */

@@ -1,0 +1,26 @@
+{% extends 'shop.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        <h1 class="display-4">{{ produit.nom }}</h1>
+        <hr class="mr-4">
+        <div>
+            <img src="{{ produit.getImageChemin() }}" alt="{{ produit.description }}">
+        </div>
+        <div>
+            <h2>Description du produit :</h2>
+            <p>{{ produit.description }}</p>
+        </div>
+        <div>
+            <small class="text-muted">Prix : {{ produit.prix }} €</small>
+        </div>
+        <hr class="mr-4">
+        <div>
+            <button class="btn btn-dark btn-lg" role="button">Acheter</button>
+        </div>
+    </div>
+
+{% endblock %}

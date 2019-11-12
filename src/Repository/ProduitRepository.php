@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,17 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    /**
+     * @return Query
+     */
+
+    public function findVisibleProducts() : Query
+    {
+        return $this->createQueryBuilder('a')
+            ->getQuery();
+    }
+
+
     public function findAll() {
         return $this->createQueryBuilder('a')
             ->orderBy('a.Prix', 'ASC')
@@ -25,10 +37,26 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /*public function findByID($id) {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :ID')
+            ->setParameter('ID', $id)
+            ->getQuery()
+            ->getResult();
+    }*/
+
     public function findClothes() {
         return $this->createQueryBuilder('a')
             ->andWhere('a.Categorie = 1')
             ->orderBy('a.Prix', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findBestProducts() {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.Quantite_vendu', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }

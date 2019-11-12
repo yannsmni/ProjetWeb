@@ -14,7 +14,7 @@
     <hr class="my-4">
     <div>
         <h1>Informations</h1>
-        <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }}</p>
+        <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
         <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
         <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>
     </div>
@@ -22,15 +22,47 @@
     <div>
         <button class="btn btn-success" type="submit">M'inscrire</button>
         <button class="btn btn-primary" type="submit">Ajouter une photo</button>
-        <button class="btn btn-primary" type="submit">Commenter</button>
+        <a class="btn btn-primary" type="submit" href="#commentaires">Commenter</a>
+        <button class="btn btn-danger" type="submit">Signaler</button>
     </div>
     <hr class="my-4">
     <div>
-        <h1>Photos de l'événement</h1>
+        <h1>Photos de l'événement ({{ evenement.images | length }})</h1>
+        {% for images in evenement.images %}
+        <div class="card" style="width: 18rem;">
+            <img src="{{ images.chemin }}" class="card-img-top" alt="{{ images.description }}">
+            <div class="card-body">
+                <p>OUI OUI OUI OUI</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
     <hr class="my-4">
     <div>
-        <h1>Commentaires</h1>
+        <h1>Commentaires ({{ evenement.commentaire | length }})</h1>
+    </div>
+    <div class="container my-4" id="commentaires">
+        {% for commentaire in evenement.commentaire %}
+        <div>
+            <div class="row">
+                <div class="col-3">
+                     (<small>Le {{ commentaire.date|date("d M Y")}} à {{ commentaire.date|date("G")}}h{{ commentaire.date|date("i")}}</small>)
+                </div>
+                <div class="col">
+                    {{ commentaire.contenu | raw }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+            {% if app.user %}
+            {{ form_start(form) }}
+                <p>{{ app.user.username }}</p>
+                {{ form_row(form.contenu, {'attr' : {'placeholder': "Votre commentaire"}}) }}
+                <button type="submit" class="btn btn-succes">Commenter</button>
+            {{ form_end(form) }}
+            {% else %}
+            <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster un commentaire</p>
+        {% endif %}
     </div>
 </div>
 

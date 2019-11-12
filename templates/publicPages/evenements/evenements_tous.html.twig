@@ -6,20 +6,45 @@
 
 <div class="container-fluid my-4">
     <h1>Tous nos événements</h1>
+
+    <div class="container mt-4">
+            {{ form_start(form) }}
+            <div class="form-row">
+                <div class="col">
+                    {{ form_row(form.prixMin) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.prixMax) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.statut) }}
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary">Filtrer</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+    </div>
+
     <div class="row">
         {% for evenement in allEvents %}
-        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
+        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">{{ evenement.nom }}</h5>
             <p class="card-text">{{ evenement.description }}</p>
-            <p class="card-text"><small class="text-muted">Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</small></p>
+            <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
+            <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
+            <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>                
                 <div>
                     <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
                 </div>
             </div>
         </div>
         {% endfor %}
+    </div>
+    <div class="pagination">
+        {{ knp_pagination_render(allEvents) }}
     </div>
 </div>
 

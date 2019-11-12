@@ -41,12 +41,12 @@ class Evenement
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="Evenement")
      */
-    private $Commentaires;
+    private $commentaire;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="Evenement")
      */
-    private $Images;
+    private $images;
 
     /**
      * @ORM\Column(type="datetime")
@@ -70,6 +70,8 @@ class Evenement
 
     public function __construct()
     {
+        $this->Date_creation = new \DateTime();
+        $this->Visible = true;
         $this->commentaires = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->participants = new ArrayCollection();
@@ -150,15 +152,15 @@ class Evenement
     /**
      * @return Collection|Commentaire[]
      */
-    public function getCommentaires(): Collection
+    public function getCommentaire(): Collection
     {
-        return $this->commentaires;
+        return $this->commentaire;
     }
 
     public function addCommentaire(Commentaire $commentaire): self
     {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
+        if (!$this->commentaire->contains($commentaire)) {
+            $this->commentaire[] = $commentaire;
             $commentaire->setEvenement($this);
         }
 
@@ -167,8 +169,8 @@ class Evenement
 
     public function removeCommentaire(Commentaire $commentaire): self
     {
-        if ($this->commentaires->contains($commentaire)) {
-            $this->commentaires->removeElement($commentaire);
+        if ($this->commentaire->contains($commentaire)) {
+            $this->commentaire->removeElement($commentaire);
             // set the owning side to null (unless already changed)
             if ($commentaire->getEvenement() === $this) {
                 $commentaire->setEvenement(null);

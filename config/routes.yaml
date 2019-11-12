@@ -7,6 +7,8 @@ accueil:
   path: /accueil
   controller: App\Controller\HomeController::index
 
+#les chemins relatifs aux événements
+
 evenements:
   path: /evenements/accueil
   controller: App\Controller\EventsController::index
@@ -19,10 +21,6 @@ evenementsAll:
   path: /evenements/tous
   controller: App\Controller\EventsController::all
 
-legislation:
-  path: /legislation
-  controller: App\Controller\HomeController::legislation
-
 evenementsMois:
   path: /evenements/mois
   controller: App\Controller\EventsController::month
@@ -31,13 +29,23 @@ evenementsPerso:
   path: /evenements/mes_evenements
   controller: App\Controller\EventsController::my
 
+
+#chemin relatif à la législation
+
+legislation:
+  path: /legislation
+  controller: App\Controller\HomeController::legislation
+
+
+#chemins relatifs à la boutique
+
 boutique/accueil:
   path: /boutique/accueil
   controller: App\Controller\ShopController::index
 
 boutique/produits:
   path: /boutique/tous-nos-produits
-  controller: App\Controller\ShopController::tousProduits
+  controller: App\Controller\ShopController::all
 
 boutique/categorie/habits:
   path: /boutique/habits
@@ -54,6 +62,46 @@ boutique/categorie/goodies:
 boutique/categorie/reductions:
   path: /boutique/reduction
   controller: App\Controller\ShopController::reduction
+
+administration:
+  path: /administration
+  controller: App\Controller\Admin\AdminHomeController::index
+
+boutique/ID:
+  path: boutique/{ID}/description
+  controller: App\Controller\ShopController::show
+
+adminEventsHome:
+  path: /administration/evenements
+  controller: App\Controller\Admin\AdminEventsController::index
+
+adminEventsAdd:
+  path: /administration/evenements/add
+  controller: App\Controller\Admin\AdminEventsController::add
+
+adminEventsEdit:
+  path: /administration/evenements/edit/{id}
+  controller: App\Controller\Admin\AdminEventsController::edit
+
+adminEventsDelete:
+  path: /administration/evenements/delete/{id}
+  controller: App\Controller\Admin\AdminEventsController::delete
+
+adminCategoryHome:
+  path: /administration/categories
+  controller: App\Controller\Admin\AdminCategoryController::index
+
+adminCategoryAdd:
+  path: /administration/categories
+  controller: App\Controller\Admin\AdminCategoryController::add
+
+adminCategoryEdit:
+  path: /administration/categories/edit/{id}
+  controller: App\Controller\Admin\AdminCategoryController::edit
+
+adminCategoryDelete:
+  path: /administration/categories/delete/{id}
+  controller: App\Controller\Admin\AdminCategoryController::delete
 
 #boutique/categorie/index:
   #path: /boutique/accueil

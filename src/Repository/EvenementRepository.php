@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use App\Entity\Evenement;
+use App\Entity\EvenementFiltre;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -19,12 +22,53 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
+    public function findVisibleEvents(): QueryBuilder
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
+            ->orderBy('e.Date', 'DESC')
+        ;
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllBySearch(EvenementFiltre $search): Query
+    {
+        $query = $this->findVisibleEvents();
+
+        if ($search->getPrixMin()) {
+            $query = $query
+                ->andWhere('e.Prix >= :prixMin')
+                ->setParameter('prixMin', $search->getPrixMin())
+            ;
+        }
+
+        if ($search->getPrixMax()) {
+            $query = $query
+                ->andWhere('e.Prix <= :prixMax')
+                ->setParameter('prixMax', $search->getPrixMax())
+            ;
+        }
+
+        if ($search->getStatut()) {
+            $query = $query
+                ->andWhere('e.Statut = :statut')
+                ->setParameter('statut', $search->getStatut())
+            ;
+        }
+
+        return $query->getQuery();
+        ;
+    }
+
     /**
     * @return Evenement[] Returns an array of Evenement objects
     */
     public function findMonthlyEvents($formattedDate)
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->andWhere('e.Date LIKE :val')
             ->setParameter('val', $formattedDate.'%')
             ->orderBy('e.Date', 'ASC')
@@ -39,6 +83,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findUpcommingEvents($date)
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->andWhere('e.Date > :val')
             ->setParameter('val', $date)
             ->orderBy('e.Date', 'ASC')
@@ -54,6 +99,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findBestEvents()
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->orderBy('e.id', 'ASC')
             ->setMaxResults(5)
             ->getQuery()
@@ -67,6 +113,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findLatestEvents($date)
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.Visible = true')
             ->andWhere('e.Date < :val')
             ->setParameter('val', $date)
             ->orderBy('e.Date', 'DESC')
