@@ -7,6 +7,8 @@ accueil:
   path: /accueil
   controller: App\Controller\HomeController::index
 
+#les chemins relatifs aux événements
+
 evenements:
   path: /evenements/accueil
   controller: App\Controller\EventsController::index
@@ -19,10 +21,6 @@ evenementsAll:
   path: /evenements/tous
   controller: App\Controller\EventsController::all
 
-legislation:
-  path: /legislation
-  controller: App\Controller\HomeController::legislation
-
 evenementsMois:
   path: /evenements/mois
   controller: App\Controller\EventsController::month
@@ -30,6 +28,16 @@ evenementsMois:
 evenementsPerso:
   path: /evenements/mes_evenements
   controller: App\Controller\EventsController::my
+
+
+#chemin relatif à la législation
+
+legislation:
+  path: /legislation
+  controller: App\Controller\HomeController::legislation
+
+
+#chemins relatifs à la boutique
 
 boutique/accueil:
   path: /boutique/accueil
@@ -58,6 +66,10 @@ boutique/categorie/reductions:
 administration:
   path: /administration
   controller: App\Controller\Admin\AdminHomeController::index
+
+boutique/ID:
+  path: boutique/{ID}/description
+  controller: App\Controller\ShopController::show
 
 adminEventsHome:
   path: /administration/evenements
