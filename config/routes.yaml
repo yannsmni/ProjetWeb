@@ -70,6 +70,7 @@ administration:
 boutique/ID:
   path: boutique/{ID}/description
   controller: App\Controller\ShopController::show
+  #options: {"mapping" : {"id" : "id"}}
 
 adminEventsHome:
   path: /administration/evenements
