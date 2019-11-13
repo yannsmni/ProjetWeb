@@ -32,7 +32,7 @@
         <div class="row">
         {% for produit in allProducts %}
         <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
-            <br/><img src="{{ produit.getImageChemin() }}" class="card-img-top" alt="{{ produit.description }}">
+            <br/><img src="/assets/image/produits/{{ produit.filename }}" class="card-img-top" alt="{{ produit.description }}">
             <div class="card-body">
                 <h4 class="card-title">{{ produit.nom }}</h4>
                 <p class="card-text"> {{ produit.description }}</p>

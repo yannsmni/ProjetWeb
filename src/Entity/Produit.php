@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
+ * @Vich\Uploadable()
  */
 class Produit
 {
@@ -39,11 +43,6 @@ class Produit
     private $Categorie;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $Image_chemin;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
      */
     private $acheteur;
@@ -52,6 +51,29 @@ class Produit
      * @ORM\Column(type="integer")
      */
     private $quantite_vendu;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="produits_images", fileNameProperty="filename")
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $Date_edit;
+
+    public function __construct()
+    {
+        $this->Date_edit = new \DateTime();
+        $this->quantite_vendu = NULL;
+    }
 
     public function getId(): ?int
     {
@@ -149,6 +171,53 @@ class Produit
     public function removeAcheteur($acheteur)
     {
         return $this->acheteur->removeElement($acheteur);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param null|string $filename
+     * @return Produit
+     */
+    public function setFilename($filename): self
+    {
+        $this->filename = null;
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        if($this->imageFile instanceof UploadedFile) {
+            $this->Date_edit = new \DateTime();
+        }
+
+        return $this;
+    }
+
+    public function getDateEdit(): ?\DateTimeInterface
+    {
+        return $this->Date_edit;
+    }
+
+    public function setDateEdit(\DateTimeInterface $Date_edit): self
+    {
+        $this->Date_edit = $Date_edit;
+
+        return $this;
     }
 
 }
