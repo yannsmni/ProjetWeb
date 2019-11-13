@@ -4,13 +4,34 @@
 
 {% block body %}
 
-<div class="container my-4">
+<div class="container-fluid my-4">
     <div class="card-deck">
         {% for image in allImages %}
-        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
-            <img src="/assets/image/photos/{{ image.filename }}" class="card-img" alt="{{ image.description }}">
+        <div class="card col-5 m-4">
+            <img src="/assets/image/photos/{{ image.filename }}" class="card-img mt-2" alt="{{ image.description }}">
             <div class="card-body">
                 <p class="card-text">Le {{ image.getDateEdit()|date("d M Y")}} à {{ image.getDateEdit()|date("G")}}h{{ image.getDateEdit()|date("i")}}</p>
+            </div>
+            <div class="mb-4">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
+                <a href="{{ path('evenementsReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+            </div>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <h5>{{ image.commentaire | length }} Commentaires</h5>
+                    {% for commentaire in image.commentaire %}
+                    <div class ="comment my-2">
+                        <div class="row">
+                            <div class="col-3">
+                            (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
+                            </div>
+                            <div class="col">
+                            {{commentaire.contenu | raw}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         {% endfor %}
