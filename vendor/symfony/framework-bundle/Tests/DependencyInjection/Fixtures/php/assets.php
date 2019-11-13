@@ -9,7 +9,7 @@ $container->loadFromExtension('framework', [
             'images_path' => [
                 'base_path' => '/foo',
             ],
-            'image' => [
+            'images' => [
                 'version' => '1.0.0',
                 'base_urls' => ['http://images1.example.com', 'http://images2.example.com'],
             ],

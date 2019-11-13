@@ -10549,7 +10549,7 @@ Madame Homais s'avança.
 
 -- Non! n'y touche pas!
 
-Les enfants voulurent voir les image.
+Les enfants voulurent voir les images.
 
 -- Sortez! fit-il impérieusement.
 
@@ -11390,7 +11390,7 @@ comme enlacé dans les fils innombrables d'une rêverie soudaine.
 
 La journée du lendemain était affreuse, et les suivantes étaient
 plus intolérables encore par l'impatience qu'avait Emma de
-ressaisir son bonheur, -- convoitise âpre, enflammée d'image
+ressaisir son bonheur, -- convoitise âpre, enflammée d'images
 connues, et qui, le septième jour, éclatait tout à l'aise dans les
 caresses de Léon. Ses ardeurs, à lui, se cachaient sous des
 expansions d'émerveillement et de reconnaissance. Emma goûtait cet
@@ -12488,7 +12488,7 @@ Elle marchait vite, le grand air la calmait: et peu à peu les
 figures de la foule, les masques, les quadrilles, les lustres, le
 souper, ces femmes, tout disparaissait comme des brumes emportées.
 Puis, revenue à la Croix rouge, elle se jeta sur son lit, dans la
-petite chambre du second, où il y avait les image de la Tour de
+petite chambre du second, où il y avait les images de la Tour de
 Nesle. À quatre heures du soir, Hivert la réveilla.
 
 En rentrant chez elle, Félicité lui montra derrière la pendule un

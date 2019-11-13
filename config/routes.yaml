@@ -4,7 +4,7 @@
 
 
 accueil:
-  path: /accueil
+  path: /
   controller: App\Controller\HomeController::index
 
 evenements:
@@ -90,3 +90,8 @@ security_connexion:
 security_inscription:
   path: /inscription
   controller: App\Controller\SecurityController::inscription
+
+security_deconnexion:
+  path: /deconnexion
+  controller: App\Controller\SecurityController::deconnexion
+

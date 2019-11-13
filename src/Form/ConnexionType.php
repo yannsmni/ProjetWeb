@@ -11,15 +11,15 @@ class ConnexionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('identifiant')
-            ->add('mot de passe')
+            ->add('email')
+            ->add('password')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            // Configure your form options here
-        ]);
+        // $resolver->setDefaults([
+        //     // Configure your form options here
+        // ]);
     }
 }

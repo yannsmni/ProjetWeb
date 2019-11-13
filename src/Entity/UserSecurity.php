@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 
 /**
  * 
@@ -14,15 +18,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  message="L'email est déjà utilisé, veuillez saisir une autre adresse email."
  * )
  */
-
-class UserSecurity implements UserInterface
+class UserSecurity //implements UserInterface
 {
+
 
     private $id;
 
+
     private $nom;
 
+
     private $prenom;
+    
 
     private $localisation;
 
@@ -34,17 +41,31 @@ class UserSecurity implements UserInterface
     /**
      * @Assert\Length(min="8", minMessage="Minimum 8 caractères")
      */
-    private $password;
+    private $motDePasse;
 
     /**
      * @Assert\EqualTo(propertyPath="password", message="Ce n'est pas le même mot de passe")
      */
-    public $confirm_password;
+   /* public $confirm_password; */
 
-    private $createdAt;
-
+    private $dateCreation;
+    
     private $role;
 
+    private $apiToken;
+/*
+    public function __construct(string $username, string $password, string $roles)
+    {
+        if (empty($username))
+        {
+            throw new \InvalidArgumentException('No username provided.');
+        }
+ 
+        $this->username = $username;
+        $this->password = $password;
+        $this->roles = $roles;
+    }
+*/
     public function getId(): ?int
     {
         return $this->id;
@@ -98,26 +119,26 @@ class UserSecurity implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getMotDePasse(): ?string
     {
-        return $this->password;
+        return $this->motDePasse;
     }
 
-    public function setPassword(string $password): self
+    public function setMotDePasse(string $motDePasse): self
     {
-        $this->password = $password;
+        $this->motDePasse = $motDePasse;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getDateCreation()//: ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->dateCreation;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setDateCreation(/*\DateTimeInterface*/String $dateCreation): self
     {
-        $this->createdAt = $createdAt;
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
@@ -146,4 +167,7 @@ class UserSecurity implements UserInterface
 
     }
 
+    public function getPassword(){
+        return getMotDePasse();
+    }
 }

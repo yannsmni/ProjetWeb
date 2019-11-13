@@ -637,9 +637,9 @@ abstract class AbstractCrawlerTest extends TestCase
         $this->assertNotSame($crawler, $crawler->selectImage('Bar'), '->selectImage() returns a new instance of a crawler');
         $this->assertInstanceOf('Symfony\\Component\\DomCrawler\\Crawler', $crawler, '->selectImage() returns a new instance of a crawler');
 
-        $this->assertCount(1, $crawler->selectImage('Fabien\'s Bar'), '->selectImage() selects image by alt attribute');
-        $this->assertCount(2, $crawler->selectImage('Fabien"s Bar'), '->selectImage() selects image by alt attribute');
-        $this->assertCount(1, $crawler->selectImage('\' Fabien"s Bar'), '->selectImage() selects image by alt attribute');
+        $this->assertCount(1, $crawler->selectImage('Fabien\'s Bar'), '->selectImage() selects images by alt attribute');
+        $this->assertCount(2, $crawler->selectImage('Fabien"s Bar'), '->selectImage() selects images by alt attribute');
+        $this->assertCount(1, $crawler->selectImage('\' Fabien"s Bar'), '->selectImage() selects images by alt attribute');
     }
 
     public function testSelectButton()
@@ -799,11 +799,11 @@ HTML;
     public function testImages()
     {
         $crawler = $this->createTestCrawler('http://example.com/bar/')->selectImage('Bar');
-        $this->assertIsArray($crawler->images(), '->image() returns an array');
+        $this->assertIsArray($crawler->images(), '->images() returns an array');
 
-        $this->assertCount(4, $crawler->images(), '->image() returns an array');
+        $this->assertCount(4, $crawler->images(), '->images() returns an array');
         $images = $crawler->images();
-        $this->assertInstanceOf('Symfony\\Component\\DomCrawler\\Image', $images[0], '->image() returns an array of Image instances');
+        $this->assertInstanceOf('Symfony\\Component\\DomCrawler\\Image', $images[0], '->images() returns an array of Image instances');
 
         $this->assertEquals([], $this->createTestCrawler()->filterXPath('//ol')->links(), '->links() returns an empty array if the node selection is empty');
     }

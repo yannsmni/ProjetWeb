@@ -550,7 +550,7 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
     /**
      * Attach a {@link Swift_Mime_SimpleMimeEntity} and return it's CID source.
      *
-     * This method should be used when embedding image or other data in a message.
+     * This method should be used when embedding images or other data in a message.
      *
      * @return string
      */
