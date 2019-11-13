@@ -142,6 +142,15 @@ class ProduitRepository extends ServiceEntityRepository
         return $query->getQuery();
 
     }
+
+    public function findBySearch($search) {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.nom LIKE :val')
+            ->setParameter('val', $search)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

@@ -78,9 +78,17 @@ class Image
     }
 
     /**
-    * @param null|string $filename
-    * @return Evenement
-    */
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param null|string $filename
+     * @return Image
+     */
     public function setFilename($filename): self
     {
         $this->filename = null;
