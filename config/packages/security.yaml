@@ -1,7 +1,14 @@
 security:
+    encoders:
+        App\Security\User\WebserviceUser:
+            algorithm: bcrypt
+            cost: 12
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        webservice:
+                id: App\Security\WebserviceUserProvider
         in_memory: { memory: null }
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|image|js)/
@@ -9,6 +16,15 @@ security:
         main:
             anonymous: true
 
+            provider: webservice
+
+            form_login:
+                login_path: security_connexion
+                check_path: security_connexion
+
+            logout:
+                path: security_deconnexion
+                target: /
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
