@@ -15,6 +15,9 @@
                     {{ form_row(form.maxPrice) }}
                 </div>
                 <div class="col">
+                    {{ form_row(form.category) }}
+                </div>
+                <div class="col">
                     <div class="form-group">
                         <button class="btn btn-primary">Rechercher</button>
                     </div>
@@ -35,7 +38,7 @@
                 <p class="card-text"> {{ produit.description }}</p>
                 <p class="card-text"><small class="text-muted">Prix : {{ produit.prix }}€</small></p>
                 <div>
-                    <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Voir le produit</a>
+                    <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id, slug: produit.slug}) }}">Voir le produit</a>
                 </div>
                 </br>
                 {# {% if app.user %} #}

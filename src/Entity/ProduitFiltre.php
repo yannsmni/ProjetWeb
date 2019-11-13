@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ProduitFiltre {
@@ -15,6 +17,17 @@ class ProduitFiltre {
      * @Assert\Range(min=1, max=200)
      */
     private $minPrice;
+
+    /**
+     * @var string|null
+     */
+    private $category;
+
+    public function __construct()
+    {
+        //$this->category = new Categorie();
+    }
+
 
     /**
      * @return int|null
@@ -47,5 +60,23 @@ class ProduitFiltre {
     {
         $this->maxPrice = $maxPrice;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string|null $category
+     */
+    public function setCategory(?string $category): void
+    {
+        $this->category = $category;
+    }
+
+
 }
 

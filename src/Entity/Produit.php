@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -67,6 +68,11 @@ class Produit
         $this->nom = $nom;
 
         return $this;
+    }
+
+    public function getSlug(): string {
+        $slugify = (new Slugify())->slugify($this->nom);
+        return $slugify;
     }
 
     public function getDescription(): ?string

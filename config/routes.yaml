@@ -71,9 +71,12 @@ administration:
   controller: App\Controller\Admin\AdminHomeController::index
 
 boutique/ID:
-  path: boutique/{ID}/description
+  path: boutique/{slug}-{ID}/description
   controller: App\Controller\ShopController::show
-  #options: {"mapping" : {"id" : "id"}}
+  requirements:
+    slug: '[a-z0-9\-]*'
+
+#chemins relatifs à la partie admin - event
 
 adminEventsHome:
   path: /administration/evenements
@@ -91,6 +94,8 @@ adminEventsDelete:
   path: /administration/evenements/delete/{id}
   controller: App\Controller\Admin\AdminEventsController::delete
 
+#chemins relatifs à la partie admin - catégorie
+
 adminCategoryHome:
   path: /administration/categories
   controller: App\Controller\Admin\AdminCategoryController::index
@@ -107,13 +112,10 @@ adminCategoryDelete:
   path: /administration/categories/delete/{id}
   controller: App\Controller\Admin\AdminCategoryController::delete
 
-#boutique/categorie/index:
-  #path: /boutique/accueil
-  #controller: App\Controller\ShopController::index
+#chemins relatifs à la partie admin - boutique
 
-#boutique/categorie/{nom}:
-  #path: /boutique/{nom}
-  #controller: App\Controller\ShopController::categorie
+
+#chemin relatif aux images
 
 photos:
   path: /photos
