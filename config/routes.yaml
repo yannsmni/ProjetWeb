@@ -114,6 +114,21 @@ adminCategoryDelete:
 
 #chemins relatifs à la partie admin - boutique
 
+adminProductsHome:
+  path: /administration/produits
+  controller: App\Controller\Admin\AdminProductsController::index
+
+adminProductsAdd:
+  path: /administration/produits/add
+  controller: App\Controller\Admin\AdminProductsController::add
+
+adminProductsEdit:
+  path: /administration/produits/edit/{id}
+  controller: App\Controller\Admin\AdminProductsController::edit
+
+adminProductsDelete:
+  path: /administration/produits/delete/{id}
+  controller: App\Controller\Admin\AdminProductsController::delete
 
 #chemin relatif aux images
 
