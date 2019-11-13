@@ -33,6 +33,10 @@ evenementsRegisterId:
   path: /evenements/{id}/register
   controller: App\Controller\EventsController::register
 
+evenementsReportId:
+  path: /evenements/{id}/report
+  controller: App\Controller\EventsController::report
+
 #chemin relatif à la législation
 
 legislation:

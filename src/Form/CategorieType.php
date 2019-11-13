@@ -22,4 +22,8 @@ class CategorieType extends AbstractType
             'data_class' => Categorie::class,
         ]);
     }
+
+    public function getBlockPrefix() {
+        return '';
+    }
 }

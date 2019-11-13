@@ -7,6 +7,16 @@
 <h1 class="mt-4">Gestion des produits</h1>
 
 <a href="{{ path('adminProductsAdd')}}" class="btn btn-success">Ajouter un produit</a>
+
+<div class="search_type my-4">
+    <h3>Personnaliser la recherche</h3>
+    {{ form_start(form) }}
+        <div class="search bar">
+            {{ form_rest(form) }}
+        </div>
+        <button type="submit" class="contained">Rechercher</button>
+    {{ form_end(form) }}
+</div>
                      
 <div class="container-fluid mt-4">
     <table class="table table-striped text-center">
@@ -24,7 +34,7 @@
             <tr>
                 <td class="font-weight-bold">{{ produit.nom }}</td>
                 <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
+                <td class="font-weight-bold">{{ produit.prix }} €</td>
                 <td>{{ produit.getQuantiteVendu() }}</td>
                 <td>
                     <a href="{{ path('adminProductsEdit', {id: produit.id}) }}" class="btn btn-primary">Modifier</a>

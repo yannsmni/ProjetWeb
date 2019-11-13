@@ -316,7 +316,7 @@ class SecurityController extends AbstractController
                 'email' => $form['email']->getData(),
                 'mot_de_passe' => $hash,
                 'date_creation' => "2019-11-05",
-                'role' => "eleve"
+                'role' => "Eleve"
             ]]);
             //var_dump($api);
 

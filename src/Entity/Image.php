@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\Commentaire;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -68,7 +71,7 @@ class Image
     public function __construct() {
         $this->Date_edit = new \DateTime();
         $this->Visible = true;
-        $this->commentaires = new ArrayCollection();
+        $this->commentaire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,9 +80,17 @@ class Image
     }
 
     /**
-    * @param null|string $filename
-    * @return Evenement
-    */
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param null|string $filename
+     * @return Image
+     */
     public function setFilename($filename): self
     {
         $this->filename = null;

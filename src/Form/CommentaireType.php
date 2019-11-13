@@ -28,4 +28,8 @@ class CommentaireType extends AbstractType
             'data_class' => Commentaire::class,
         ]);
     }
+
+    public function getBlockPrefix() {
+        return '';
+    }
 }

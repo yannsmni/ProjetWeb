@@ -75,11 +75,11 @@
                         <p class="nav-link text-white h5"></p>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger h5" href="">Déconnexion</a>
+                        <a class="nav-link text-danger h5" href="{{ path('security_deconnexion') }}">Déconnexion</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link text-success h5" href="">Connexion</a>
+                        <a class="nav-link text-success h5" href="{{ path('security_connexion') }}">Connexion</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -109,7 +109,9 @@
                 <p><a href="{{ path('boutique/accueil') }}" class="text-white">Boutique</a></p>
                 <p><a href="{{ path('photos') }}" class="text-white">Photos</a></p>
                 <p><a href="" class="text-white">Boîte à idées</a></p>
+                {% if is_granted('ROLE_BDE') %}
                 <p><a href="{{ path('administration') }}" class="text-white">Administration</a></p>
+                {% endif %}
             </div>
             <hr class="w-100 clearfix d-md-none">
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
