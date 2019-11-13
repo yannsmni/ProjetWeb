@@ -24,7 +24,7 @@
             <tr>
                 <td class="font-weight-bold">{{ produit.nom }}</td>
                 <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
+                <td class="font-weight-bold">{{ produit.prix }} €</td>
                 <td>{{ produit.getQuantiteVendu() }}</td>
                 <td>
                     <a href="{{ path('adminProductsEdit', {id: produit.id}) }}" class="btn btn-primary">Modifier</a>

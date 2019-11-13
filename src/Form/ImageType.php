@@ -37,4 +37,8 @@ class ImageType extends AbstractType
             'data_class' => Image::class,
         ]);
     }
+
+    public function getBlockPrefix() {
+        return '';
+    }
 }

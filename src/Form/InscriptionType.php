@@ -47,4 +47,8 @@ class InscriptionType extends AbstractType
         //     'data_class' => UserSecurity::class,
         // ]);
     }
+
+    public function getBlockPrefix() {
+        return '';
+    }
 }

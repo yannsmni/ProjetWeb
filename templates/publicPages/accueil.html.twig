@@ -61,8 +61,8 @@
                 <hr class="my-4">
                 <div class="card-deck">
                     {% for produit in bestProducts %}
-                    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 m-4" style="background-color: ">
-                        <br/><img src="{{ produit.getImageChemin() }}" class="card-img-top" alt="{{ produit.description }}">
+                    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 m-4">
+                        <br/><img src="/assets/image/produits/{{ produit.filename }}" class="card-img-top" alt="{{ produit.description }}">
                       <div class="card-body">
                         <h5 class="card-title">{{ produit.nom }}</h5>
                         <p class="card-text">Retrouvez ce produit et bien d'autres sur notre boutique. </p>
