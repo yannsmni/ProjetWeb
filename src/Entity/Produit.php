@@ -71,9 +71,8 @@ class Produit
     }
 
     public function getSlug(): string {
-        $slugify = (new Slugify())->slugify($this->Nom);
+        $slugify = (new Slugify())->slugify($this->nom);
         return $slugify;
-
     }
 
     public function getDescription(): ?string
