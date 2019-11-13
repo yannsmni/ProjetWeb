@@ -29,7 +29,7 @@
     <div class="row">
         {% for evenement in allEvents %}
         <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="image de l'événement">
             <div class="card-body">
             <h5 class="card-title">{{ evenement.nom }}</h5>
             <p class="card-text">{{ evenement.description }}</p>

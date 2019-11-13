@@ -8,6 +8,9 @@
     <h1 class="display-4">{{ evenement.nom }} - {{ evenement.id }}</h1>
     <hr class="my-4">
     <div>
+        <div class="container my-4">
+            <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="image de l'événement">
+        </div>
         <h1>Description de l'événement</h1>
         <p>{{ evenement.description }}</p>
     </div>
@@ -21,10 +24,18 @@
     </div>
         <hr class="my-4">
         <div>
-            <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
-            <button class="btn btn-primary" type="submit">Ajouter une photo</button>
-            <button class="btn btn-primary" type="submit">Commenter</button>
-            <button class="btn btn-danger" type="submit">Signaler</button>
+            <div class="row">
+                <div class="col-9">
+                    <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
+                    <button class="btn btn-primary" type="submit">Ajouter une photo</button>
+                    <button class="btn btn-primary" type="submit">Commenter</button>
+                    <button class="btn btn-danger" type="submit">Signaler</button>
+                </div>
+                <div class="col-3">
+                    <a href="{{ path('adminEventsEdit', {id: evenement.id}) }}" class="btn btn-primary">Modifier</a>
+                    <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
         </div>
     <hr class="my-4">
     <div>
