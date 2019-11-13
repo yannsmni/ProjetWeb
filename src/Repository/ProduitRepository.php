@@ -28,6 +28,11 @@ class ProduitRepository extends ServiceEntityRepository
     {
         $query = $this->findAll();
 
+        if ($search->getCategory()) {
+            $query->andWhere('a.Categorie = :categorie');
+            $query->setParameter('categorie', $search->getCategory());
+        }
+
         if ($search->getMaxPrice()) {
             $query->andWhere('a.Prix <= :maxprice');
             $query->setParameter('maxprice', $search->getMaxPrice());

@@ -1,4 +1,6 @@
 {
+    "cocur/slugify": {
+        "version": "v3.2"
     "behat/transliterator": {
         "version": "v1.2.0"
     },

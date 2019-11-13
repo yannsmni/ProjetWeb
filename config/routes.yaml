@@ -71,9 +71,10 @@ administration:
   controller: App\Controller\Admin\AdminHomeController::index
 
 boutique/ID:
-  path: boutique/{ID}/description
+  path: boutique/{slug}-{ID}/description
   controller: App\Controller\ShopController::show
-  #options: {"mapping" : {"id" : "id"}}
+  requirements:
+    slug: '[a-z0-9\-]*'
 
 adminEventsHome:
   path: /administration/evenements
