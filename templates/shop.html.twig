@@ -75,11 +75,11 @@
                         <p class="nav-link text-white h5"></p>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger h5" href="">Déconnexion</a>
+                        <a class="nav-link text-danger h5" href="{{ path('security_deconnexion') }}">Déconnexion</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link text-success h5" href="">Connexion</a>
+                        <a class="nav-link text-success h5" href="{{ path('security_connexion') }}">Connexion</a>
                     </li>
                     {% endif %}
                 </ul>
