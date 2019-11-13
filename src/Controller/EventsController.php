@@ -119,4 +119,14 @@ class EventsController extends AbstractController {
 
         return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
     }
+
+    public function report(Evenement $evenement, ObjectManager $manager): Response
+    {
+        $evenement->setVisible(false);
+
+        $manager->persist($evenement);
+        $manager->flush();
+
+        return $this->redirectToRoute('evenementsAll');
+    }
 }

@@ -6,21 +6,14 @@
 
 <div class="container my-4">
     <div class="card-deck">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
+        {% for image in allImages %}
+        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
+            <img src="/assets/image/photos/{{ image.filename }}" class="card-img" alt="{{ image.description }}">
+            <div class="card-body">
+                <p class="card-text">Le {{ image.getDateEdit()|date("d M Y")}} à {{ image.getDateEdit()|date("G")}}h{{ image.getDateEdit()|date("i")}}</p>
+            </div>
         </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-        </div>
+        {% endfor %}
     </div>
 </div>
 
