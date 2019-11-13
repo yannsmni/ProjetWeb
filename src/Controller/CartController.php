@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
-{
+{   
     /**
      * @Route("/panier", name="cart_index")
      */
@@ -32,8 +32,7 @@ class CartController extends AbstractController
             $totalItem = $item['produit']->getPrix() * $item['quantity'];
             $total += $totalItem;
         }
-
-        //dd($panierWithData);
+        
         return $this->render('publicPages/panier/panier.html.twig', [
             'items' => $panierWithData,
             'total' => $total
@@ -43,9 +42,29 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="cart_add")
      */
-    public function add($id, SessionInterface $session)
+    public function add($id, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager)
     {
-        //$session->set('panier', []);
+        // $user = $this->getUser();
+        // $userId = $user->getId();
+        // $produit = $produitRepository->find($id);
+        // $produitId = $produit->getId();
+        // $produit->setAcheteur($user);
+        // $manager->persist($produit);
+        // $manager->flush();
+
+        // $entityManager = $this->getEntityManager();
+
+        // $query = $entityManager->createQuery(
+        //     'SELECT *
+        //     FROM produit_utilisateur
+        //     WHERE utilisateur_id = :userId'
+        // )->setParameter('id', $id, 'userId', $userId);
+
+        // $panierCourant = $query->getResult();
+        
+        //$panier = $session->get('panier', $panierCourant);
+
+
         $panier = $session->get('panier', []);
 
         if(!empty($panier[$id])){
@@ -55,14 +74,32 @@ class CartController extends AbstractController
         }
 
         $session->set('panier', $panier);
-        //echo $session->get('panier');
         return $this->redirectToRoute("cart_index");
     }
 
     /**
      * @Route("/panier/remove/{id}", name="cart_remove")
      */
-    public function remove($id, SessionInterface $session){
+    public function remove($id, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager){
+        // $user = $this->getUser();
+        // $userId = $user->getId();
+        // $produit = $produitRepository->find($id);
+        // $produit->removeAcheteur($userId); 
+        // $manager->persist($produit);
+        // $manager->flush();
+
+        // $entityManager = $this->getEntityManager();
+
+        // $query = $entityManager->createQuery(
+        //     'SELECT *
+        //     FROM produit_utilisateur
+        //     WHERE utilisateur_id = :userId'
+        // )->setParameter('id', $id, 'userId', $userId);
+
+        // $panierCourant = $query->getResult();
+        
+        //$panier = $session->get('panier', $panierCourant);
+
         $panier = $session->get('panier', []);
 
         if(!empty($panier[$id])){

@@ -9,9 +9,9 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
- * @Vich\Uploadable()
- */
+* @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+* @Vich\Uploadable()
+*/
 class Image
 {
     /**
@@ -22,15 +22,15 @@ class Image
     private $id;
 
     /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255)
-     */
+    * @var string|null
+    * @ORM\Column(type="string", length=255)
+    */
     private $filename;
 
     /**
-     * @var File|null
-     * @Vich\UploadableField(mapping="photos_images", fileNameProperty="filename")
-     */
+    * @var File|null
+    * @Vich\UploadableField(mapping="photos_images", fileNameProperty="filename")
+    */
     private $imageFile;
 
     /**
@@ -56,13 +56,19 @@ class Image
     private $utilisateur;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="Image")
      */
+    private $commentaire;
+
+    /**
+    * @ORM\Column(type="datetime")
+    */
     private $Date_edit;
 
     public function __construct() {
         $this->Date_edit = new \DateTime();
         $this->Visible = true;
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,14 +76,41 @@ class Image
         return $this->id;
     }
 
-    public function getChemin(): ?string
+    /**
+    * @param null|string $filename
+    * @return Evenement
+    */
+    public function setFilename($filename): self
     {
-        return $this->Chemin;
+        $this->filename = null;
+        $this->filename = $filename;
+
+        return $this;
     }
 
-    public function setChemin(string $Chemin): self
+    public function getImageFile(): ?File
     {
-        $this->Chemin = $Chemin;
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        if($this->imageFile instanceof UploadedFile) {
+        $this->Date_edit = new \DateTime();
+    }
+
+        return $this;
+    }
+
+    public function getDateEdit(): ?\DateTimeInterface
+    {
+        return $this->Date_edit;
+    }
+
+    public function setDateEdit(\DateTimeInterface $Date_edit): self
+    {
+        $this->Date_edit = $Date_edit;
 
         return $this;
     }
@@ -131,48 +164,32 @@ class Image
     }
 
     /**
-     * @return null|string
+     * @return Collection|Commentaire[]
      */
-    public function getFilename(): ?string
+    public function getCommentaire(): Collection
     {
-        return $this->filename;
+        return $this->commentaire;
     }
 
-    /**
-     * @param null|string $filename
-     * @return Evenement
-     */
-    public function setFilename($filename): self
+    public function addCommentaire(Commentaire $commentaire): self
     {
-        $this->filename = null;
-        $this->filename = $filename;
-
-        return $this;
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(?File $imageFile): self
-    {
-        $this->imageFile = $imageFile;
-        if($this->imageFile instanceof UploadedFile) {
-            $this->Date_edit = new \DateTime();
+        if (!$this->commentaire->contains($commentaire)) {
+            $this->commentaire[] = $commentaire;
+            $commentaire->setImage($this);
         }
 
         return $this;
     }
 
-    public function getDateEdit(): ?\DateTimeInterface
+    public function removeCommentaire(Commentaire $commentaire): self
     {
-        return $this->Date_edit;
-    }
-
-    public function setDateEdit(\DateTimeInterface $Date_edit): self
-    {
-        $this->Date_edit = $Date_edit;
+        if ($this->commentaire->contains($commentaire)) {
+            $this->commentaire->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getImage() === $this) {
+                $commentaire->setImage(null);
+            }
+        }
 
         return $this;
     }

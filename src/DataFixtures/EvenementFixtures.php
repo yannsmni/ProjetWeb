@@ -35,7 +35,6 @@ class EvenementFixtures extends Fixture
                           ->setDescription($faker->realText($maxNbChars = 254))
                           ->setDate($faker->dateTimeBetween('-18 months'))
                           ->setDateCreation($faker->dateTime($max = '-18 months'))
-                          ->setVisible($faker->boolean($chanceOfGettingTrue = 50))
                           ->setPrix(random_int(0, 5))
                           ->setStatut($statut);
     
@@ -49,11 +48,9 @@ class EvenementFixtures extends Fixture
                     $days = $interval->days;
                     $minimum = '-' . $days . 'days';
     
-                    $commentaire->setEvenement($evenement)
-                                ->setContenu($faker->realText($maxNbChars = 254))
-                                ->setVisible($faker->boolean($chanceOfGettingTrue = 50))
-                                ->setAuteur($utilisateur)
-                                ->setDate($faker->dateTimeBetween($minimum));
+                    $commentaire->setContenu($faker->realText($maxNbChars = 254))
+                                ->setAuteur($utilisateur);
+                                
                     
                     $manager->persist($commentaire);
                 }
