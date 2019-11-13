@@ -79,7 +79,7 @@ class ProduitRepository extends ServiceEntityRepository
     public function findBestProducts() {
 
         return $this->createQueryBuilder('a')
-            ->orderBy('a.Quantite_vendu', 'DESC')
+            ->orderBy('a.quantite_vendu', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
