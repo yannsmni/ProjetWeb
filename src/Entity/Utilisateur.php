@@ -19,7 +19,7 @@ class Utilisateur
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image")
      */
     private $Vote;
 

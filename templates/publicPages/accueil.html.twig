@@ -56,33 +56,19 @@
           <div class="jumbotron jumbotron-fluid" style="background-color: #00a490">
               <div class="container">
                 <h1 class="display-4 font-weight-bold">Boutique</h1>
-                <p class="lead">Ouais ouais ouais</p>
+                <p class="lead">Retrouvez tous vos produits préférés à l'image du BDE !<br/>
+                Voici nos trois produits les plus vendus : </p>
                 <hr class="my-4">
                 <div class="card-deck">
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
+                    {% for produit in bestProducts %}
+                    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 m-4" style="background-color: ">
+                        <br/><img src="{{ produit.getImageChemin() }}" class="card-img-top" alt="{{ produit.description }}">
                       <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">{{ produit.nom }}</h5>
+                        <p class="card-text">Retrouvez ce produit et bien d'autres sur notre boutique. </p>
                       </div>
                     </div>
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
+                    {% endfor %}
                   </div>
               </div>
           </div>

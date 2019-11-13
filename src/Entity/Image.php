@@ -3,10 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
- */
+* @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+* @Vich\Uploadable()
+*/
 class Image
 {
     /**
@@ -17,9 +22,16 @@ class Image
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Chemin;
+    * @var string|null
+    * @ORM\Column(type="string", length=255)
+    */
+    private $filename;
+
+    /**
+    * @var File|null
+    * @Vich\UploadableField(mapping="photos_images", fileNameProperty="filename")
+    */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,19 +55,62 @@ class Image
      */
     private $utilisateur;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="Image")
+     */
+    private $commentaire;
+
+    /**
+    * @ORM\Column(type="datetime")
+    */
+    private $Date_edit;
+
+    public function __construct() {
+        $this->Date_edit = new \DateTime();
+        $this->Visible = true;
+        $this->commentaires = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getChemin(): ?string
+    /**
+    * @param null|string $filename
+    * @return Evenement
+    */
+    public function setFilename($filename): self
     {
-        return $this->Chemin;
+        $this->filename = null;
+        $this->filename = $filename;
+
+        return $this;
     }
 
-    public function setChemin(string $Chemin): self
+    public function getImageFile(): ?File
     {
-        $this->Chemin = $Chemin;
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        if($this->imageFile instanceof UploadedFile) {
+        $this->Date_edit = new \DateTime();
+    }
+
+        return $this;
+    }
+
+    public function getDateEdit(): ?\DateTimeInterface
+    {
+        return $this->Date_edit;
+    }
+
+    public function setDateEdit(\DateTimeInterface $Date_edit): self
+    {
+        $this->Date_edit = $Date_edit;
 
         return $this;
     }
@@ -104,6 +159,37 @@ class Image
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaire(): Collection
+    {
+        return $this->commentaire;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaire->contains($commentaire)) {
+            $this->commentaire[] = $commentaire;
+            $commentaire->setImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaire->contains($commentaire)) {
+            $this->commentaire->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getImage() === $this) {
+                $commentaire->setImage(null);
+            }
+        }
 
         return $this;
     }

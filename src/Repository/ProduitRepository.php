@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Produit;
+use App\Entity\ProduitFiltre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,43 +20,127 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    /**
+     * @return Query
+     */
+
+    public function findVisibleProducts(ProduitFiltre $search) : Query
+    {
+        $query = $this->findAll();
+
+        if ($search->getCategory()) {
+            $query->andWhere('a.Categorie = :categorie');
+            $query->setParameter('categorie', $search->getCategory());
+        }
+
+        if ($search->getMaxPrice()) {
+            $query->andWhere('a.Prix <= :maxprice');
+            $query->setParameter('maxprice', $search->getMaxPrice());
+        }
+
+        if ($search->getMinPrice()) {
+            $query->andWhere('a.Prix >= :minprice');
+            $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        return $query->getQuery();
+    }
+
+    public function findAllProducts() {
+        return $this->createQueryBuilder('a')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findAll() {
         return $this->createQueryBuilder('a')
-            ->orderBy('a.Prix', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('a.Prix', 'ASC');
     }
 
-    public function findClothes() {
-        return $this->createQueryBuilder('a')
+    public function findClothes(ProduitFiltre $search) {
+
+        $query = $this->createQueryBuilder('a')
             ->andWhere('a.Categorie = 1')
-            ->orderBy('a.Prix', 'ASC')
+            ->orderBy('a.Prix', 'ASC');
+
+        if ($search->getMaxPrice()) {
+            $query->andWhere('a.Prix <= :maxprice');
+            $query->setParameter('maxprice', $search->getMaxPrice());
+        }
+
+        if ($search->getMinPrice()) {
+            $query->andWhere('a.Prix >= :minprice');
+            $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        return $query->getQuery();
+    }
+
+    public function findBestProducts() {
+
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.Quantite_vendu', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }
 
-    public function findITProducts() {
-        return $this->createQueryBuilder('a')
+    public function findITProducts(ProduitFiltre $search) {
+
+        $query = $this->createQueryBuilder('a')
             ->andWhere('a.Categorie = 3')
-            ->orderBy('a.Prix', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('a.Prix', 'ASC');
+
+        if ($search->getMaxPrice()) {
+            $query->andWhere('a.Prix <= :maxprice');
+            $query->setParameter('maxprice', $search->getMaxPrice());
+        }
+
+        if ($search->getMinPrice()) {
+            $query->andWhere('a.Prix >= :minprice');
+            $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        return $query->getQuery();
+
     }
 
-    public function findGoodies() {
-        return $this->createQueryBuilder('a')
+    public function findGoodies(ProduitFiltre $search) {
+        $query = $this->createQueryBuilder('a')
             ->andWhere('a.Categorie = 2')
-            ->orderBy('a.Prix', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('a.Prix', 'ASC');
+
+        if ($search->getMaxPrice()) {
+            $query->andWhere('a.Prix <= :maxprice');
+            $query->setParameter('maxprice', $search->getMaxPrice());
+        }
+
+        if ($search->getMinPrice()) {
+            $query->andWhere('a.Prix >= :minprice');
+            $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        return $query->getQuery();
+
     }
 
-    public function findReductions() {
-        return $this->createQueryBuilder('a')
+    public function findReductions(ProduitFiltre $search) {
+        $query = $this->createQueryBuilder('a')
             ->andWhere('a.Categorie = 4')
-            ->orderBy('a.Prix', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('a.Prix', 'ASC');
+
+        if ($search->getMaxPrice()) {
+            $query->andWhere('a.Prix <= :maxprice');
+            $query->setParameter('maxprice', $search->getMaxPrice());
+        }
+
+        if ($search->getMinPrice()) {
+            $query->andWhere('a.Prix >= :minprice');
+            $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        return $query->getQuery();
+
     }
     // /**
     //  * @return Produit[] Returns an array of Produit objects

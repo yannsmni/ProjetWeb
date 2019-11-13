@@ -2,12 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Evenement;
+use App\Entity\Commentaire;
 use App\Entity\EvenementFiltre;
+use App\Form\CommentaireType;
+use App\Form\ImageType;
 use App\Form\EvenementFiltreType;
 use App\Repository\EvenementRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,10 +38,35 @@ class EventsController extends AbstractController {
         ]);
     }
 
-    public function show(Evenement $evenement): Response
+    public function show(Evenement $evenement, Request $request, ObjectManager $manager): Response
     {
+        // $commentaire = new Commentaire();
+        $image = new Image();
+        // $commentaireForm = $this->createForm(CommentaireType::class, $commentaire);
+        // $commentaireForm->handleRequest($request);
+        $imageForm = $this->createForm(ImageType::class, $image);
+        $imageForm->handleRequest($request);
+
+        // if($commentaireForm->isSubmitted() && $commentaireForm->isValid()){
+        //     $commentaire->setEvenement($evenement);
+        //     $manager->persist($commentaire);
+        //     $manager->flush();
+
+        //     return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
+        // }
+
+        if($imageForm->isSubmitted() && $imageForm->isValid()){
+            $image->setEvenement($evenement);
+            $manager->persist($image);
+            $manager->flush();
+
+            return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
+        }
+
         return $this->render('publicPages/evenements/evenements_show.html.twig', [
-            'evenement' => $evenement
+            'evenement' => $evenement,
+            // 'commentaireForm' => $commentaireForm->createView(),
+            'imageForm' => $imageForm->createView()
         ]);
     }
 
@@ -76,5 +106,17 @@ class EventsController extends AbstractController {
         return $this->render('publicPages/evenements/evenements_perso.html.twig', [
             //'myEvents' => $myEvents
         ]);
+    }
+
+    public function register(Evenement $evenement, ObjectManager $manager): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $evenement->addParticipants($user);
+        $manager->persist($evenement);
+        $manager->flush();
+
+        return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
     }
 }

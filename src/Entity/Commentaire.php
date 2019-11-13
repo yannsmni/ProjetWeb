@@ -17,10 +17,10 @@ class Commentaire
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Evenement", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Evenement;
+    private $Image;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,19 +43,25 @@ class Commentaire
      */
     private $Date;
 
+    public function __construct()
+    {
+        $this->Date = new \DateTime();
+        $this->Visible = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEvenement(): ?Evenement
+    public function getImage(): ?Image
     {
         return $this->Evenement;
     }
 
-    public function setEvenement(?Evenement $Evenement): self
+    public function setImage(?Image $Image): self
     {
-        $this->Evenement = $Evenement;
+        $this->Image = $Image;
 
         return $this;
     }

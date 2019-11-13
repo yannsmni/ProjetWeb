@@ -7,6 +7,8 @@ accueil:
   path: /
   controller: App\Controller\HomeController::index
 
+#les chemins relatifs aux événements
+
 evenements:
   path: /evenements/accueil
   controller: App\Controller\EventsController::index
@@ -19,10 +21,6 @@ evenementsAll:
   path: /evenements/tous
   controller: App\Controller\EventsController::all
 
-legislation:
-  path: /legislation
-  controller: App\Controller\HomeController::legislation
-
 evenementsMois:
   path: /evenements/mois
   controller: App\Controller\EventsController::month
@@ -31,13 +29,26 @@ evenementsPerso:
   path: /evenements/mes_evenements
   controller: App\Controller\EventsController::my
 
+evenementsRegisterId:
+  path: /evenements/{id}/register
+  controller: App\Controller\EventsController::register
+
+#chemin relatif à la législation
+
+legislation:
+  path: /legislation
+  controller: App\Controller\HomeController::legislation
+
+
+#chemins relatifs à la boutique
+
 boutique/accueil:
   path: /boutique/accueil
   controller: App\Controller\ShopController::index
 
 boutique/produits:
   path: /boutique/tous-nos-produits
-  controller: App\Controller\ShopController::tousProduits
+  controller: App\Controller\ShopController::all
 
 boutique/categorie/habits:
   path: /boutique/habits
@@ -55,6 +66,18 @@ boutique/categorie/reductions:
   path: /boutique/reduction
   controller: App\Controller\ShopController::reduction
 
+administration:
+  path: /administration
+  controller: App\Controller\Admin\AdminHomeController::index
+
+boutique/ID:
+  path: boutique/{slug}-{ID}/description
+  controller: App\Controller\ShopController::show
+  requirements:
+    slug: '[a-z0-9\-]*'
+
+#chemins relatifs à la partie admin - event
+
 adminEventsHome:
   path: /administration/evenements
   controller: App\Controller\Admin\AdminEventsController::index
@@ -71,13 +94,43 @@ adminEventsDelete:
   path: /administration/evenements/delete/{id}
   controller: App\Controller\Admin\AdminEventsController::delete
 
-#boutique/categorie/index:
-  #path: /boutique/accueil
-  #controller: App\Controller\ShopController::index
+#chemins relatifs à la partie admin - catégorie
 
-#boutique/categorie/{nom}:
-  #path: /boutique/{nom}
-  #controller: App\Controller\ShopController::categorie
+adminCategoryHome:
+  path: /administration/categories
+  controller: App\Controller\Admin\AdminCategoryController::index
+
+adminCategoryAdd:
+  path: /administration/categories
+  controller: App\Controller\Admin\AdminCategoryController::add
+
+adminCategoryEdit:
+  path: /administration/categories/edit/{id}
+  controller: App\Controller\Admin\AdminCategoryController::edit
+
+adminCategoryDelete:
+  path: /administration/categories/delete/{id}
+  controller: App\Controller\Admin\AdminCategoryController::delete
+
+#chemins relatifs à la partie admin - boutique
+
+adminProductsHome:
+  path: /administration/produits
+  controller: App\Controller\Admin\AdminProductsController::index
+
+adminProductsAdd:
+  path: /administration/produits/add
+  controller: App\Controller\Admin\AdminProductsController::add
+
+adminProductsEdit:
+  path: /administration/produits/edit/{id}
+  controller: App\Controller\Admin\AdminProductsController::edit
+
+adminProductsDelete:
+  path: /administration/produits/delete/{id}
+  controller: App\Controller\Admin\AdminProductsController::delete
+
+#chemin relatif aux images
 
 photos:
   path: /photos

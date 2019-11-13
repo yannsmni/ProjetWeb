@@ -31,6 +31,10 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'Vich\\UploaderBundle\\' => 20,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -53,6 +57,7 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Validator\\' => 28,
             'Symfony\\Component\\Translation\\' => 30,
+            'Symfony\\Component\\Templating\\' => 29,
             'Symfony\\Component\\Stopwatch\\' => 28,
             'Symfony\\Component\\Serializer\\' => 29,
             'Symfony\\Component\\Security\\Http\\' => 32,
@@ -112,6 +117,7 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Metadata\\' => 9,
         ),
         'K' => 
         array (
@@ -146,6 +152,10 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
+        'C' => 
+        array (
+            'Cocur\\Slugify\\' => 14,
+        ),
         'A' => 
         array (
             'App\\Tests\\' => 10,
@@ -171,6 +181,10 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Vich\\UploaderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vich/uploader-bundle',
         ),
         'Twig\\' => 
         array (
@@ -239,6 +253,10 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Symfony\\Component\\Templating\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/templating',
         ),
         'Symfony\\Component\\Stopwatch\\' => 
         array (
@@ -452,6 +470,10 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Metadata\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/metadata/src',
+        ),
         'Knp\\Component\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-components/src/Knp/Component',
@@ -539,6 +561,10 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
         ),
+        'Cocur\\Slugify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cocur/slugify/src',
+        ),
         'App\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
@@ -562,6 +588,13 @@ class ComposerStaticInit6ea9b0788c2404b7df05187bb1f87aaf
             'ProxyManager\\' => 
             array (
                 0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
+            ),
+        ),
+        'B' => 
+        array (
+            'Behat\\Transliterator' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/transliterator/src',
             ),
         ),
     );
