@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\ProduitFiltre;
+use App\Form\ProduitFiltreType;
 use App\Repository\ProduitRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +24,14 @@ class ShopController extends AbstractController {
      * Index comprenant tous les types possibles de filtres
      */
     public function index(): Response 
-    {        
+    {
+        $search = new ProduitFiltre();
+
         $allProducts = $this->repository->findAll();
-        $ITProducts = $this->repository->findITProducts();
-        $goodies = $this->repository->findGoodies();
-        $clothes = $this->repository->findClothes();
-        $reductions = $this->repository->findReductions();
+        $ITProducts = $this->repository->findITProducts($search);
+        $goodies = $this->repository->findGoodies($search);
+        $clothes = $this->repository->findClothes($search);
+        $reductions = $this->repository->findReductions($search);
 
         return $this->render('publicPages/boutique/boutique.html.twig', [
             'allProducts' => $allProducts,
@@ -48,59 +52,69 @@ class ShopController extends AbstractController {
 
     public function all(PaginatorInterface $paginator, Request $request) : Response
     {
-        $allProducts = $paginator->paginate($this->repository->findVisibleProducts(), $request->query->getInt('page', 1), 10);
+        $search = new ProduitFiltre();
+        $form = $this->createForm(ProduitFiltreType::class, $search);
+        $form->handleRequest($request);
+
+        $allProducts = $paginator->paginate($this->repository->findVisibleProducts($search),
+            $request->query->getInt('page', 1),
+            10);
         return $this->render('publicPages/boutique/boutique.all.html.twig', [
-            'allProducts' => $allProducts
+            'allProducts' => $allProducts,
+            'form' => $form->createView()
         ]);
     }
 
-    /**
-     * @return Response
-     */
-    public function goodies() : Response
+
+    public function goodies(PaginatorInterface $paginator, Request $request) : Response
     {
-        $goodies = $this->repository->findGoodies();
+        $search = new ProduitFiltre();
+        $form = $this->createForm(ProduitFiltreType::class, $search);
+        $form->handleRequest($request);
+        $goodies = $paginator->paginate($this->repository->findGoodies($search),
+            $request->query->getInt('page', 1), 10);
         return $this->render('publicPages/boutique/boutique.goodies.html.twig', [
-            'goodies' => $goodies
+            'goodies' => $goodies,
+            'form' => $form->createView()
         ]);
     }
-    /*public function tousProduits() : Response
+
+    public function produitsIT(PaginatorInterface $paginator, Request $request) : Response
     {
-        $allProducts = $this->repository->findAll();
-        return $this->render('publicPages/boutique/boutique.all.html.twig', [
-            'allProducts' => $allProducts
-        ]);
-    }*/
-    /**
-     * @return Response
-     */
-    public function produitsIT() : Response
-    {
-        $ITProducts = $this->repository->findITProducts();
+        $search = new ProduitFiltre();
+        $form = $this->createForm(ProduitFiltreType::class, $search);
+        $form->handleRequest($request);
+        $ITProducts = $paginator->paginate($this->repository->findITProducts($search),
+            $request->query->getInt('page', 1), 10);
         return $this->render('publicPages/boutique/boutique.produitsIT.html.twig', [
-            'ITProducts' => $ITProducts
+            'ITProducts' => $ITProducts,
+            'form' => $form->createView()
         ]);
     }
 
-    /**
-     * @return Response
-     */
-    public function habits() : Response
+    public function habits(PaginatorInterface $paginator, Request $request) : Response
     {
-        $clothes = $this->repository->findClothes();
+        $search = new ProduitFiltre();
+        $form = $this->createForm(ProduitFiltreType::class, $search);
+        $form->handleRequest($request);
+        $clothes = $paginator->paginate($this->repository->findClothes($search),
+            $request->query->getInt('page', 1), 10);
         return $this->render('publicPages/boutique/boutique.habits.html.twig', [
-            'clothes' => $clothes
+            'clothes' => $clothes,
+            'form' => $form->createView()
         ]);
     }
 
-    /**
-     * @return Response
-     */
-    public function reduction() : Response
+    public function reduction(PaginatorInterface $paginator, Request $request) : Response
     {
-        $reductions = $this->repository->findReductions();
+        $search = new ProduitFiltre();
+        $form = $this->createForm(ProduitFiltreType::class, $search);
+        $form->handleRequest($request);
+        $reductions = $paginator->paginate($this->repository->findReductions($search),
+            $request->query->getInt('page', 1), 10);
         return $this->render('publicPages/boutique/boutique.reduction.html.twig', [
-            'reductions' => $reductions
+            'reductions' => $reductions,
+            'form' => $form->createView()
         ]);
     }
 }

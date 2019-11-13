@@ -8,6 +8,9 @@
     <h1 class="display-4">{{ evenement.nom }} - {{ evenement.id }}</h1>
     <hr class="my-4">
     <div>
+        <div class="container my-4">
+            <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="image de l'événement">
+        </div>
         <h1>Description de l'événement</h1>
         <p>{{ evenement.description }}</p>
     </div>
@@ -17,13 +20,35 @@
         <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
         <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
         <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>
+        <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participants | length }}</p>
     </div>
+        <hr class="my-4">
+        <div>
+            <div class="row">
+                <div class="col-9">
+                    <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
+                    <button class="btn btn-primary" type="submit">Ajouter une photo</button>
+                    <button class="btn btn-primary" type="submit">Commenter</button>
+                    <button class="btn btn-danger" type="submit">Signaler</button>
+                </div>
+                <div class="col-3">
+                    <a href="{{ path('adminEventsEdit', {id: evenement.id}) }}" class="btn btn-primary">Modifier</a>
+                    <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        </div>
     <hr class="my-4">
     <div>
-        <button class="btn btn-success" type="submit">M'inscrire</button>
-        <button class="btn btn-primary" type="submit">Ajouter une photo</button>
-        <a class="btn btn-primary" type="submit" href="#commentaires">Commenter</a>
-        <button class="btn btn-danger" type="submit">Signaler</button>
+        <h1>Participants ({{ evenement.participants | length }})</h1>
+        <div class="col">
+            {% for participant in evenement.participants %}
+                <div class="card">
+                    <div class="card-body">
+                        <p>{{ participant.nom }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <hr class="my-4">
     <div>
@@ -41,9 +66,9 @@
     <div>
         <h1>Commentaires ({{ evenement.commentaire | length }})</h1>
     </div>
-    <div class="container my-4" id="commentaires">
+    <div class="container my-4">
         {% for commentaire in evenement.commentaire %}
-        <div>
+        <div class="mt-3">
             <div class="row">
                 <div class="col-3">
                      (<small>Le {{ commentaire.date|date("d M Y")}} à {{ commentaire.date|date("G")}}h{{ commentaire.date|date("i")}}</small>)
@@ -54,15 +79,13 @@
             </div>
         </div>
         {% endfor %}
-            {% if app.user %}
+        <div class="my-4">
             {{ form_start(form) }}
-                <p>{{ app.user.username }}</p>
-                {{ form_row(form.contenu, {'attr' : {'placeholder': "Votre commentaire"}}) }}
-                <button type="submit" class="btn btn-succes">Commenter</button>
+                {{ form_rest(form) }}
+                <button type="submit" class="btn btn-primary">Poster</button>
             {{ form_end(form) }}
-            {% else %}
             <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster un commentaire</p>
-        {% endif %}
+        </div>
     </div>
 </div>
 

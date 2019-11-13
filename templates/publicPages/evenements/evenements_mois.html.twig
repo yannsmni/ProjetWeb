@@ -15,7 +15,8 @@
                 <p class="card-text">{{ evenement.description }}</p>
                 <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
                 <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
-                <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>                    
+                <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p> 
+                <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participants | length }}</p>                   
                     <div>
                         <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
                     </div>

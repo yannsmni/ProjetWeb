@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
+ * @Vich\Uploadable()
  */
 class Evenement
 {
@@ -29,6 +33,18 @@ class Evenement
     private $Description;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="evenements_images", fileNameProperty="filename")
+     */
+    private $imageFile;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $Date;
@@ -36,7 +52,7 @@ class Evenement
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
      */
-    private $Participants;
+    private $participants;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="Evenement")
@@ -68,9 +84,15 @@ class Evenement
      */
     private $Statut;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $Date_edit;
+
     public function __construct()
     {
         $this->Date_creation = new \DateTime();
+        $this->Date_edit = new \DateTime();
         $this->Visible = true;
         $this->commentaires = new ArrayCollection();
         $this->images = new ArrayCollection();
@@ -255,6 +277,53 @@ class Evenement
     public function setStatut(string $Statut): self
     {
         $this->Statut = $Statut;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param null|string $filename
+     * @return Evenement
+     */
+    public function setFilename($filename): self
+    {
+        $this->filename = null;
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        if($this->imageFile instanceof UploadedFile) {
+            $this->Date_edit = new \DateTime();
+        }
+
+        return $this;
+    }
+
+    public function getDateEdit(): ?\DateTimeInterface
+    {
+        return $this->Date_edit;
+    }
+
+    public function setDateEdit(\DateTimeInterface $Date_edit): self
+    {
+        $this->Date_edit = $Date_edit;
 
         return $this;
     }
