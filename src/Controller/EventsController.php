@@ -38,21 +38,21 @@ class EventsController extends AbstractController {
 
     public function show(Evenement $evenement, Request $request, ObjectManager $manager): Response
     {
-        $commentaire = new Commentaire();
-        $form=$this->createForm(CommentaireType::class, $commentaire);
-        $form->handleRequest($request);
+        //$commentaire = new Commentaire();
+        // $form=$this->createForm(CommentaireType::class, $commentaire);
+        // $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $commentaire->setEvenement($evenement);
-            $manager->persist($commentaire);
-            $manager->flush();
+        // if($form->isSubmitted() && $form->isValid()){
+        //     $commentaire->setEvenement($evenement);
+        //     $manager->persist($commentaire);
+        //     $manager->flush();
 
-            return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
-        }
+        //     return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
+        // }
 
         return $this->render('publicPages/evenements/evenements_show.html.twig', [
             'evenement' => $evenement,
-            'form' => $form->createView()
+            // 'form' => $form->createView()
         ]);
     }
 

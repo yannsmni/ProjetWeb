@@ -55,11 +55,6 @@ class Evenement
     private $participants;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="Evenement")
-     */
-    private $commentaire;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="Evenement")
      */
     private $images;
@@ -94,7 +89,6 @@ class Evenement
         $this->Date_creation = new \DateTime();
         $this->Date_edit = new \DateTime();
         $this->Visible = true;
-        $this->commentaires = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->participants = new ArrayCollection();
     }
@@ -165,37 +159,6 @@ class Evenement
             // set the owning side to null (unless already changed)
             if ($participant->getEvenement() === $this) {
                 $participant->setEvenement(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Commentaire[]
-     */
-    public function getCommentaire(): Collection
-    {
-        return $this->commentaire;
-    }
-
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaire->contains($commentaire)) {
-            $this->commentaire[] = $commentaire;
-            $commentaire->setEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaire->contains($commentaire)) {
-            $this->commentaire->removeElement($commentaire);
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getEvenement() === $this) {
-                $commentaire->setEvenement(null);
             }
         }
 

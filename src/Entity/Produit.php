@@ -138,6 +138,11 @@ class Produit
         $this->acheteur = $acheteur;
         
         return $this;
-	}
+    }
+    
+    public function removeAcheteur($acheteur)
+    {
+        return $this->acheteur->removeElement($acheteur);
+    }
 
 }
