@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
 use App\Repository\ProduitRepository;
+use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,22 +78,54 @@ class CartController extends AbstractController
         return $this->redirectToRoute("cart_index");
     }
 
-    public function email($name, \Swift_Mailer $mailer)
+    /**
+     * @Route("/panier/commander", name="cart_command")
+     */
+    public function email(\Swift_Mailer $mailer, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager)
     {
-        $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('l.antoni@hotmail.fr')
-            ->setTo('l.antoni@hotmail.fr')
-            ->setBody(
-                $this->renderView(
-                    // templates/emails/registration.html.twig
-                    'emails/registration.html.twig',
-                    ['name' => $name]
-                ),
-                'text/html'
-            )
-        ;
+        // $user = $this->getUser();
+        // $userId = $user->getId();
+        $panier = $session->get('panier', []); 
+
+        $panierWithData = [];
+        foreach($panier as $id => $quantity){
+            $panierWithData[] = [
+                'produit' => $produitRepository->find($id),
+                'quantity' => $quantity
+            ];
+            $produit = $produitRepository->find($id);
+            $quantite = $produit->getQuantiteVendu();
+            $produit->setQuantiteVendu($quantite+$quantity);
+            $manager->persist($produit);
+            $manager->flush();
+        }
+
+        $total = 0;
+
+        foreach($panierWithData as $item){
+            // $totalItem = $item['produit']->getPrix() * $item['quantity'];
+            // $total += $totalItem;
+        }
+
+
+
+        $produitNames = [];
+
+        for ($i=0; $i<count($panierWithData); $i++) {
+            $produitNames[$i]["produit"] = $panierWithData[$i]["produit"]->getNom();
+            $produitNames[$i]["quantite"] = $panierWithData[$i]["quantity"];
+        }
+
+        $panierString =  json_encode($produitNames);
+
+        $message = (new \Swift_Message('Commande de l\'utilisateur ' . 'oui'/*$userId*/))
+            ->setFrom('noreply@server.com')
+            ->setTo('bde@cesi.fr')
+            ->setBody($panierString);
 
         $mailer->send($message);
+
+        $session->set('panier', []);
 
         return $this->redirectToRoute("cart_index");
     }

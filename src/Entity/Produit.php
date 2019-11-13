@@ -19,7 +19,7 @@ class Produit
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Nom;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,12 +45,12 @@ class Produit
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
      */
-    private $Acheteur;
+    private $acheteur;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $Quantite_vendu;
+    private $quantite_vendu;
 
     public function getId(): ?int
     {
@@ -59,12 +59,12 @@ class Produit
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): self
+    public function setNom(string $nom): self
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -119,15 +119,25 @@ class Produit
 
     public function getQuantiteVendu(): ?int
     {
-        return $this->Quantite_Vendu;
+        return $this->quantite_vendu;
     }
 
-    public function setQuantiteVendu(int $Quantite_Vendu): self
+    public function setQuantiteVendu(int $quantite_vendu): self
     {
-        $this->Quantite_Vendu = $Quantite_Vendu;
+        $this->quantite_vendu = $quantite_vendu;
 
         return $this;
     }
 
+    public function getAcheteur() : ?Utilisateur
+    {
+		return $this->acheteur;
+	}
+
+	public function setAcheteur(?Utilisateur $acheteur) {
+        $this->acheteur = $acheteur;
+        
+        return $this;
+	}
 
 }

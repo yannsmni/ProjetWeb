@@ -18,15 +18,15 @@
                     <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id}) }}">Voir le produit</a>
                 </div>
                 </br>
-                {% if app.user %}
+                {# {% if app.user %} #}
                 <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">
                         Ajouter au panier
                 </a>
-                {% else %}
+                {# {% else %}
                 <a href="#" class="btn btn-danger">
                         Se connecter
                 </a>
-                {% endif %}
+                {% endif %} #}
             </div>
         </div>
         {% endfor %}
