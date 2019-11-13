@@ -7,6 +7,7 @@ security:
     providers:
         webservice:
                 id: App\Security\WebserviceUserProvider
+
         in_memory: { memory: null }
 
     firewalls:
@@ -36,3 +37,6 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_BDE }
+        - { path: ^/accueil, roles: ROLE_ELEVE }
+

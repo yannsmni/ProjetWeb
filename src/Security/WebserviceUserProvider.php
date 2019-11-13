@@ -49,7 +49,15 @@ class WebserviceUserProvider implements UserProviderInterface
             $password = $userData[0]['mot_de_passe'];
             $username = $userData[0]['email'];
             $salt = 'null';
-            $roles = ['USER_ROLES'];
+            
+            if ($userData[0]['role'] == "CESI"){
+                $roles = ['ROLE_CESI']; //Admin
+            } else if ($userData[0]['role'] == "BDE"){
+                $roles = ['ROLE_BDE']; //Membre BDE
+            } else ($userData[0]['role'] == "Eleve"){
+                $roles = ['ROLE_ELEVE'] //Eleve
+            };
+            
 
             // ...
 
