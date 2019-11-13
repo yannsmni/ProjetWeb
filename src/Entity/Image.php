@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @Vich\Uploadable()
  */
 class Image
 {
@@ -17,9 +22,16 @@ class Image
     private $id;
 
     /**
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
-    private $Chemin;
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="photos_images", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -42,6 +54,16 @@ class Image
      * @ORM\JoinColumn(nullable=false)
      */
     private $utilisateur;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $Date_edit;
+
+    public function __construct() {
+        $this->Date_edit = new \DateTime();
+        $this->Visible = true;
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +126,53 @@ class Image
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param null|string $filename
+     * @return Evenement
+     */
+    public function setFilename($filename): self
+    {
+        $this->filename = null;
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        if($this->imageFile instanceof UploadedFile) {
+            $this->Date_edit = new \DateTime();
+        }
+
+        return $this;
+    }
+
+    public function getDateEdit(): ?\DateTimeInterface
+    {
+        return $this->Date_edit;
+    }
+
+    public function setDateEdit(\DateTimeInterface $Date_edit): self
+    {
+        $this->Date_edit = $Date_edit;
 
         return $this;
     }
