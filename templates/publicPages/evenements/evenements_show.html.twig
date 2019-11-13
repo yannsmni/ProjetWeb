@@ -9,7 +9,7 @@
     <hr class="my-4">
     <div>
         <div class="container my-4">
-            <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="image de l'événement">
+            <img src="/assets/image/evenements/{{evenement.filename}}" class="card-img-top" alt="image de l'événement">
         </div>
         <h1>Description de l'événement</h1>
         <p>{{ evenement.description }}</p>
@@ -55,12 +55,26 @@
         <h1>Photos de l'événement ({{ evenement.images | length }})</h1>
         {% for images in evenement.images %}
         <div class="card" style="width: 18rem;">
-            <img src="{{ images.chemin }}" class="card-img-top" alt="{{ images.description }}">
+            <img src="/assets/image/photos/{{images.filename}}" class="card-img-top" alt="{{ images.description }}">
             <div class="card-body">
                 <p>OUI OUI OUI OUI</p>
             </div>
         </div>
         {% endfor %}
+        <div class="my-4">
+            {{ form_start(imageForm) }}
+            <div class="row">
+                <div class="col-4">
+                    {{ form_row(imageForm.imageFile) }}
+                </div>
+                <div class="col-8">
+                    {{ form_row(imageForm.Description) }}
+                </div>
+                <button type="submit" class="btn btn-primary">Poster</button>
+            </div>
+            {{ form_end(imageForm) }}
+            <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster une photo</p>
+        </div>
     </div>
     <hr class="my-4">
     <div>
@@ -80,10 +94,10 @@
         </div>
         {% endfor %}
         <div class="my-4">
-            {{ form_start(form) }}
-                {{ form_rest(form) }}
+            {{ form_start(commentaireForm) }}
+                {{ form_rest(commentaireForm) }}
                 <button type="submit" class="btn btn-primary">Poster</button>
-            {{ form_end(form) }}
+            {{ form_end(commentaireForm) }}
             <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster un commentaire</p>
         </div>
     </div>
