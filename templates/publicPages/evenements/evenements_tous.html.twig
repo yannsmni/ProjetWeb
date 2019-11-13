@@ -29,13 +29,14 @@
     <div class="row">
         {% for evenement in allEvents %}
         <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="image de l'événement">
             <div class="card-body">
             <h5 class="card-title">{{ evenement.nom }}</h5>
             <p class="card-text">{{ evenement.description }}</p>
             <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
             <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
-            <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>                
+            <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>     
+            <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participants | length }}</p>           
                 <div>
                     <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
                 </div>
