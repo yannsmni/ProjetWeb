@@ -98,6 +98,10 @@ adminEventsDelete:
   path: /administration/evenements/delete/{id}
   controller: App\Controller\Admin\AdminEventsController::delete
 
+adminEventsSearch:
+  path: /administration/evenements/{search}
+  controller: App\Controller\Admin\AdminEventsController::search
+
 #chemins relatifs à la partie admin - catégorie
 
 adminCategoryHome:
@@ -133,6 +137,10 @@ adminProductsEdit:
 adminProductsDelete:
   path: /administration/produits/delete/{id}
   controller: App\Controller\Admin\AdminProductsController::delete
+
+adminProductsSearch:
+  path: /administration/produits/{search}
+  controller: App\Controller\Admin\AdminProductsController::search
 
 #chemin relatif aux images
 

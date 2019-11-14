@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Produit;
 use App\Form\ProduitType;
+use App\Entity\ProduitSearch;
+use App\Form\ProduitSearchType;
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,8 +24,13 @@ class AdminProductsController extends AbstractController {
     {  
         $allProducts = $this->repository->findAllProducts();
 
+        $search = new ProduitSearch();
+        $form = $this->createForm(ProduitSearchType::class, $search);
+        $form->handleRequest($request);
+
         return $this->render('adminPages/produits.html.twig', [
-            'allProducts' => $allProducts
+            'allProducts' => $allProducts,
+            'form' => $form->createView()
         ]);
     }
 
@@ -72,7 +79,7 @@ class AdminProductsController extends AbstractController {
 
     public function search($search): JsonResponse
     {
-        $products = $this->productRepository->findBySearch($search);
+        $products = $this->repository->findBySearch($search);
 
         $jsonProducts = null;
         foreach ($products as $key => $product)
@@ -85,5 +92,4 @@ class AdminProductsController extends AbstractController {
         }
         return $this->json($jsonProducts, 200, ['Content-Type' => 'application/json']);
     }
-
 }

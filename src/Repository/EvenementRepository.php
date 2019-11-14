@@ -123,6 +123,14 @@ class EvenementRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findBySearch($search) {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.Nom LIKE :val')
+            ->setParameter('val', $search)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Evenement
     {
