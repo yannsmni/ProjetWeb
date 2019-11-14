@@ -1,0 +1,19 @@
+{% extends 'events.html.twig' %}
+
+{% block title %}Liste des participants{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid my-4">
+        <h1>Voir la liste des participants</h1>
+        <hr class="mr-4">
+
+    </div>
+
+    <div class="container-fluid my-4">
+        <h1>Télécharger selon le format choisit :</h1>
+        <a href="{{ path('evenementsDownloadPDF') }}" class="btn btn-secondary">Format PDF</a>
+        <a href="{{ path('evenementsDownloadCSV') }}" class="btn btn-secondary">Format CSV</a>
+    </div>
+
+{% endblock %}

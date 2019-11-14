@@ -28,6 +28,18 @@ class ProduitRepository extends ServiceEntityRepository
     {
         $query = $this->findAll();
 
+        if($search->getBestSales()) {
+            $query->orderBy('a.quantite_vendu', 'DESC');
+        }
+
+        if($search->getAscPrice()) {
+            $query->orderBy('a.Prix', 'ASC');
+        }
+
+        if($search->getDescPrice()) {
+            $query->orderBy('a.Prix', 'DESC');
+        }
+
         if ($search->getCategory()) {
             $query->andWhere('a.Categorie = :categorie');
             $query->setParameter('categorie', $search->getCategory());
@@ -53,15 +65,21 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
     public function findAll() {
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.Prix', 'ASC');
+        return $this->createQueryBuilder('a');
     }
 
     public function findClothes(ProduitFiltre $search) {
 
         $query = $this->createQueryBuilder('a')
-            ->andWhere('a.Categorie = 1')
-            ->orderBy('a.Prix', 'ASC');
+            ->andWhere('a.Categorie = 5');
+
+        if($search->getAscPrice()) {
+            $query->orderBy('a.Prix', 'ASC');
+        }
+
+        if($search->getDescPrice()) {
+            $query->orderBy('a.Prix', 'DESC');
+        }
 
         if ($search->getMaxPrice()) {
             $query->andWhere('a.Prix <= :maxprice');
@@ -88,8 +106,7 @@ class ProduitRepository extends ServiceEntityRepository
     public function findITProducts(ProduitFiltre $search) {
 
         $query = $this->createQueryBuilder('a')
-            ->andWhere('a.Categorie = 3')
-            ->orderBy('a.Prix', 'ASC');
+            ->andWhere('a.Categorie = 7');
 
         if ($search->getMaxPrice()) {
             $query->andWhere('a.Prix <= :maxprice');
@@ -99,6 +116,14 @@ class ProduitRepository extends ServiceEntityRepository
         if ($search->getMinPrice()) {
             $query->andWhere('a.Prix >= :minprice');
             $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        if($search->getAscPrice()) {
+            $query->orderBy('a.Prix', 'ASC');
+        }
+
+        if($search->getDescPrice()) {
+            $query->orderBy('a.Prix', 'DESC');
         }
 
         return $query->getQuery();
@@ -107,8 +132,7 @@ class ProduitRepository extends ServiceEntityRepository
 
     public function findGoodies(ProduitFiltre $search) {
         $query = $this->createQueryBuilder('a')
-            ->andWhere('a.Categorie = 2')
-            ->orderBy('a.Prix', 'ASC');
+            ->andWhere('a.Categorie = 6');
 
         if ($search->getMaxPrice()) {
             $query->andWhere('a.Prix <= :maxprice');
@@ -118,6 +142,14 @@ class ProduitRepository extends ServiceEntityRepository
         if ($search->getMinPrice()) {
             $query->andWhere('a.Prix >= :minprice');
             $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        if($search->getAscPrice()) {
+            $query->orderBy('a.Prix', 'ASC');
+        }
+
+        if($search->getDescPrice()) {
+            $query->orderBy('a.Prix', 'DESC');
         }
 
         return $query->getQuery();
@@ -126,8 +158,7 @@ class ProduitRepository extends ServiceEntityRepository
 
     public function findReductions(ProduitFiltre $search) {
         $query = $this->createQueryBuilder('a')
-            ->andWhere('a.Categorie = 4')
-            ->orderBy('a.Prix', 'ASC');
+            ->andWhere('a.Categorie = 8');
 
         if ($search->getMaxPrice()) {
             $query->andWhere('a.Prix <= :maxprice');
@@ -137,6 +168,14 @@ class ProduitRepository extends ServiceEntityRepository
         if ($search->getMinPrice()) {
             $query->andWhere('a.Prix >= :minprice');
             $query->setParameter('minprice', $search->getMinPrice());
+        }
+
+        if($search->getAscPrice()) {
+            $query->orderBy('a.Prix', 'ASC');
+        }
+
+        if($search->getDescPrice()) {
+            $query->orderBy('a.Prix', 'DESC');
         }
 
         return $query->getQuery();
