@@ -20,7 +20,7 @@
         <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
         <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
         <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>
-        <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participants | length }}</p>
+        <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participant | length }}</p>
     </div>
         <hr class="my-4">
         <div>

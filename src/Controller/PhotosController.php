@@ -55,8 +55,7 @@ class PhotosController extends AbstractController {
             $manager->persist($commentaire);
             $manager->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $connection = $em->getConnection();
+            $connection = $manager->getConnection();
             $statement = $connection->prepare("UPDATE commentaire SET auteur = :user WHERE contenu = :contenu");
             $statement->bindValue('user', $username);
             $statement->bindValue('contenu', $commentaire->getContenu());
@@ -95,8 +94,7 @@ class PhotosController extends AbstractController {
         $rep = $response->toArray();
         $userId = $rep[0]["id"];
 
-        $em = $this->getDoctrine()->getManager();
-        $connection = $em->getConnection();
+        $connection = $manager->getConnection();
 
         try{
             $query = $connection->prepare("INSERT INTO image_utilisateur (utilisateur_id, image_id) VALUES (:userId, :imageId)");

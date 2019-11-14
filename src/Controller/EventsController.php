@@ -62,12 +62,14 @@ class EventsController extends AbstractController {
             $manager->persist($image);
             $manager->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $connection = $em->getConnection();
+            $connection = $manager->getConnection();
             $statement = $connection->prepare("UPDATE image SET utilisateur_id = :user WHERE filename = :fichier");
+            $statement2 = $connection->prepare("SELECT * FROM evenement_utilisateur WHERE evenement_id = :evenement");
             $statement->bindValue('user', $userId);
             $statement->bindValue('fichier', $image->getFilename());
+            $statement2->bindValue('evenement', $evenement->getId());
             $statement->execute();
+            $statement2->execute();
 
             return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
         }
@@ -118,13 +120,26 @@ class EventsController extends AbstractController {
 
     public function register(Evenement $evenement, ObjectManager $manager): Response
     {
-        $user = $this->getUser();
+        if (!empty($this->getUser())) {
+            $user = $this->getUser();
+            $userEmail = $user->getUsername();
+            $req = 'http://127.0.0.1:9000/users/' . $userEmail;
 
-        $evenement->addParticipant($user);
-        $manager->persist($evenement);
-        $manager->flush();
+            $api = HttpClient::create();
+            $response = $api->request('GET', $req);
+            $rep = $response->toArray();
+            $userNom = $rep[0]["nom"];
+            $userPrenom = $rep[0]["prenom"];
+            $username = $userPrenom . " " . $userNom;
 
-        return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
+            $connection = $manager->getConnection();
+            $statement = $connection->prepare("INSERT INTO evenement_utilisateur (evenement_id, utilisateur_id) VALUES :evenement, :user");
+            $statement->bindValue('evenement', $evenement->getId());
+            $statement->bindValue('user', $username);
+            $statement->execute();
+
+            return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
+        }
     }
 
     public function report(Evenement $evenement, ObjectManager $manager): Response

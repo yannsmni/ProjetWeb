@@ -90,7 +90,6 @@ class Evenement
         $this->Date_edit = new \DateTime();
         $this->Visible = true;
         $this->images = new ArrayCollection();
-        $this->participants = new ArrayCollection();
     }
 
     public function getId(): ?int
