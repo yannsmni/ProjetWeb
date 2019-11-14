@@ -35,12 +35,10 @@ class HomeController extends AbstractController {
             'first_visit' => $first_visit
         ]);
 
-        if(!$first_visit)
-        {
-            $cookieNom = new Cookie('name', 'test nom', time() + 365*24*3600, '/', true, true);
-            $cookieEmail = new Cookie('e-mail', 'test email', time() + 365*24*3600, '/', true, true);
-            $cookieRole = new Cookie('role', 'test role', time() + 365*24*3600, '/', true, true);
-        }
+
+            $cookieNom = new Cookie('name', 'test_nom', time() + 365*24*3600);
+            $cookieEmail = new Cookie('e-mail', 'test_email', time() + 365*24*3600);
+            $cookieRole = new Cookie('role', 'test_role', time() + 365*24*3600);
 
         $responseNom->headers->setCookie($cookieNom);
         $responseEmail->headers->setCookie($cookieEmail);
