@@ -41,10 +41,7 @@ class EventsController extends AbstractController {
 
     public function show(Evenement $evenement, Request $request, ObjectManager $manager): Response
     {
-        // $commentaire = new Commentaire();
         $image = new Image();
-        // $commentaireForm = $this->createForm(CommentaireType::class, $commentaire);
-        // $commentaireForm->handleRequest($request);
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
 
@@ -56,14 +53,6 @@ class EventsController extends AbstractController {
         $response = $api->request('GET', $req);
         $rep = $response->toArray();
         $userId = $rep[0]["id"];
-
-        // if($commentaireForm->isSubmitted() && $commentaireForm->isValid()){
-        //     $commentaire->setEvenement($evenement);
-        //     $manager->persist($commentaire);
-        //     $manager->flush();
-
-        //     return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
-        // }
 
         if($imageForm->isSubmitted() && $imageForm->isValid()){
             $image->setEvenement($evenement);
@@ -82,7 +71,6 @@ class EventsController extends AbstractController {
 
         return $this->render('publicPages/evenements/evenements_show.html.twig', [
             'evenement' => $evenement,
-            // 'commentaireForm' => $commentaireForm->createView(),
             'imageForm' => $imageForm->createView()
         ]);
     }

@@ -91,16 +91,16 @@ class AdminEventsController extends AbstractController {
     {
         $evenements = $this->repository->findBySearch($search);
 
-        $jsonProducts = null;
+        $jsonEvents = null;
         foreach ($evenements as $key => $evenement)
         {
-        $jsonProducts[$key]['Id'] = $evenements[$key]->getId();
-        $jsonProducts[$key]['nom'] = $evenements[$key]->getNom();
-        $jsonProducts[$key]['prix'] = $evenements[$key]->getPrix();
-        $jsonProducts[$key]['type'] = $evenements[$key]->getStatut();
-        $jsonProducts[$key]['date_evenement'] = $evenements[$key]->getDate();
-        $jsonProducts[$key]['date_creation'] = $evenements[$key]->getDateCreation();
+        $jsonEvents[$key]['Id'] = $evenements[$key]->getId();
+        $jsonEvents[$key]['nom'] = $evenements[$key]->getNom();
+        $jsonEvents[$key]['prix'] = $evenements[$key]->getPrix();
+        $jsonEvents[$key]['statut'] = $evenements[$key]->getStatut();
+        $jsonEvents[$key]['date'] = $evenements[$key]->getDate();
+        $jsonEvents[$key]['dateCreation'] = $evenements[$key]->getDateCreation();
         }
-        return $this->json($jsonProducts, 200, ['Content-Type' => 'application/json']);
+        return $this->json($jsonEvents, 200, ['Content-Type' => 'application/json']);
     }
 }

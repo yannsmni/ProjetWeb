@@ -32,6 +32,14 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% if app.user %}
+                {{ form_start(commentaireForm) }}
+                    {{ form_rest(commentaireForm) }}
+                <button type="submit" class="btn btn-succes">Commenter</button>
+                {{ form_end(commentaireForm) }}
+                {% else %}
+                <p>Connectez vous pour pouvoir poster un commentaire</p>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

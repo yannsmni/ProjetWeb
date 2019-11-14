@@ -71,6 +71,7 @@
         </div>
         {% endfor %}
         <div class="my-4">
+            {% if app.user %}
             {{ form_start(imageForm) }}
             <div class="row">
                 <div class="col-4">
@@ -82,7 +83,9 @@
                 <button type="submit" class="btn btn-primary">Poster</button>
             </div>
             {{ form_end(imageForm) }}
+            {% else %}
             <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster une photo</p>
+            {% endif %}
         </div>
     </div>
 </div>
