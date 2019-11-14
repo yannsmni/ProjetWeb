@@ -63,9 +63,11 @@
                     <li class="nav-item">
                         <a class="nav-link h5" href="">Boîte à idées</a>
                     </li>
+                    {% if is_granted('ROLE_BDE') %}
                     <li class="nav-item active">
                       <a class="nav-link h5" href="{{ path('administration') }}">Administration<span class="sr-only">(current)</span></a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link h5" href="">Contact</a>
                     </li>
@@ -110,7 +112,9 @@
                 <p><a href="{{ path('boutique/accueil') }}" class="text-white">Boutique</a></p>
                 <p><a href="{{ path('photos') }}" class="text-white">Photos</a></p>
                 <p><a href="" class="text-white">Boîte à idées</a></p>
+                {% if is_granted('ROLE_BDE') %}
                 <p><a href="{{ path('administration') }}" class="text-white">Administration</a></p>
+                {% endif %}
             </div>
             <hr class="w-100 clearfix d-md-none">
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
