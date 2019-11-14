@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class EvenementFiltreType extends AbstractType
@@ -29,12 +29,16 @@ class EvenementFiltreType extends AbstractType
                     'placeholder' => 'Prix maximum'
                 ]
             ])
-            ->add('statut', TextType::class, [
+            ->add('statut', ChoiceType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
                     'placeholder' => "Type d'événement"
-                ]
+                ],
+                'choices'  => [
+                    'Ponctuel' => "ponctuel",
+                    'Récurent' => "Recurent"
+                ],
             ])
         ;
     }

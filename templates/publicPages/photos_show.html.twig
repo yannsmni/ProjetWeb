@@ -32,9 +32,16 @@
                     <div class="col-6">
                         <div class="container my-3">
                             <div class="card card-body">
-                                <h5>{{ image.commentaire | length }} Commentaires</h5>
+                                {% set nombreCommentaires = 0 %}
+                                {% for commentaire in image.commentaire %}
+                                    {% if commentaire.visible == 1 %}
+                                        {% set nombreCommentaires = nombreCommentaires + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+                                <h5>{{ nombreCommentaires }} Commentaires</h5>
                                 <div class ="comment">
                                     {% for commentaire in image.commentaire %}
+                                    {% if commentaire.visible == 1 %}
                                     <div class="row my-4">
                                         <div class="col-3">
                                             <span class="font-weight-bold">{{ commentaire.auteur }}</span> (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
@@ -46,6 +53,7 @@
                                             <a href="{{ path('commentsReportId', {id: commentaire.id}) }}" class="btn btn-danger ml-4">Signaler</a>
                                         </div>
                                     </div>
+                                    {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>

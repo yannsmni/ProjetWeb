@@ -10,9 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommentController extends AbstractController { 
 
-    public function report(Commentaire $commentaire, Image $image, ObjectManager $manager): Response
+    public function report(Commentaire $commentaire, ObjectManager $manager): Response
     {
-        $image->getId();
+        $image = $commentaire->getImage();
         $commentaire->setVisible(false);
 
         $manager->persist($commentaire);

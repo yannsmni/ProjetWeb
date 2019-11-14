@@ -72,9 +72,16 @@
             <div class="collapse" id="collapseExample{{images.id}}">
                     <div class="container">
                         <div class="card card-body">
-                            <h5>{{ images.commentaire | length }} Commentaires</h5>
+                            {% set nombreCommentaires = 0 %}
+                            {% for commentaire in images.commentaire %}
+                                {% if commentaire.visible == 1 %}
+                                    {% set nombreCommentaires = nombreCommentaires + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            <h5>{{ nombreCommentaires }} Commentaires</h5>
                             <div class ="comment">
                                 {% for commentaire in images.commentaire %}
+                                {% if commentaire.visible == 1 %}
                                 <div class="row my-2">
                                     <div class="col-3">
                                     <span class="font-weight-bold">{{ commentaire.auteur }}</span> (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
@@ -83,6 +90,7 @@
                                     {{commentaire.contenu | raw}}
                                     </div>
                                 </div>
+                                {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
@@ -98,6 +106,7 @@
         {% endfor %}
         <div class="my-4">
             {% if app.user %}
+            <h5>Ajouter une image</h5>
             {{ form_start(imageForm) }}
             <div class="row">
                 <div class="col-4">

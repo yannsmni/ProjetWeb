@@ -4,10 +4,11 @@
 
 {% block body %}
 
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: #5c88da;">
     <h1 class="text-center font-weight-bold">Tous nos événements</h1>
 
     <div class="container mt-4">
+        <h5>Personnalisez votre recherche</h5>
             {{ form_start(form) }}
             <div class="form-row">
                 <div class="col">
@@ -20,12 +21,14 @@
                     {{ form_row(form.statut) }}
                 </div>
                 <div class="col">
-                    <button class="btn btn-primary">Filtrer</button>
+                    <button class="btn btn-dark">Filtrer</button>
                 </div>
             </div>
             {{ form_end(form) }}
     </div>
+</div>
 
+<div class="container-fluid">
     <div class="row">
         {% set id = 0 %}
         {% for evenement in allEvents %}
