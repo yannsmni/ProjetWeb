@@ -20,7 +20,9 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
@@ -329,33 +331,33 @@ class SecurityController extends AbstractController
            // $formserialize = $serializer->serialize($data, 'json');
             //echo $formserialize;
 
-            $req = 'http://127.0.0.1:9000/users/' . $form['email']->getData() ;
+                $req = 'http://127.0.0.1:9000/users/' . $form['email']->getData() ;
 
-            $api_email = HttpClient::create();
+                $api_email = HttpClient::create();
+            
+                $querry = $api_email->request('GET', $req);
 
-            $querry = $api_email->request('GET', $req);
+                $rep = $querry->toArray();
 
-            $rep = $querry->toArray();
+                if (!isset($rep[0]['id'])){
+                    $date = new \DateTime();
+                    $date = $date->format('Y-m-d H:i:s');
 
-            if (!isset($rep[0]['id'])){
-                $date = new \DateTime();
-                $date = $date->format('Y-m-d H:i:s');
+                    $email = (string) $form['email']->getData();
 
-                $email = (string) $form['email']->getData();
+                    $api = HttpClient::create();
 
-                $api = HttpClient::create();
-
-                
-                $response = $api->request('POST', 'http://127.0.0.1:9000/users', ['body' => [
-                    'id' => null,
-                    'nom' => $form['nom']->getData(),
-                    'prenom' => $form['prenom']->getData(),
-                    'localisation' => $form['localisation']->getData(),
-                    'email' => $email,
-                    'mot_de_passe' => $hash,
-                    'date_creation' => $date,
-                    'role' => "Eleve"
-                ]]);
+                    
+                    $response = $api->request('POST', 'http://127.0.0.1:9000/users', ['body' => [
+                        'id' => null,
+                        'nom' => $form['nom']->getData(),
+                        'prenom' => $form['prenom']->getData(),
+                        'localisation' => $form['localisation']->getData(),
+                        'email' => $email,
+                        'mot_de_passe' => $hash,
+                        'date_creation' => $date,
+                        'role' => "Eleve"
+                    ]]);
 
                 // var_dump($api);
 
