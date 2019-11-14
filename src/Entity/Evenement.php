@@ -49,10 +49,10 @@ class Evenement
      */
     private $Date;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
-     */
-    private $participant;
+    // /**
+    //  * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
+    //  */
+    // private $participant;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="Evenement")
@@ -90,7 +90,6 @@ class Evenement
         $this->Date_edit = new \DateTime();
         $this->Visible = true;
         $this->images = new ArrayCollection();
-        $this->participants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,17 +133,17 @@ class Evenement
         return $this;
     }
 
-    public function getParticipant(): ?string
-    {
-        return $this->participant;
-    }
+    // public function getParticipant(): ?string
+    // {
+    //     return $this->participant;
+    // }
 
-    public function setParticipant(string $participant): self
-    {
-        $this->participant = $participant;
+    // public function setParticipant(string $participant): self
+    // {
+    //     $this->participant = $participant;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection|Image[]
