@@ -7,8 +7,9 @@
 <div class="container-fluid my-4">
         <h1>Nos événements ce mois</h1>
         <div class="row">
+            {% set id = 0 %}
             {% for evenement in monthlyEvents %}
-            <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
+            <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
                 <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="...">
                 <div class="card-body">
                 <h5 class="card-title">{{ evenement.nom }}</h5>
@@ -16,12 +17,13 @@
                 <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
                 <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
                 <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p> 
-                <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participant | length }}</p>                   
+                <p><span class="font-weight-bold">Nombre de participants :</span> {{ nombreParticipants[id][0]['COUNT(participant)'] }}</p>                   
                     <div>
                         <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
                     </div>
                 </div>
             </div>
+            {% set id = id + 1 %}
             {% endfor %}
         </div>
     </div>
