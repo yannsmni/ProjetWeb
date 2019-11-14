@@ -315,6 +315,9 @@ class SecurityController extends AbstractController
             $rep = $querry->toArray();
 
             if (!isset($rep[0]['id'])){
+                $date = new \DateTime();
+                $date = $date->format('Y-m-d H:i:s');
+
                 $api = HttpClient::create();
                 
                 $response = $api->request('POST', 'http://127.0.0.1:9000/users', ['body' => [
@@ -324,10 +327,10 @@ class SecurityController extends AbstractController
                     'localisation' => $form['localisation']->getData(),
                     'email' => $form['email']->getData(),
                     'mot_de_passe' => $hash,
-                    'date_creation' => "2019-11-05",
+                    'date_creation' => $date,
                     'role' => "Eleve"
                 ]]);
-                //var_dump($api);
+                var_dump($api);
             } else {
                 return $this->redirectToRoute('security_inscription');
             }
