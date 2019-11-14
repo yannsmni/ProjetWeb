@@ -16,8 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PhotosController extends AbstractController {
 
-    public function __construct(ImageRepository $repository) {
+    public function __construct(ImageRepository $repository, ObjectManager $manager) {
         $this->repository = $repository;
+        $this->manager = $manager;
     }
 
     public function index(): Response 
@@ -83,7 +84,7 @@ class PhotosController extends AbstractController {
     /**
      * @Route("/images/{id}/like", name="image_like")
      */
-    public function like(Request $request, Image $image){
+    public function like(Request $request, Image $image, ObjectManager $manager){
         $user = $this->getUser();
         $userEmail = $user->getUsername();
         $req = 'http://127.0.0.1:9000/users/' . $userEmail;
