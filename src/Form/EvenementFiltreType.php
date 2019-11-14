@@ -19,21 +19,21 @@ class EvenementFiltreType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'prix minimum'
+                    'placeholder' => 'Prix minimum'
                 ]
             ])
             ->add('prixMax', IntegerType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'prix maximum'
+                    'placeholder' => 'Prix maximum'
                 ]
             ])
             ->add('statut', TextType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => "type d'événement"
+                    'placeholder' => "Type d'événement"
                 ]
             ])
         ;

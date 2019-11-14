@@ -60,8 +60,6 @@ class HomeController extends AbstractController {
             $responseRole->send();
         }
         
-        
-
         return $this->render('publicPages/accueil.html.twig', [
             'upcommingEvents' => $upcommingEvents,
             'bestProducts' => $bestProducts

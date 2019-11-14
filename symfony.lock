@@ -736,6 +736,9 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "spipu/html2pdf": {
+        "version": "v5.2.1"
+    },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"
     },
@@ -1095,6 +1098,9 @@
     },
     "symfony/yaml": {
         "version": "v4.3.8"
+    },
+    "tecnickcom/tcpdf": {
+        "version": "6.3.2"
     },
     "twig/twig": {
         "version": "v2.12.2"

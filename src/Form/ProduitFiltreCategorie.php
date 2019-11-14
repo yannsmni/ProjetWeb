@@ -7,6 +7,7 @@ use App\Entity\ProduitFiltre;
 use Doctrine\DBAL\Types\StringType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,6 +38,18 @@ class ProduitFiltreCategorie extends AbstractType
                 'class' => Categorie::class,
                 'choice_label' => 'Nom',
                 'multiple' => false
+            ])
+            ->add('bestSales', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Meilleures ventes'
+            ])
+            ->add('ascPrice', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Prix croissant'
+            ])
+            ->add('descPrice', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Prix décroissant'
             ])
         ;
     }

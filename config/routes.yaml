@@ -37,6 +37,14 @@ evenementsReportId:
   path: /evenements/{id}/report
   controller: App\Controller\EventsController::report
 
+#evenementsDownloadPDF:
+ # path: /evenements/{id}/dl-pdf
+ # controller: App\Controller\EventsController::downloadPDF
+
+#evenementsDownloadCSV:
+ # path: /evenements/{id}-dl-csv
+ # controller: App\Controller\EventsController::downloadCSV
+
 #chemin relatif à la législation
 
 legislation:
