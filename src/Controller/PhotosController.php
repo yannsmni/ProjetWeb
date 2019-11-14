@@ -20,13 +20,20 @@ class PhotosController extends AbstractController {
         $this->repository = $repository;
     }
 
-    public function index(Request $request, ObjectManager $manager): Response 
+    public function index(): Response 
     {        
         $allImages = $this->repository->findAll();
-        $commentaire = new Commentaire();
 
-        $commentaireForm = $this->createForm(CommentaireType::class, $commentaire);
-        $commentaireForm->handleRequest($request);
+        return $this->render('publicPages/photos.html.twig', [
+            'allImages' => $allImages
+        ]);
+    }
+
+    public function show(Image $image, Request $request, ObjectManager $manager): Response
+    {
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
 
         $user = $this->getUser();
         $userEmail = $user->getUsername();
@@ -37,7 +44,7 @@ class PhotosController extends AbstractController {
         $rep = $response->toArray();
         $userId = $rep[0]["id"];
 
-        if($commentaireForm->isSubmitted() && $commentaireForm->isValid())
+        if($form->isSubmitted() && $form->isValid())
         {
             $commentaire->setImage($image);
             $manager->persist($commentaire);
@@ -47,15 +54,15 @@ class PhotosController extends AbstractController {
             $connection = $em->getConnection();
             $statement = $connection->prepare("UPDATE commentaire SET auteur_id = :user WHERE contenu = :contenu");
             $statement->bindValue('user', $userId);
-            $statement->bindValue('commentaire', $commentaire->getContenu());
+            $statement->bindValue('contenu', $commentaire->getContenu());
             $statement->execute();
 
-            return $this->redirectToRoute('photos');
+            return $this->redirectToRoute('photosId', ['id' => $image->getId()]);
         }
 
-        return $this->render('publicPages/photos.html.twig', [
-            'allImages' => $allImages,
-            'commentaireForm' => $commentaireForm->createView()
+        return $this->render('publicPages/photos_show.html.twig', [
+            'image' => $image,
+            'form' => $form->createView()
         ]);
     }
 
@@ -68,7 +75,7 @@ class PhotosController extends AbstractController {
 
         return $this->redirectToRoute('photos');
     }
-    
+
     /**
      * @Route("/images/{id}/like", name="image_like")
      */
