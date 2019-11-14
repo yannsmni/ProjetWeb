@@ -1,5 +1,5 @@
 <?php
-// src/Security/User/WebserviceUser.php
+
 namespace App\Security\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
