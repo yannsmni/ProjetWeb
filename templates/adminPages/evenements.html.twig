@@ -55,6 +55,7 @@
         </thead>
         
         <tbody class="tbody_evenements">
+        {% set id = 0 %}
         {% for evenement in allEvents %}
             <tr class="admin_event">
                 <td class="font-weight-bold">{{ evenement.nom }}</td>
@@ -66,7 +67,7 @@
                     {% endif %}
                 </td>
                 <td>{{ evenement.statut }}</td>
-                <td>{{ evenement.participant | length }}</td>
+                <td>{{ nombreParticipants[id][0]['COUNT(participant)'] }}</td>
                 <td>{{ evenement.images | length }}</td>
                 <td>{{ evenement.date|date("d M Y")}}</td>
                 <td>{{ evenement.getDateCreation()|date("d M Y")}}</td>
@@ -75,6 +76,7 @@
                     <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
+        {% set id = id + 1 %}
         {% endfor %}
         </tbody>
     </table>

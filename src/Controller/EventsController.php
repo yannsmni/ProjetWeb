@@ -24,19 +24,30 @@ class EventsController extends AbstractController {
         $this->repository = $repository;
     }
 
-    public function index(): Response 
+    public function index(ObjectManager $manager): Response 
     {        
         $date = new \DateTime();
         $allEvents = $this->repository->findAll();
         $latestEvents = $this->repository->findLatestEvents($date);
         $upcommingEvents = $this->repository->findUpcommingEvents($date);
         $bestEvents = $this->repository->findBestEvents();
+        $index = 0;
+
+        foreach ($allEvents as $evenement) {
+            $connection = $manager->getConnection();
+            $statement = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
+            $statement->bindValue('evenement', $evenement->getId());
+            $statement->execute();            
+            $nombreParticipants[$index] = $statement->fetchAll();
+            $index += 1;
+        }
 
         return $this->render('publicPages/evenements/evenements_home.html.twig', [
             'allEvents' => $allEvents,
             'latestEvents' => $latestEvents,
             'upcommingEvents' => $upcommingEvents,
-            'bestEvents' => $bestEvents
+            'bestEvents' => $bestEvents,
+            'nombreParticipants' => $nombreParticipants
         ]);
     }
 
@@ -57,6 +68,17 @@ class EventsController extends AbstractController {
             $userId = $rep[0]["id"];
         }
 
+        $connection = $manager->getConnection();
+        $statement2 = $connection->prepare("SELECT * FROM evenement_utilisateur WHERE evenement_id = :evenement");
+        $statement3 = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
+        $statement2->bindValue('evenement', $evenement->getId());
+        $statement3->bindValue('evenement', $evenement->getId());
+        $statement2->execute();
+        $statement3->execute();
+            
+        $participants = $statement2->fetchAll();
+        $nombreParticipants = $statement3->fetchAll();
+
         if($imageForm->isSubmitted() && $imageForm->isValid()){
             $image->setEvenement($evenement);
             $manager->persist($image);
@@ -64,23 +86,22 @@ class EventsController extends AbstractController {
 
             $connection = $manager->getConnection();
             $statement = $connection->prepare("UPDATE image SET utilisateur_id = :user WHERE filename = :fichier");
-            $statement2 = $connection->prepare("SELECT * FROM evenement_utilisateur WHERE evenement_id = :evenement");
             $statement->bindValue('user', $userId);
             $statement->bindValue('fichier', $image->getFilename());
-            $statement2->bindValue('evenement', $evenement->getId());
             $statement->execute();
-            $statement2->execute();
 
             return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
         }
 
         return $this->render('publicPages/evenements/evenements_show.html.twig', [
             'evenement' => $evenement,
+            'participants' => $participants,
+            'nombreParticipants' => $nombreParticipants,
             'imageForm' => $imageForm->createView()
         ]);
     }
 
-    public function all(PaginatorInterface $paginator, Request $request): Response 
+    public function all(PaginatorInterface $paginator, Request $request, ObjectManager $manager): Response 
     {        
         $search = new EvenementFiltre();
         $form = $this->createForm(EvenementFiltreType::class, $search);
@@ -92,19 +113,42 @@ class EventsController extends AbstractController {
             10
         );
 
+        $index = 0;
+
+        foreach ($allEvents as $evenement) {
+            $connection = $manager->getConnection();
+            $statement = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
+            $statement->bindValue('evenement', $evenement->getId());
+            $statement->execute();            
+            $nombreParticipants[$index] = $statement->fetchAll();
+            $index += 1;
+        }
+
         return $this->render('publicPages/evenements/evenements_tous.html.twig', [
             'allEvents' => $allEvents,
+            'nombreParticipants' => $nombreParticipants,
             'form' => $form->createView()
         ]);
     }
 
-    public function month(): Response 
+    public function month(ObjectManager $manager): Response 
     {       
         $date = new \DateTime();
         $formattedDate = $date->format('Y-m');
         $monthlyEvents = $this->repository->findMonthlyEvents($formattedDate);
+        $index = 0;
+
+        foreach ($monthlyEvents as $evenement) {
+            $connection = $manager->getConnection();
+            $statement = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
+            $statement->bindValue('evenement', $evenement->getId());
+            $statement->execute();            
+            $nombreParticipants[$index] = $statement->fetchAll();
+            $index += 1;
+        }
 
         return $this->render('publicPages/evenements/evenements_mois.html.twig', [
+            'nombreParticipants' => $nombreParticipants,
             'monthlyEvents' => $monthlyEvents
         ]);
     }
@@ -133,7 +177,7 @@ class EventsController extends AbstractController {
             $username = $userPrenom . " " . $userNom;
 
             $connection = $manager->getConnection();
-            $statement = $connection->prepare("INSERT INTO evenement_utilisateur (evenement_id, utilisateur_id) VALUES :evenement, :user");
+            $statement = $connection->prepare("INSERT INTO evenement_utilisateur (evenement_id, participant) VALUES (:evenement, :user)");
             $statement->bindValue('evenement', $evenement->getId());
             $statement->bindValue('user', $username);
             $statement->execute();
