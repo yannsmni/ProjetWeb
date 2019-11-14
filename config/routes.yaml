@@ -160,3 +160,7 @@ security_deconnexion:
   path: /deconnexion
   controller: App\Controller\SecurityController::deconnexion
 
+photosReportId:
+  path: /photos/{id}/report
+  controller: App\Controller\PhotosController::report
+

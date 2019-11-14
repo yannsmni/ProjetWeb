@@ -18,7 +18,7 @@ class PhotosController extends AbstractController {
         $this->repository = $repository;
     }
 
-    public function index(Image $image, Request $request, ObjectManager $manager): Response 
+    public function index(Request $request, ObjectManager $manager): Response 
     {        
         $allImages = $this->repository->findAll();
         $commentaire = new Commentaire();
@@ -55,5 +55,15 @@ class PhotosController extends AbstractController {
             'allImages' => $allImages,
             'commentaireForm' => $commentaireForm->createView()
         ]);
+    }
+
+    public function report(Image $image, ObjectManager $manager): Response
+    {
+        $image->setVisible(false);
+
+        $manager->persist($image);
+        $manager->flush();
+
+        return $this->redirectToRoute('photos');
     }
 }
