@@ -176,3 +176,8 @@ security_deconnexion:
   path: /deconnexion
   controller: App\Controller\SecurityController::deconnexion
 
+#chemin relatif aux commentaires
+
+commentsReportId:
+  path: /commentaire/{id}/report
+  controller: App\Controller\CommentController::report
