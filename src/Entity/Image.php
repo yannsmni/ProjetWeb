@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Commentaire;
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
@@ -67,6 +68,11 @@ class Image
     * @ORM\Column(type="datetime")
     */
     private $Date_edit;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur")
+     */
+    private $Vote;
 
     public function __construct() {
         $this->Date_edit = new \DateTime();
@@ -203,5 +209,13 @@ class Image
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getVote(): Collection
+    {
+        return $this->Vote;
     }
 }

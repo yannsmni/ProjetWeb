@@ -68,6 +68,12 @@
                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{images.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
                 <a href="{{ path('evenementsReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
             </div>
+            <div>
+                Nombre de likes : {{ images.vote | length }}
+            </div>
+                {% if app.user %}
+                    <a href="{{ path('image_like', {id: images.id}) }}" class="btn btn-info">Like</a>
+                {% endif %}
         </div>
         {% endfor %}
         <div class="my-4">
