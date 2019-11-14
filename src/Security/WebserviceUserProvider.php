@@ -38,8 +38,6 @@ class WebserviceUserProvider implements UserProviderInterface
     {
         $api = HttpClient::create();
 
-        //$email = str_replace('"', "", $form['email']->getData());
-        // make a call to your webservice here
         $response =  $api->request('GET', "http://127.0.0.1:9000/users/$username");
         
         $userData = $response->toArray();
@@ -57,9 +55,6 @@ class WebserviceUserProvider implements UserProviderInterface
             } else ($userData[0]['role'] == "Eleve"){
                 $roles = ['ROLE_ELEVE'] //Eleve
             };
-            
-
-            // ...
 
             return new WebserviceUser($username, $password, $salt, $roles);
         }

@@ -198,7 +198,7 @@ class CartController extends AbstractController
         $message = (new \Swift_Message('Commande de l\'utilisateur ' . $userEmail))
             ->setFrom('noreply@server.com')
             ->setTo('bde@cesi.fr')
-            ->setBody($panierString);
+            ->setBody($panierString + "Vous pourrez récupérer votre colis en salle 125 dans 8 jours");
 
         $mailer->send($message);
 

@@ -33,10 +33,9 @@ class Commentaire
     private $Visible;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $Auteur;
+    private $auteur;
 
     /**
      * @ORM\Column(type="datetime")
@@ -90,14 +89,14 @@ class Commentaire
         return $this;
     }
 
-    public function getAuteur(): ?Utilisateur
+    public function getAuteur(): ?string
     {
-        return $this->Auteur;
+        return $this->auteur;
     }
 
-    public function setAuteur(Utilisateur $Auteur): self
+    public function setAuteur(string $auteur): self
     {
-        $this->Auteur = $Auteur;
+        $this->auteur = $auteur;
 
         return $this;
     }

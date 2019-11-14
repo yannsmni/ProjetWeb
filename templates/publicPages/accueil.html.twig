@@ -7,22 +7,42 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4 font-weight-bold">BDE CESI Strasbourg</h1>
-      <p class="lead">Ouais ouais ouais</p>
+      <p class="lead">En naviguant sur ce site, vous acceptez la présence de cookies. <br/>
+        Pour en savoir plus sur vos droits et données personnelles, cliquez sur le bouton ci dessous. <br/>
+      </p>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cookie">
+          Cookies
+      </button>
     </div>
 </div>
 
-<div class="container my-4">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1 class="display-4 font-weight-bold">Présentation</h1>
-
-          <p class="lead">En naviguant sur ce site, vous acceptez la présence de cookies. <br/>
-              Pour en savoir plus sur vos droits et données personnelles, cliquez sur le bouton ci dessous. <br/>
-          </p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cookie">
-                En savoir plus
-            </button>
-
+<div class="jumbotron jumbotron-fluid" style="background-image: url(assets/image/cesi.jpeg);">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4 font-weight-bold">Présentation</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+        </div>
+        <a class="btn btn-dark" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Découvrir</a>
+        <div class="collapse" id="collapseExample">
+            <div class="jumbotron my-4">
+                <div>
+                    <h1>Notre programme</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                </div>
+                <div>
+                    <h1>Nos objectifs</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ducimus iusto optio commodi expedita repellat adipisci sed odio, nam cupiditate veritatis veniam mollitia quidem atque quis nulla voluptatibus laborum non.</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -44,7 +64,7 @@
                 <div class="row">
                   {% for evenement in upcommingEvents %}
                   <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
-                      <img src="..." class="card-img-top" alt="...">
+                      <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="...">
                       <div class="card-body">
                       <h5 class="card-title">{{ evenement.nom }}</h5>
                       <p class="card-text">{{ evenement.description }}</p>
@@ -69,7 +89,7 @@
                 <div class="card-deck">
                     {% for produit in bestProducts %}
                     <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 m-4">
-                        <br/><img src="" class="card-img-top" alt="{{ produit.description }}">
+                        <br/><img src="/assets/image/produits/{{ produit.filename }}" class="card-img-top" alt="{{ produit.description }}">
                       <div class="card-body">
                         <h5 class="card-title">{{ produit.nom }}</h5>
                         <p class="card-text">Retrouvez ce produit et bien d'autres sur notre boutique. </p>
@@ -164,7 +184,8 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4 font-weight-bold">Nos partenaires</h1>
-      <p class="lead">Ouais ouais ouais</p>
+      <div class="card-deck my-4">
+          
     </div>
 </div>
 
