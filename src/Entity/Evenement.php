@@ -52,7 +52,7 @@ class Evenement
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
      */
-    private $participants;
+    private $participant;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="Evenement")
@@ -134,33 +134,14 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getParticipants(): Collection
+    public function getParticipant(): ?string
     {
-        return $this->participants;
+        return $this->participant;
     }
 
-    public function addParticipant(Utilisateur $participant): self
+    public function setParticipant(string $participant): self
     {
-        if (!$this->participants->contains($participant)) {
-            $this->participants[] = $participant;
-            $participant->setEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipant(Utilisateur $participant): self
-    {
-        if ($this->participants->contains($participant)) {
-            $this->participants->removeElement($participant);
-            // set the owning side to null (unless already changed)
-            if ($participant->getEvenement() === $this) {
-                $participant->setEvenement(null);
-            }
-        }
+        $this->participant = $participant;
 
         return $this;
     }

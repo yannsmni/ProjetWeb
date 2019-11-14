@@ -104,7 +104,10 @@ class PhotosController extends AbstractController {
             $query->bindValue('imageId', $imageId);
             $query->execute();
         } catch (\Exception $e){
-            echo "Vous ne pouvez pas liker plusieurs fois la même photo";
+            $queryMinus = $connection->prepare("DELETE FROM image_utilisateur WHERE utilisateur_id = :userId AND image_id = :imageId");
+            $queryMinus->bindValue('userId', $userId);
+            $queryMinus->bindValue('imageId', $imageId);
+            $queryMinus->execute();
         };
         
 
