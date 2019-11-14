@@ -35,16 +35,18 @@ class PhotosController extends AbstractController {
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
-        $user = $this->getUser();
-        $userEmail = $user->getUsername();
-        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+        if (!empty($this->getUser())) {
+            $user = $this->getUser();
+            $userEmail = $user->getUsername();
+            $req = 'http://127.0.0.1:9000/users/' . $userEmail;
 
-        $api = HttpClient::create();
-        $response = $api->request('GET', $req);
-        $rep = $response->toArray();
-        $userNom = $rep[0]["nom"];
-        $userPrenom = $rep[0]["prenom"];
-        $username = $userPrenom . $userNom;
+            $api = HttpClient::create();
+            $response = $api->request('GET', $req);
+            $rep = $response->toArray();
+            $userNom = $rep[0]["nom"];
+            $userPrenom = $rep[0]["prenom"];
+            $username = $userPrenom . " " . $userNom;
+        }
 
         if($form->isSubmitted() && $form->isValid())
         {
@@ -53,21 +55,12 @@ class PhotosController extends AbstractController {
             $manager->persist($commentaire);
             $manager->flush();
 
-<<<<<<< HEAD
-            // $em = $this->getDoctrine()->getManager();
-            // $connection = $em->getConnection();
-            // $statement = $connection->prepare("UPDATE commentaire SET auteur_id = :user WHERE contenu = :contenu");
-            // $statement->bindValue('user', $username);
-            // $statement->bindValue('commentaire', $commentaire->getContenu());
-            // $statement->execute();
-=======
             $em = $this->getDoctrine()->getManager();
             $connection = $em->getConnection();
-            $statement = $connection->prepare("UPDATE commentaire SET auteur_id = :user WHERE contenu = :contenu");
-            $statement->bindValue('user', $userId);
+            $statement = $connection->prepare("UPDATE commentaire SET auteur = :user WHERE contenu = :contenu");
+            $statement->bindValue('user', $username);
             $statement->bindValue('contenu', $commentaire->getContenu());
             $statement->execute();
->>>>>>> 731c798d54c754c963e6c4e2f4fbef95cc3858a3
 
             return $this->redirectToRoute('photosId', ['id' => $image->getId()]);
         }

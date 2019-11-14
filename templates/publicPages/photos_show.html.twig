@@ -11,24 +11,31 @@
                         <div class="container my-3">
                             <img src="/assets/image/photos/{{image.filename}}" alt="{{ image.description }}" style="width: 100%; height: auto;">
                         </div>
-                    </div>
-                    <div class="col-6">
                         <div class="card-body">
-                            <p class="card-text">Le {{ image.getDateEdit()|date("d M Y")}} à {{ image.getDateEdit()|date("G")}}h{{ image.getDateEdit()|date("i")}}</p>
+                            <p class="card-text"><span class="font-weight-bold">Date de publication : </span>Le {{ image.getDateEdit()|date("d M Y")}} à {{ image.getDateEdit()|date("G")}}h{{ image.getDateEdit()|date("i")}}</p>
+                            <p class="card-text"><span class="font-weight-bold">Description de l'image : </span> {{ image.description }}</p>
+                            {% if not app.user %}
+                            <p class="card-text"><span class="font-weight-bold">Nombre de likes : </span>{{ image.vote | length }}
+                            {% endif %}
                         </div>
                         <div class="container">
                             <div class="mb-4">
+                                {% if app.user %}
+                                <a href="{{ path('image_like', {id: image.id}) }}" class="btn btn-info mr-4">Likes : {{ image.vote | length }}</a>
+                                {% endif %}
                                 <a href="{{ path('photosReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>
                             </div>
                         </div>
-                        <div class="container">
+                    </div>
+                    <div class="col-6">
+                        <div class="container my-3">
                             <div class="card card-body">
                                 <h5>{{ image.commentaire | length }} Commentaires</h5>
                                 <div class ="comment">
                                     {% for commentaire in image.commentaire %}
-                                    <div class="row my-2">
+                                    <div class="row my-4">
                                         <div class="col-3">
-                                        (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
+                                            <span class="font-weight-bold">{{ commentaire.auteur }}</span> (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
                                         </div>
                                         <div class="col">
                                         {{commentaire.contenu}}
