@@ -4,8 +4,10 @@
 
 {% block body %}
 
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-color: #00a490;">
+        <h1 class="text-center font-weight-bold">Tous nos produits</h1>
         <div class="container">
+            <h5>Filtrez votre recherche</h5>
             {{ form_start(form) }}
             <div class="form-row align-items-end">
                 <div class="col">
@@ -19,7 +21,7 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <button class="btn btn-primary">Rechercher</button>
+                        <button class="btn btn-dark">Rechercher</button>
                     </div>
                 </div>
             </div>
@@ -27,29 +29,26 @@
         </div>
     </div>
 
-    <div class="container-fluid my-4">
-        <h1>Tous nos produits</h1>
+    <div class="container-fluid">
         <div class="row">
         {% for produit in allProducts %}
-        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
+        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4" >
             <br/><img src="/assets/image/produits/{{ produit.filename }}" class="card-img-top" alt="{{ produit.description }}">
             <div class="card-body">
                 <h4 class="card-title">{{ produit.nom }}</h4>
                 <p class="card-text"> {{ produit.description }}</p>
                 <p class="card-text"><small class="text-muted">Prix : {{ produit.prix }}€</small></p>
                 <div>
-                    <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id, slug: produit.slug}) }}">Voir le produit</a>
+                    <a class="btn btn-dark" href="{{ path('boutique/ID', {ID: produit.id, slug: produit.slug}) }}">Voir le produit</a>
                 </div>
                 </br>
-                {# {% if app.user %} #}
-                <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">
-                        Ajouter au panier
+                {% if app.user %}
+                <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-warning">Ajouter au panier</a>
+                {% else %}
+                <a href="security_connexion" class="btn btn-success">
+                    Se connecter
                 </a>
-                {# {% else %}
-                <a href="#" class="btn btn-danger">
-                        Se connecter
-                </a>
-                {% endif %} #}
+                {% endif %}
             </div>
         </div>
         {% endfor %}
@@ -58,6 +57,5 @@
         <div class="pagination">
             {{ knp_pagination_render(allProducts) }}
         </div>
-
     </div>
 {% endblock %}

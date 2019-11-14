@@ -52,10 +52,12 @@ searchBar.addEventListener('keyup', function ()
             link1.innerText = "Modifier";
             link1.classList.add('btn');
             link1.classList.add('btn-primary');
+            link1.classList.add('mx-1');
             link2.setAttribute('href', '/administration/evenements/delete/'+data[j].Id)
             link2.innerText = "Supprimer";
             link2.classList.add('btn');
             link2.classList.add('btn-danger');
+            link2.classList.add('mx-1');
 
             tr.appendChild(td1);
             tr.appendChild(td2);

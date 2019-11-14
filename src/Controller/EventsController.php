@@ -45,14 +45,16 @@ class EventsController extends AbstractController {
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
 
-        $user = $this->getUser();
-        $userEmail = $user->getUsername();
-        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+        if (!empty($this->getUser())) {
+            $user = $this->getUser();
+            $userEmail = $user->getUsername();
+            $req = 'http://127.0.0.1:9000/users/' . $userEmail;
 
-        $api = HttpClient::create();
-        $response = $api->request('GET', $req);
-        $rep = $response->toArray();
-        $userId = $rep[0]["id"];
+            $api = HttpClient::create();
+            $response = $api->request('GET', $req);
+            $rep = $response->toArray();
+            $userId = $rep[0]["id"];
+        }
 
         if($imageForm->isSubmitted() && $imageForm->isValid()){
             $image->setEvenement($evenement);
