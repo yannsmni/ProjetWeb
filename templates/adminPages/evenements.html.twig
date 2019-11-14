@@ -9,7 +9,7 @@
 <a href="{{ path('adminEventsAdd')}}" class="btn btn-success">Ajouter un événenement</a>
 
 <div class="container mt-4">
-    <div class="search_type my-4" style="margin-bottom: 32px">
+    <div class="search_type my-4">
         <h5>Personnaliser la recherche</h5>
         {{ form_start(formRecherche) }}
         <div class="search_bar">
@@ -45,8 +45,8 @@
                 <th>Evénement</th>
                 <th>Prix</th>
                 <th>Type</th>
-                <th>Participants</th>
-                <th>Photos</th>
+                <th class="admin_event_optional">Participants</th>
+                <th class="admin_event_optional">Photos</th>
                 <th>Date de l'événement</th>
                 <th>Date de création</th>
                 <th>Administration</th>
