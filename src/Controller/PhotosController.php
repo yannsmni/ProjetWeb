@@ -42,20 +42,32 @@ class PhotosController extends AbstractController {
         $api = HttpClient::create();
         $response = $api->request('GET', $req);
         $rep = $response->toArray();
-        $userId = $rep[0]["id"];
+        $userNom = $rep[0]["nom"];
+        $userPrenom = $rep[0]["prenom"];
+        $username = $userPrenom . $userNom;
 
         if($form->isSubmitted() && $form->isValid())
         {
+            $commentaire->setAuteur($username);
             $commentaire->setImage($image);
             $manager->persist($commentaire);
             $manager->flush();
 
+<<<<<<< HEAD
+            // $em = $this->getDoctrine()->getManager();
+            // $connection = $em->getConnection();
+            // $statement = $connection->prepare("UPDATE commentaire SET auteur_id = :user WHERE contenu = :contenu");
+            // $statement->bindValue('user', $username);
+            // $statement->bindValue('commentaire', $commentaire->getContenu());
+            // $statement->execute();
+=======
             $em = $this->getDoctrine()->getManager();
             $connection = $em->getConnection();
             $statement = $connection->prepare("UPDATE commentaire SET auteur_id = :user WHERE contenu = :contenu");
             $statement->bindValue('user', $userId);
             $statement->bindValue('contenu', $commentaire->getContenu());
             $statement->execute();
+>>>>>>> 731c798d54c754c963e6c4e2f4fbef95cc3858a3
 
             return $this->redirectToRoute('photosId', ['id' => $image->getId()]);
         }

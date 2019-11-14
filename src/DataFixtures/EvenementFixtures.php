@@ -49,7 +49,7 @@ class EvenementFixtures extends Fixture
                     $minimum = '-' . $days . 'days';
     
                     $commentaire->setContenu($faker->realText($maxNbChars = 254))
-                                ->setAuteur($utilisateur);
+                                ->setAuteur($faker->name);
                                 
                     
                     $manager->persist($commentaire);
