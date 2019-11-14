@@ -36,9 +36,9 @@ class HomeController extends AbstractController {
         ]);
 
 
-            $cookieNom = new Cookie('name', 'test_nom', time() + 365*24*3600);
-            $cookieEmail = new Cookie('e-mail', 'test_email', time() + 365*24*3600);
-            $cookieRole = new Cookie('role', 'test_role', time() + 365*24*3600);
+            $cookieNom = Cookie::create('name', 'test_nom', time() + 365*24*3600);
+            $cookieEmail = Cookie::create('e-mail', 'test_email', time() + 365*24*3600);
+            $cookieRole = Cookie::create('role', 'test_role', time() + 365*24*3600);
 
         $responseNom->headers->setCookie($cookieNom);
         $responseEmail->headers->setCookie($cookieEmail);

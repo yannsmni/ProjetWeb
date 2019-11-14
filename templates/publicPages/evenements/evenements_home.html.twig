@@ -17,14 +17,14 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="background-color: #92b8fb;">
     <h1 class="display-4">Prochains événements</h1>
     <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
     Vous pouvez également poster vos idées, n'hésitez pas !</p>
     <div class="row">
         {% for evenement in upcommingEvents %}
-        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
+            <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">{{ evenement.nom }}</h5>
             <p class="card-text">{{ evenement.description }}</p>
@@ -52,8 +52,8 @@
     Vous pouvez également poster vos idées, n'hésitez pas !</p>
     <div class="row">
         {% for evenement in latestEvents %}
-        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 m-4">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
+            <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">{{ evenement.nom }}</h5>
             <p class="card-text">{{ evenement.description }}</p>

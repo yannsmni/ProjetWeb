@@ -4,22 +4,22 @@
 
 {% block body %}
 
-<h1 class="mt-4">Gestion des événements</h1>
+<div class="jumbotron jumbotron-fluid" style="background-color: #67657f;">
+    <h1 class="text-white text-center font-weight-bold">Gestion des événements</h1>
 
-<a href="{{ path('adminEventsAdd')}}" class="btn btn-success">Ajouter un événenement</a>
-
-<div class="container mt-4">
-    <div class="search_type my-4">
-        <h5>Personnaliser la recherche</h5>
-        {{ form_start(formRecherche) }}
-        <div class="search_bar">
-            {{ form_rest(formRecherche) }}
+    <div class="container mt-4">
+        <a href="{{ path('adminEventsAdd')}}" class="btn btn-success">Ajouter un événenement</a>
+        <div class="search_type my-4">
+            <h5>Personnaliser la recherche</h5>
+            {{ form_start(formRecherche) }}
+            <div class="search_bar">
+                {{ form_rest(formRecherche) }}
+            </div>
+            {{ form_end(formRecherche) }}
         </div>
-        {{ form_end(formRecherche) }}
     </div>
-</div>
 
-<div class="container mt-4">
+    <div class="container mt-4 admin_event_optional">
         {{ form_start(formFiltre) }}
         <div class="form-row">
             <div class="col">
@@ -36,6 +36,7 @@
             </div>
         </div>
         {{ form_end(formFiltre) }}
+    </div>
 </div>
                      
 <div class="container-fluid mt-4">
@@ -79,7 +80,7 @@
     </table>
 </div>
 
-<div class="pagination">
+<div class="pagination admin_event_optional">
     {{ knp_pagination_render(allEvents) }}
 </div>
     

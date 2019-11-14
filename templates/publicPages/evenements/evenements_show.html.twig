@@ -28,10 +28,11 @@
                 <div class="col-9">
                     {% if app.user %}
                         <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
-                        <button class="btn btn-primary" type="submit">Ajouter une photo</button>
                     {% endif %}
                     {% if is_granted('ROLE_CESI') %}
                     <a href="{{ path('evenementsReportId', {id: evenement.id}) }}" class="btn btn-danger">Signaler</a>
+                    <a href="{{ path('evenementsDownloadPDF', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en PDF</a>
+                    <a href="{{ path('evenementsDownloadCSV', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en CSV</a>
                     {% endif %}
                 </div>
                 <div class="col-3">

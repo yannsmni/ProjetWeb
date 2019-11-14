@@ -23,6 +23,21 @@ class ProduitFiltre {
      */
     private $category;
 
+    /**
+     * @var bool|null
+     */
+    private $bestSales;
+
+    /**
+     * @var bool|null
+     */
+    private $ascPrice;
+
+    /**
+     * @var bool|null
+     */
+    private $descPrice;
+
     public function __construct()
     {
         //$this->category = new Categorie();
@@ -75,6 +90,54 @@ class ProduitFiltre {
     public function setCategory(?Categorie $category): void
     {
         $this->category = $category;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getBestSales(): ?bool
+    {
+        return $this->bestSales;
+    }
+
+    /**
+     * @param bool|null $bestSales
+     */
+    public function setBestSales(?bool $bestSales): void
+    {
+        $this->bestSales = $bestSales;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getAscPrice(): ?bool
+    {
+        return $this->ascPrice;
+    }
+
+    /**
+     * @param bool|null $ascPrice
+     */
+    public function setAscPrice(?bool $ascPrice): void
+    {
+        $this->ascPrice = $ascPrice;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getDescPrice(): ?bool
+    {
+        return $this->descPrice;
+    }
+
+    /**
+     * @param bool|null $descPrice
+     */
+    public function setDescPrice(?bool $descPrice): void
+    {
+        $this->descPrice = $descPrice;
     }
 
 

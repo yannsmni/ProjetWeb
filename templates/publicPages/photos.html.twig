@@ -12,38 +12,44 @@
 </div>
 
 <div class="container-fluid my-4">
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+        <div class="row">
             {% for image in allImages %}
-            <div class="card m-4">
-                <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img mt-2" alt="{{ image.description }}" style="width: 100%; height: auto;">
+            <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 m-4" style="background-color: #fcb74a;">
+                <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top" alt="{{ image.description }}">
                 <div class="card-body">
                     <p class="card-text">Le {{ image.getDateEdit()|date("d M Y")}} à {{ image.getDateEdit()|date("G")}}h{{ image.getDateEdit()|date("i")}}</p>
                 </div>
                 <div class="container">
                     <div class="mb-4">
-                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{image.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
-                        <a href="{{ path('photosReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                        {% if app.user %}
+                            <a href="{{ path('image_like', {id: image.id}) }}" class="btn btn-dark mr-2">Likes : {{ image.vote | length }}</a>
+                            <a href="{{ path('photosId', {id: image.id}) }}" class="btn btn-dark mr-2">Informations</a>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{image.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_CESI') %}
+                            <a href="{{ path('photosReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="collapse" id="collapseExample{{image.id}}">
                     <div class="container">
                         <div class="card card-body">
                             <h5>{{ image.commentaire | length }} Commentaires</h5>
-                            <div class ="comment my-2">
+                            <div class ="comment">
                                 {% for commentaire in image.commentaire %}
-                                <div class="row">
+                                <div class="row my-2">
                                     <div class="col-3">
-                                    (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
+                                    <span class="font-weight-bold">{{ commentaire.auteur }}</span> (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
                                     </div>
                                     <div class="col">
                                     {{commentaire.contenu | raw}}
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
                         </div>
                         {% if app.user %}
-                        <a href="{{ path('photosId', {id: image.id}) }}" class="btn btn-success m-2">Ajouter un commentaire</a>
+                            <a href="{{ path('photosId', {id: image.id}) }}" class="btn btn-success m-2">Ajouter un commentaire</a>
                         {% endif %}
                     </div>
                 </div>

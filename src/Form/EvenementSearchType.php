@@ -18,7 +18,7 @@ class EvenementSearchType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => "Nom du produit"
+                    'placeholder' => "Nom de l'événement"
                 ]
             ])
         ;

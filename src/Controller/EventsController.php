@@ -17,6 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class EventsController extends AbstractController {  
 
     public function __construct(EvenementRepository $repository) {
@@ -45,14 +46,16 @@ class EventsController extends AbstractController {
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
 
-        $user = $this->getUser();
-        $userEmail = $user->getUsername();
-        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+        if (!empty($this->getUser())) {
+            $user = $this->getUser();
+            $userEmail = $user->getUsername();
+            $req = 'http://127.0.0.1:9000/users/' . $userEmail;
 
-        $api = HttpClient::create();
-        $response = $api->request('GET', $req);
-        $rep = $response->toArray();
-        $userId = $rep[0]["id"];
+            $api = HttpClient::create();
+            $response = $api->request('GET', $req);
+            $rep = $response->toArray();
+            $userId = $rep[0]["id"];
+        }
 
         if($imageForm->isSubmitted() && $imageForm->isValid()){
             $image->setEvenement($evenement);
@@ -133,4 +136,15 @@ class EventsController extends AbstractController {
 
         return $this->redirectToRoute('evenementsAll');
     }
+
+    /*public function downloadCSV() {
+
+        return $this->render('publicPages/evenements/evenements_dl.html.twig');
+    }
+
+    public function downloadPDF() {
+
+
+        return $this->render('publicPages/evenements/evenements_dl.html.twig');
+    }*/
 }
