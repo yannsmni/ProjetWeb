@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Utilisateur;
 use App\Form\ConnexionType;
 use App\Entity\UserSecurity;
 use App\Form\InscriptionType;
@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -237,6 +238,28 @@ class SecurityController extends AbstractController
         $provider->loadUserByUsername("yann.szymanski@viacesi.fr");
         var_dump($provider);
         */
+        //try{
+        // $querry = 'http://127.0.0.1:9000/users/'. $userMail;
+        // var_dump($userMail);
+        
+        // $api_email = HttpClient::create();
+
+        // $getid = $api_email->request('GET', $querry );
+        // //var_dump($getid);
+
+        // $reponse = $getid->toArray();
+        // var_dump($reponse);
+        // $em = $this->getDoctrine()->getManager();
+        // $connection = $em->getConnection();
+
+        // $query = $connection->prepare("INSERT INTO utilisateur (id) VALUES (:userId)");
+        // $query->bindValue('userId', $reponse[0]['id']);
+        // $query->execute();
+
+        //} catch(\Exception $e){
+           // echo "utilisateur déjà existant";
+        //}
+
         return $this->render('security/connexion.html.twig');
     }
 
@@ -318,30 +341,93 @@ class SecurityController extends AbstractController
                 $date = new \DateTime();
                 $date = $date->format('Y-m-d H:i:s');
 
+                $email = (string) $form['email']->getData();
+
                 $api = HttpClient::create();
+
                 
                 $response = $api->request('POST', 'http://127.0.0.1:9000/users', ['body' => [
                     'id' => null,
                     'nom' => $form['nom']->getData(),
                     'prenom' => $form['prenom']->getData(),
                     'localisation' => $form['localisation']->getData(),
-                    'email' => $form['email']->getData(),
+                    'email' => $email,
                     'mot_de_passe' => $hash,
                     'date_creation' => $date,
                     'role' => "Eleve"
                 ]]);
-                var_dump($api);
+
+                // var_dump($api);
+
+                // $querry = 'http://127.0.0.1:9000/users/' . $webserviceUser->getUsername();
+                // //var_dump($email);
+                
+                // $api_email = HttpClient::create();
+        
+                // $getid = $api_email->request('GET', $querry );
+                // //var_dump($getid);
+        
+                // $reponse = $getid->toArray();
+                // var_dump($reponse);
+                // // echo($reponse[0]['id']);
+        
+                // if(isset($rep[0]['id'])){
+                //     echo("oui mamen");
+
+        
+                // }
+                // echo ("nonono");
+
+                // $apidatabaselinker = new ApiDatabaseController($webserviceUser);
+                // $apidatabaselinker->linkApiToLocalDatabase();
+            
+
             } else {
                 return $this->redirectToRoute('security_inscription');
             }
-
+            //$this->addIdApi($email);
             return $this->redirectToRoute('security_connexion');
         }
-
+            
         return $this->render('security/inscription.html.twig',[
             'form' => $form->createView()
         ]);
+        
     }
 
+    // public function addIdApi(string $userMail){
+        
+        
+    //     $querry = 'http://127.0.0.1:9000/users/'. $userMail;
+    //     var_dump($userMail);
+        
+    //     $api_email = HttpClient::create();
+
+    //     $getid = $api_email->request('GET', $querry );
+    //     //var_dump($getid);
+
+    //     $reponse = $getid->toArray();
+    //     var_dump($reponse);
+    //     // echo($reponse[0]['id']);
+
+    //     if(isset($reponse[0]['id'])){
+    //         echo("oui mamen");
+
+    //         // $manager = new ObjectManager();
+    //         // $setUserId = new Utilisateur();
+    //         // $setUserId->setId((int) $resp[0]['id']);
+
+    //         // var_dump($setUserId);
+    //         // $manager->persist($setUserId);
+    //         // $manager->flush();
+
+    //     }
+    //     echo ("nonono");
+
+    // }
+
     public function deconnexion(){}
+
+
 }
+

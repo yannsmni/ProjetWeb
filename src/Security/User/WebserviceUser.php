@@ -44,7 +44,7 @@ class WebserviceUser implements UserInterface, EquatableInterface
 
     /**
      * @Assert\NotBlank(message="Ce champ ne peut être vide !")
-     * @Assert\Regex("/(^Strasbourg$)|(^Arras$)|(^Caen$)|(^Lille$)|(^Rouen$)|(^Angoulême$)|(^Brest$)|(^La Rochelle$)|(^Le Mains$)|(^Nantes$)|(^Saint-Nazaire$)|(^Paris$)|(^Orléans$)|(^Dijon$)|(^Nancy$)|(^Reims$)|(^Bordeaux$)|(^Montpellier$)|(^Pau$)|(^Toulouse$)|(^Aix-En-Provence$)|(^Grenoble$)|(^Lyon$)|(^Nice$)/", message="Veuillez choisir parmis l'un des centres suivants : Strasbourg, Arras, Caen, Lille, Rouen, Angoulême, Brest, La Rochelle, Le Mains, Nantes, Saint-Nazaire, Paris, Orléans, Dijon, Nancy, Reims, Bordeaux, Montpellier, Pau, Toulouse, Aix-En-Provence, Grenoble, Lyon, Nice.")
+     * @Assert\Regex("/(^Strasbourg$)|(^Arras$)|(^Caen$)|(^Lille$)|(^Rouen$)|(^Angoulême$)|(^Brest$)|(^La Rochelle$)|(^Le Mains$)|(^Nantes$)|(^Saint-Nazaire$)|(^Paris$)|(^Orléans$)|(^Dijon$)|(^Nancy$)|(^Reims$)|(^Bordeaux$)|(^Montpellier$)|(^Pau$)|(^Toulouse$)|(^Aix-En-Provence$)|(^Grenoble$)|(^Lyon$)|(^Nice$)/", message="Veuillez choisir parmi l'un des centres suivants : Strasbourg, Arras, Caen, Lille, Rouen, Angoulême, Brest, La Rochelle, Le Mains, Nantes, Saint-Nazaire, Paris, Orléans, Dijon, Nancy, Reims, Bordeaux, Montpellier, Pau, Toulouse, Aix-En-Provence, Grenoble, Lyon, Nice.")
      */
     public $localisation;
 
