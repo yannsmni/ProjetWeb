@@ -8,14 +8,15 @@
 
 <a href="{{ path('adminProductsAdd')}}" class="btn btn-success">Ajouter un produit</a>
 
-<div class="search_type my-4">
-    <h3>Personnaliser la recherche</h3>
-    {{ form_start(form) }}
-        <div class="search bar">
+<div class="container">
+    <div class="search_type my-4" style="margin-bottom: 32px">
+        <h5>Personnaliser la recherche</h5>
+        {{ form_start(form) }}
+        <div class="search_bar">
             {{ form_rest(form) }}
         </div>
-        <button type="submit" class="contained">Rechercher</button>
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 </div>
                      
 <div class="container-fluid mt-4">
@@ -29,9 +30,10 @@
                 <th>Administration</th>
             </tr>
         </thead>
-                
+
+        <tbody class="tbody_produits">
         {% for produit in allProducts %}
-            <tr>
+            <tr class="admin_product">
                 <td class="font-weight-bold">{{ produit.nom }}</td>
                 <td>{{ produit.description }}</td>
                 <td class="font-weight-bold">{{ produit.prix }} €</td>
@@ -42,7 +44,12 @@
                 </td>
             </tr>
         {% endfor %}
+        </tbody>
     </table>
 </div>
     
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/js/ajaxProducts.js"></script>
 {% endblock %}

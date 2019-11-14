@@ -26,13 +26,19 @@
         <div>
             <div class="row">
                 <div class="col-9">
-                    <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
-                    <button class="btn btn-primary" type="submit">Ajouter une photo</button>
+                    {% if app.user %}
+                        <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
+                        <button class="btn btn-primary" type="submit">Ajouter une photo</button>
+                    {% endif %}
+                    {% if is_granted('ROLE_CESI') %}
                     <a href="{{ path('evenementsReportId', {id: evenement.id}) }}" class="btn btn-danger">Signaler</a>
+                    {% endif %}
                 </div>
                 <div class="col-3">
-                    <a href="{{ path('adminEventsEdit', {id: evenement.id}) }}" class="btn btn-primary">Modifier</a>
-                    <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
+                    {% if is_granted('ROLE_BDE') %}
+                        <a href="{{ path('adminEventsEdit', {id: evenement.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -54,9 +60,13 @@
         <h1>Photos de l'événement ({{ evenement.images | length }})</h1>
         {% for images in evenement.images %}
         <div class="card" style="width: 18rem;">
-            <img src="/assets/image/photos/{{images.filename}}" class="card-img-top" alt="{{ images.description }}">
+            <img src="/assets/image/photos/{{ images.filename }}" class="card-img mt-2" alt="{{ images.description }}">
             <div class="card-body">
-                <p>OUI OUI OUI OUI</p>
+                <p class="card-text">Le {{ images.getDateEdit()|date("d M Y")}} à {{ images.getDateEdit()|date("G")}}h{{ images.getDateEdit()|date("i")}}</p>
+            </div>
+            <div class="mb-4">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{images.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
+                <a href="{{ path('evenementsReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
             </div>
         </div>
         {% endfor %}

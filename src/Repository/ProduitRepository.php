@@ -3,10 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Produit;
-use App\Entity\ProduitFiltre;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use App\Entity\ProduitFiltre;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -143,10 +143,10 @@ class ProduitRepository extends ServiceEntityRepository
 
     }
 
-    public function findBySearch($search) {
+    public function findBySearch($recherche) {
         return $this->createQueryBuilder('a')
             ->andWhere('a.nom LIKE :val')
-            ->setParameter('val', $search)
+            ->setParameter('val', $recherche)
             ->getQuery()
             ->getResult();
     }

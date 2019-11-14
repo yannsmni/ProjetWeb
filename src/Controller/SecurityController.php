@@ -250,7 +250,7 @@ class SecurityController extends AbstractController
 
         // $serializer = new Serializer($normalizers, $encoders);
 
-       // $user = new UserSecurity();
+        $user = new WebserviceUser(null, null, null, []);
 
         // $defaultData = ['message' => 'Type your message here'];
         // $form = $this->createFormBuilder($defaultData)
@@ -263,7 +263,7 @@ class SecurityController extends AbstractController
         //     ->add('send', SubmitType::class)
         //     ->getForm();
 
-        $form = $this->createForm(InscriptionType::class);
+        $form = $this->createForm(InscriptionType::class, $user);
 
        // $request = Request::createFromGlobals();
         
@@ -283,20 +283,20 @@ class SecurityController extends AbstractController
 
 
            $hash = $encoder->encodePassword($webserviceUser, $webserviceUser->getPassword());
-           var_dump($hash);
-           echo($hash);
+           //var_dump($hash);
+           //echo($hash);
            //$user = $webserviceUser->setPassword($hash);
 
-            $data = [
-                'id' => null,
-                'nom' => $form['nom']->getData(),
-                'prenom' => $form['prenom']->getData(),
-                'localisation' => $form['localisation']->getData(),
-                'email' => $form['email']->getData(),
-                'mot_de_passe' => $hash,
-                'date_creation' => "2019-11-05",
-                'role' => "eleve"
-            ];
+            // $data = [
+            //     'id' => null,
+            //     'nom' => $form['nom']->getData(),
+            //     'prenom' => $form['prenom']->getData(),
+            //     'localisation' => $form['localisation']->getData(),
+            //     'email' => $form['email']->getData(),
+            //     'mot_de_passe' => $hash,
+            //     'date_creation' => "2019-11-05",
+            //     'role' => "eleve"
+            // ];
 
             // $test = $form->getData()->getPrenom();
             //var_dump($data);
@@ -306,19 +306,34 @@ class SecurityController extends AbstractController
            // $formserialize = $serializer->serialize($data, 'json');
             //echo $formserialize;
 
-           $api = HttpClient::create();
-            
-            $response = $api->request('POST', 'http://127.0.0.1:9000/users', ['body' => [
-                'id' => null,
-                'nom' => $form['nom']->getData(),
-                'prenom' => $form['prenom']->getData(),
-                'localisation' => $form['localisation']->getData(),
-                'email' => $form['email']->getData(),
-                'mot_de_passe' => $hash,
-                'date_creation' => "2019-11-05",
-                'role' => "eleve"
-            ]]);
-            //var_dump($api);
+            $req = 'http://127.0.0.1:9000/users/' . $form['email']->getData() ;
+
+            $api_email = HttpClient::create();
+
+            $querry = $api_email->request('GET', $req);
+
+            $rep = $querry->toArray();
+
+            if (!isset($rep[0]['id'])){
+                $date = new \DateTime();
+                $date = $date->format('Y-m-d H:i:s');
+
+                $api = HttpClient::create();
+                
+                $response = $api->request('POST', 'http://127.0.0.1:9000/users', ['body' => [
+                    'id' => null,
+                    'nom' => $form['nom']->getData(),
+                    'prenom' => $form['prenom']->getData(),
+                    'localisation' => $form['localisation']->getData(),
+                    'email' => $form['email']->getData(),
+                    'mot_de_passe' => $hash,
+                    'date_creation' => $date,
+                    'role' => "Eleve"
+                ]]);
+                var_dump($api);
+            } else {
+                return $this->redirectToRoute('security_inscription');
+            }
 
             return $this->redirectToRoute('security_connexion');
         }

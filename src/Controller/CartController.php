@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Utilisateur;
 use App\Repository\ProduitRepository;
-use App\Repository\UtilisateurRepository;
+use Symfony\Component\HttpClient\HttpClient;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -17,7 +16,33 @@ class CartController extends AbstractController
      */
     public function index(SessionInterface $session, ProduitRepository $produitRepository)
     {
-        $panier = $session->get('panier', []); 
+        $user = $this->getUser();
+        $userEmail = $user->getUsername();
+        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+
+        $api = HttpClient::create();
+        $response = $api->request('GET', $req);
+        $rep = $response->toArray();
+        $userId = $rep[0]["id"];
+
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+
+        $query = $connection->prepare("SELECT * FROM produit_utilisateur WHERE utilisateur_id = :userId");
+        $query->bindValue('userId', $userId);
+        $query->execute();
+        $panierCourant = $query->fetchAll();
+
+        $panier = [];
+
+        for ($i=0; $i<count($panierCourant); $i++){
+            if (!isset($panier[$panierCourant[$i]["produit_id"]])) {
+                $panier[$panierCourant[$i]["produit_id"]] = 1;
+            } else{
+                $panier[$panierCourant[$i]["produit_id"]] += 1;
+            }
+        };
+
         $panierWithData = [];
         foreach($panier as $id => $quantity){
             $panierWithData[] = [
@@ -44,36 +69,41 @@ class CartController extends AbstractController
      */
     public function add($id, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager)
     {
-        // $user = $this->getUser();
-        // $userId = $user->getId();
-        // $produit = $produitRepository->find($id);
-        // $produitId = $produit->getId();
-        // $produit->setAcheteur($user);
-        // $manager->persist($produit);
-        // $manager->flush();
+        $user = $this->getUser();
+        $userEmail = $user->getUsername();
+        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
 
-        // $entityManager = $this->getEntityManager();
+        $api = HttpClient::create();
+        $response = $api->request('GET', $req);
+        $rep = $response->toArray();
+        $userId = $rep[0]["id"];
+        $produit = $produitRepository->find($id);
+        $produitId = $produit->getId();
 
-        // $query = $entityManager->createQuery(
-        //     'SELECT *
-        //     FROM produit_utilisateur
-        //     WHERE utilisateur_id = :userId'
-        // )->setParameter('id', $id, 'userId', $userId);
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("INSERT INTO produit_utilisateur (produit_id, utilisateur_id) VALUES (:produit, :user)");
+        $statement->bindValue('produit', $produitId);
+        $statement->bindValue('user', $userId);
+        $statement->execute();
 
-        // $panierCourant = $query->getResult();
-        
-        //$panier = $session->get('panier', $panierCourant);
+        $query = $connection->prepare("SELECT * FROM produit_utilisateur WHERE utilisateur_id = :userId");
+        $query->bindValue('userId', $userId);
+        $query->execute();
+        $panierCourant = $query->fetchAll();
 
+        $panier = [];
 
-        $panier = $session->get('panier', []);
-
-        if(!empty($panier[$id])){
-            $panier[$id]++;
-        } else {
-            $panier[$id] = 1;
-        }
+        for ($i=0; $i<count($panierCourant); $i++){
+            if (!isset($panier[$panierCourant[$i]["produit_id"]])) {
+                $panier[$panierCourant[$i]["produit_id"]] = 1;
+            } else{
+                $panier[$panierCourant[$i]["produit_id"]] += 1;
+            }
+        };
 
         $session->set('panier', $panier);
+
         return $this->redirectToRoute("cart_index");
     }
 
@@ -81,34 +111,38 @@ class CartController extends AbstractController
      * @Route("/panier/remove/{id}", name="cart_remove")
      */
     public function remove($id, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager){
-        // $user = $this->getUser();
-        // $userId = $user->getId();
-        // $produit = $produitRepository->find($id);
-        // $produit->removeAcheteur($userId); 
-        // $manager->persist($produit);
-        // $manager->flush();
+        $user = $this->getUser();
+        $userEmail = $user->getUsername();
+        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
 
-        // $entityManager = $this->getEntityManager();
+        $api = HttpClient::create();
+        $response = $api->request('GET', $req);
+        $rep = $response->toArray();
+        $userId = $rep[0]["id"];
+        $produit = $produitRepository->find($id);
+        $produitId = $produit->getId();
 
-        // $query = $entityManager->createQuery(
-        //     'SELECT *
-        //     FROM produit_utilisateur
-        //     WHERE utilisateur_id = :userId'
-        // )->setParameter('id', $id, 'userId', $userId);
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("DELETE FROM produit_utilisateur WHERE produit_id = :produit AND utilisateur_id = :user");
+        $statement->bindValue('produit', $produitId);
+        $statement->bindValue('user', $userId);
+        $statement->execute();
 
-        // $panierCourant = $query->getResult();
-        
-        //$panier = $session->get('panier', $panierCourant);
+        $query = $connection->prepare("SELECT * FROM produit_utilisateur WHERE utilisateur_id = :userId");
+        $query->bindValue('userId', $userId);
+        $query->execute();
+        $panierCourant = $query->fetchAll();
 
-        $panier = $session->get('panier', []);
+        $panier = [];
 
-        if(!empty($panier[$id])){
-            if($panier[$id] = 0 || $panier[$id] = -1){
-                unset($panier[$id]);
+        for ($i=0; $i<count($panierCourant); $i++){
+            if (!isset($panier[$panierCourant[$i]["produit_id"]])) {
+                $panier[$panierCourant[$i]["produit_id"]] = 1;
             } else{
-                $panier[$id]--;
+                $panier[$panierCourant[$i]["produit_id"]] += 1;
             }
-        }
+        };
 
         $session->set('panier', $panier);
 
@@ -120,8 +154,16 @@ class CartController extends AbstractController
      */
     public function email(\Swift_Mailer $mailer, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager)
     {
-        // $user = $this->getUser();
-        // $userId = $user->getId();
+        $user = $this->getUser();
+        $userEmail = $user->getUsername();
+        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+
+        $api = HttpClient::create();
+        $response = $api->request('GET', $req);
+        $rep = $response->toArray();
+        $userId = $rep[0]["id"];
+        $userEmail = $rep[0]["email"];
+
         $panier = $session->get('panier', []); 
 
         $panierWithData = [];
@@ -144,8 +186,6 @@ class CartController extends AbstractController
             // $total += $totalItem;
         }
 
-
-
         $produitNames = [];
 
         for ($i=0; $i<count($panierWithData); $i++) {
@@ -155,12 +195,18 @@ class CartController extends AbstractController
 
         $panierString =  json_encode($produitNames);
 
-        $message = (new \Swift_Message('Commande de l\'utilisateur ' . 'oui'/*$userId*/))
+        $message = (new \Swift_Message('Commande de l\'utilisateur ' . $userEmail))
             ->setFrom('noreply@server.com')
             ->setTo('bde@cesi.fr')
             ->setBody($panierString);
 
         $mailer->send($message);
+
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("DELETE FROM produit_utilisateur WHERE utilisateur_id = :user");
+        $statement->bindValue('user', $userId);
+        $statement->execute();
 
         $session->set('panier', []);
 

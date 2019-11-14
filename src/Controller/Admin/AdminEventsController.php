@@ -3,14 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Evenement;
-use App\Entity\EvenementFiltre;
 use App\Form\EvenementType;
+use App\Entity\EvenementFiltre;
+use App\Entity\EvenementSearch;
 use App\Form\EvenementFiltreType;
+use App\Form\EvenementSearchType;
 use App\Repository\EvenementRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminEventsController extends AbstractController {
@@ -22,9 +25,12 @@ class AdminEventsController extends AbstractController {
 
     public function index(PaginatorInterface $paginator, Request $request): Response 
     {        
+        $recherche = new EvenementSearch();
         $search = new EvenementFiltre();
-        $form = $this->createForm(EvenementFiltreType::class, $search);
-        $form->handleRequest($request);
+        $formFiltre = $this->createForm(EvenementFiltreType::class, $search);
+        $formFiltre->handleRequest($request);
+        $formRecherche = $this->createForm(EvenementSearchType::class, $recherche);
+        $formRecherche->handleRequest($request);
 
         $allEvents = $paginator->paginate(
             $this->repository->findAllBySearch($search),
@@ -34,7 +40,8 @@ class AdminEventsController extends AbstractController {
 
         return $this->render('adminPages/evenements.html.twig', [
             'allEvents' => $allEvents,
-            'form' => $form->createView()
+            'formFiltre' => $formFiltre->createView(),
+            'formRecherche' => $formRecherche->createView()
         ]);
     }
 
@@ -80,4 +87,20 @@ class AdminEventsController extends AbstractController {
         return $this->redirectToRoute('adminEventsHome');
     }
 
+    public function search($search): JsonResponse
+    {
+        $evenements = $this->repository->findBySearch($search);
+
+        $jsonProducts = null;
+        foreach ($evenements as $key => $evenement)
+        {
+        $jsonProducts[$key]['Id'] = $evenements[$key]->getId();
+        $jsonProducts[$key]['nom'] = $evenements[$key]->getNom();
+        $jsonProducts[$key]['prix'] = $evenements[$key]->getPrix();
+        $jsonProducts[$key]['type'] = $evenements[$key]->getStatut();
+        $jsonProducts[$key]['date_evenement'] = $evenements[$key]->getDate();
+        $jsonProducts[$key]['date_creation'] = $evenements[$key]->getDateCreation();
+        }
+        return $this->json($jsonProducts, 200, ['Content-Type' => 'application/json']);
+    }
 }

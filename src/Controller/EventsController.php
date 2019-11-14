@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Form\ImageType;
 use App\Entity\Evenement;
 use App\Entity\Commentaire;
-use App\Entity\EvenementFiltre;
 use App\Form\CommentaireType;
-use App\Form\ImageType;
+use App\Entity\EvenementFiltre;
 use App\Form\EvenementFiltreType;
 use App\Repository\EvenementRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +48,15 @@ class EventsController extends AbstractController {
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
 
+        $user = $this->getUser();
+        $userEmail = $user->getUsername();
+        $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+
+        $api = HttpClient::create();
+        $response = $api->request('GET', $req);
+        $rep = $response->toArray();
+        $userId = $rep[0]["id"];
+
         // if($commentaireForm->isSubmitted() && $commentaireForm->isValid()){
         //     $commentaire->setEvenement($evenement);
         //     $manager->persist($commentaire);
@@ -59,6 +69,13 @@ class EventsController extends AbstractController {
             $image->setEvenement($evenement);
             $manager->persist($image);
             $manager->flush();
+
+            $em = $this->getDoctrine()->getManager();
+            $connection = $em->getConnection();
+            $statement = $connection->prepare("UPDATE image SET utilisateur_id = :user WHERE filename = :fichier");
+            $statement->bindValue('user', $userId);
+            $statement->bindValue('fichier', $image->getFilename());
+            $statement->execute();
 
             return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
         }
@@ -111,9 +128,8 @@ class EventsController extends AbstractController {
     public function register(Evenement $evenement, ObjectManager $manager): Response
     {
         $user = $this->getUser();
-        $userId = $user->getId();
 
-        $evenement->addParticipants($user);
+        $evenement->addParticipant($user);
         $manager->persist($evenement);
         $manager->flush();
 
