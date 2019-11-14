@@ -41,13 +41,13 @@ evenementsDownloadCSVId:
   path : /evenements/{id}/DownloadCSV
   controller : App\Controller\EventsController::downloadCSV
 
-#evenementsDownloadPDF:
- # path: /evenements/{id}/dl-pdf
- # controller: App\Controller\EventsController::downloadPDF
+evenementsDownloadPDF:
+ path: /evenements/{id}/dl-pdf
+ controller: App\Controller\EventsController::downloadPDF
 
-#evenementsDownloadCSV:
- # path: /evenements/{id}-dl-csv
- # controller: App\Controller\EventsController::downloadCSV
+evenementsDownloadCSV:
+ path: /evenements/{id}-dl-csv
+ controller: App\Controller\EventsController::downloadCSV
 
 #chemin relatif à la législation
 
