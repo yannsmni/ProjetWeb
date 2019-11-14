@@ -9,22 +9,33 @@
 <a href="{{ path('adminEventsAdd')}}" class="btn btn-success">Ajouter un événenement</a>
 
 <div class="container mt-4">
-        {{ form_start(form) }}
+    <div class="search_type my-4" style="margin-bottom: 32px">
+        <h5>Personnaliser la recherche</h5>
+        {{ form_start(formRecherche) }}
+        <div class="search_bar">
+            {{ form_rest(formRecherche) }}
+        </div>
+        {{ form_end(formRecherche) }}
+    </div>
+</div>
+
+<div class="container mt-4">
+        {{ form_start(formFiltre) }}
         <div class="form-row">
             <div class="col">
-                {{ form_row(form.prixMin) }}
+                {{ form_row(formFiltre.prixMin) }}
             </div>
             <div class="col">
-                {{ form_row(form.prixMax) }}
+                {{ form_row(formFiltre.prixMax) }}
             </div>
             <div class="col">
-                {{ form_row(form.statut) }}
+                {{ form_row(formFiltre.statut) }}
             </div>
             <div class="col">
                 <button class="btn btn-primary">Filtrer</button>
             </div>
         </div>
-        {{ form_end(form) }}
+        {{ form_end(formFiltre) }}
 </div>
                      
 <div class="container-fluid mt-4">
@@ -41,9 +52,10 @@
                 <th>Administration</th>
             </tr>
         </thead>
-                
+        
+        <tbody class="tbody_evenements">
         {% for evenement in allEvents %}
-            <tr>
+            <tr class="admin_event">
                 <td class="font-weight-bold">{{ evenement.nom }}</td>
                 <td>
                     {% if evenement.prix == 0 %}
@@ -63,6 +75,7 @@
                 </td>
             </tr>
         {% endfor %}
+        </tbody>
     </table>
 </div>
 
@@ -70,4 +83,8 @@
     {{ knp_pagination_render(allEvents) }}
 </div>
     
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/js/ajaxEvents.js"></script>
 {% endblock %}
