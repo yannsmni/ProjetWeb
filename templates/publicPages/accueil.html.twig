@@ -4,6 +4,10 @@
 
 {% block body %}
 
+    {% if cookie == false %}
+        <div data-toggle="modal" data-target="#exampleModal"></div>
+    {% endif %}
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4 font-weight-bold">BDE CESI Strasbourg</h1>
