@@ -20,7 +20,7 @@
         <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
         <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
         <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>
-        <p><span class="font-weight-bold">Nombre de participants :</span> {{ nombreParticipants[evenement.id - 1]['COUNT(participant)'] }}</p>
+        <p><span class="font-weight-bold">Nombre de participants :</span> {{ nombreParticipants[0]['COUNT(participant)'] }}</p>
     </div>
         <hr class="my-4">
         <div>
@@ -45,7 +45,7 @@
         </div>
     <hr class="my-4">
     <div>
-        <h1>Participants ({{ nombreParticipants[evenement.id - 1]['COUNT(participant)'] }})</h1>
+        <h1>Participants ({{ nombreParticipants[0]['COUNT(participant)'] }})</h1>
         <div class="col">
             {% for participant in participants %}
                 <div class="card">
