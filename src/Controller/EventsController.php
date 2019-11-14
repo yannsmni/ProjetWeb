@@ -243,12 +243,23 @@ class EventsController extends AbstractController {
         return $this->redirectToRoute('evenementsAll');
     }
 
-    /*public function downloadCSV() {
+    public function downloadCSV(Evenement $evenement, ObjectManager $manager): Response {
+        $connection = $manager->getConnection();
+        $statement = $connection->prepare("SELECT participant FROM evenement_utilisateur WHERE evenement_id = :evenement");
+        $statement->bindValue('evenement', $evenement->getId());
+        $statement->execute();
+        $participants = $statement->fetchAll();
 
-        return $this->render('publicPages/evenements/evenements_dl.html.twig');
+        $fp = fopen("listeInscrits".$evenement->getId().".csv", 'w');
+        foreach ($participants as $participants) {
+            fputcsv($fp, $participants, ';');
+        }
+        fclose($fp);
+        
+        return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
     }
 
-    public function downloadPDF() {
+    /*public function downloadPDF() {
 
 
         return $this->render('publicPages/evenements/evenements_dl.html.twig');
