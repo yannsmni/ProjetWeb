@@ -17,7 +17,7 @@ class Commentaire
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="commentaire")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Image;
@@ -33,10 +33,9 @@ class Commentaire
     private $Visible;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $Auteur;
+    private $auteur;
 
     /**
      * @ORM\Column(type="datetime")
@@ -56,7 +55,7 @@ class Commentaire
 
     public function getImage(): ?Image
     {
-        return $this->Evenement;
+        return $this->Image;
     }
 
     public function setImage(?Image $Image): self
@@ -90,14 +89,14 @@ class Commentaire
         return $this;
     }
 
-    public function getAuteur(): ?Utilisateur
+    public function getAuteur(): ?string
     {
-        return $this->Auteur;
+        return $this->auteur;
     }
 
-    public function setAuteur(Utilisateur $Auteur): self
+    public function setAuteur(string $auteur): self
     {
-        $this->Auteur = $Auteur;
+        $this->auteur = $auteur;
 
         return $this;
     }

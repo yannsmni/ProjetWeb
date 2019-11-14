@@ -19,7 +19,7 @@ class ProduitFiltre {
     private $minPrice;
 
     /**
-     * @var string|null
+     * @var Categorie|null
      */
     private $category;
 
@@ -62,17 +62,17 @@ class ProduitFiltre {
     }
 
     /**
-     * @return string|null
+     * @return Categorie|null
      */
-    public function getCategory(): ?string
+    public function getCategory(): ?Categorie
     {
         return $this->category;
     }
 
     /**
-     * @param string|null $category
+     * @param Categorie|null $category
      */
-    public function setCategory(?string $category): void
+    public function setCategory(?Categorie $category): void
     {
         $this->category = $category;
     }

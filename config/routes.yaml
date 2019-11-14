@@ -148,6 +148,14 @@ photos:
   path: /photos
   controller: App\Controller\PhotosController::index
 
+photosId:
+  path: /photos/{id}/description
+  controller: App\Controller\PhotosController::show
+
+photosReportId:
+  path: /photos/{id}/report
+  controller: App\Controller\PhotosController::report
+
 security_connexion:
   path: /connexion
   controller: App\Controller\SecurityController::login
