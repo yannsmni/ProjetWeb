@@ -23,6 +23,9 @@
                     <div class="mb-4">
                         {% if app.user %}
                             <a href="{{ path('image_like', {id: image.id}) }}" class="btn btn-dark mr-2">Likes : {{ image.vote | length }}</a>
+                        {% else %}
+                            <p class="card-text"><span class="font-weight-bold">Nombre de likes : </span>{{ image.vote | length }}
+                        {% endif %}
                             <a href="{{ path('photosId', {id: image.id}) }}" class="btn btn-dark mr-2">Informations</a>
                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{image.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
                             <a class="btn btn-primary" data-toggle="collapse" target="_blank" rel="noopener noreferrer"  {#href="http://127.0.0.1:8000/assets/image/photos/{{ image.filename }}"#}href="{{ path('download_images', {id: image.id}) }}" download="{{ image.filename }}"{#href="{{ path('download_images', {id: image.id}) }}"#}>Télécharger la photo</a>
@@ -35,9 +38,16 @@
                 <div class="collapse" id="collapseExample{{image.id}}">
                     <div class="container">
                         <div class="card card-body">
-                            <h5>{{ image.commentaire | length }} Commentaires</h5>
+                            {% set nombreCommentaires = 0 %}
+                            {% for commentaire in image.commentaire %}
+                                {% if commentaire.visible == 1 %}
+                                    {% set nombreCommentaires = nombreCommentaires + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            <h5>{{ nombreCommentaires }} Commentaires</h5>
                             <div class ="comment">
                                 {% for commentaire in image.commentaire %}
+                                {% if commentaire.visible == 1 %}
                                 <div class="row my-2">
                                     <div class="col-3">
                                     <span class="font-weight-bold">{{ commentaire.auteur }}</span> (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
@@ -46,6 +56,7 @@
                                     {{commentaire.contenu | raw}}
                                     </div>
                                 </div>
+                                {% endif %}
                                 {% endfor %}
                             </div>
                         </div>

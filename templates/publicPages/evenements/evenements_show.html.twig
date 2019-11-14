@@ -61,24 +61,54 @@
         <h1>Photos de l'événement ({{ evenement.images | length }})</h1>
         {% for images in evenement.images %}
         <div class="card" style="width: 18rem;">
-            <img src="/assets/image/photos/{{ images.filename }}" class="card-img mt-2" alt="{{ images.description }}">
+            <img src="/assets/image/photos/{{ images.filename }}" class="card-img-top" alt="{{ images.description }}">
             <div class="card-body">
                 <p class="card-text">Le {{ images.getDateEdit()|date("d M Y")}} à {{ images.getDateEdit()|date("G")}}h{{ images.getDateEdit()|date("i")}}</p>
             </div>
             <div class="mb-4">
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{images.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
-                <a href="{{ path('evenementsReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                    <a class="btn btn-primary ml-4" data-toggle="collapse" href="#collapseExample{{images.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
+                {% if is_granted('ROLE_CESI') %}
+                    <a href="{{ path('evenementsReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                {% endif %}
             </div>
-            <div>
-                Nombre de likes : {{ images.vote | length }}
-            </div>
+            <div class="collapse" id="collapseExample{{images.id}}">
+                    <div class="container">
+                        <div class="card card-body">
+                            {% set nombreCommentaires = 0 %}
+                            {% for commentaire in images.commentaire %}
+                                {% if commentaire.visible == 1 %}
+                                    {% set nombreCommentaires = nombreCommentaires + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            <h5>{{ nombreCommentaires }} Commentaires</h5>
+                            <div class ="comment">
+                                {% for commentaire in images.commentaire %}
+                                {% if commentaire.visible == 1 %}
+                                <div class="row my-2">
+                                    <div class="col-3">
+                                    <span class="font-weight-bold">{{ commentaire.auteur }}</span> (<small>{{commentaire.date | date('d/m/Y à H:i')}}</small>)
+                                    </div>
+                                    <div class="col">
+                                    {{commentaire.contenu | raw}}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% if app.user %}
+                            <a href="{{ path('photosId', {id: images.id}) }}" class="btn btn-success m-2">Ajouter un commentaire</a>
+                        {% endif %}
+                    </div>
+                </div>
                 {% if app.user %}
-                    <a href="{{ path('image_like', {id: images.id}) }}" class="btn btn-info">Like</a>
+                    <a href="{{ path('image_like', {id: images.id}) }}" class="btn btn-info">Likes : {{ images.vote | length }}</a>
                 {% endif %}
         </div>
         {% endfor %}
         <div class="my-4">
             {% if app.user %}
+            <h5>Ajouter une image</h5>
             {{ form_start(imageForm) }}
             <div class="row">
                 <div class="col-4">

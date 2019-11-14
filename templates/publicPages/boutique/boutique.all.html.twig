@@ -54,11 +54,9 @@
                 </div>
                 </br>
                 {% if app.user %}
-                <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">Ajouter au panier</a>
+                    <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">Ajouter au panier</a>
                 {% else %}
-                <a href="security_connexion" class="btn btn-success">
-                    Se connecter
-                </a>
+                    <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir acheter cet article</p>
                 {% endif %}
             </div>
         </div>

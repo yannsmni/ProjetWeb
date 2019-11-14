@@ -153,12 +153,50 @@ class EventsController extends AbstractController {
         ]);
     }
 
-    public function my(): Response 
+    public function my(ObjectManager $manager): Response 
     {        
-        //$myEvents = $this->repository->findMyEvents();
+        if (!empty($this->getUser())) {
+            $user = $this->getUser();
+            $userEmail = $user->getUsername();
+            $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+
+            $api = HttpClient::create();
+            $response = $api->request('GET', $req);
+            $rep = $response->toArray();
+            $userNom = $rep[0]["nom"];
+            $userPrenom = $rep[0]["prenom"];
+            $username = $userPrenom . " " . $userNom;
+
+            $allEvents = $this->repository->findAll();
+            $date = new \DateTime();
+            $date = $date->format('Y-m-d H:i:s');
+            $index = 0;
+
+            foreach ($allEvents as $evenement) {
+                $connection = $manager->getConnection();
+                $statement = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
+                $statement2 = $connection->prepare("SELECT * FROM evenement, evenement_utilisateur WHERE evenement_utilisateur.participant = :user AND evenement.date >= :dateNow AND evenement.id = evenement_utilisateur.evenement_id ORDER BY evenement.date DESC");
+                $statement3 = $connection->prepare("SELECT * FROM evenement, evenement_utilisateur WHERE evenement_utilisateur.participant = :user AND evenement.date <= :dateNow AND evenement.id = evenement_utilisateur.evenement_id ORDER BY evenement.date DESC");
+                $statement->bindValue('evenement', $evenement->getId());
+                $statement2->bindValue('user', $username);
+                $statement2->bindValue('dateNow', $date);
+                $statement3->bindValue('user', $username);
+                $statement3->bindValue('dateNow', $date);
+                $statement->execute();  
+                $statement2->execute();    
+                $statement3->execute();      
+                $nombreParticipants[$index] = $statement->fetchAll();
+                $myNextEvents = $statement2->fetchAll();
+                $myPreviousEvents = $statement3->fetchAll();
+                $index += 1;
+            }
+        }
 
         return $this->render('publicPages/evenements/evenements_perso.html.twig', [
-            //'myEvents' => $myEvents
+            'myNextEvents' => $myNextEvents,
+            'myPreviousEvents' => $myPreviousEvents,
+            'nombreParticipants' => $nombreParticipants,
+            'allEvents' => $allEvents
         ]);
     }
 
@@ -177,10 +215,19 @@ class EventsController extends AbstractController {
             $username = $userPrenom . " " . $userNom;
 
             $connection = $manager->getConnection();
-            $statement = $connection->prepare("INSERT INTO evenement_utilisateur (evenement_id, participant) VALUES (:evenement, :user)");
-            $statement->bindValue('evenement', $evenement->getId());
-            $statement->bindValue('user', $username);
-            $statement->execute();
+            
+            try{
+                $statement = $connection->prepare("INSERT INTO evenement_utilisateur (evenement_id, participant) VALUES (:evenement, :user)");
+                $statement->bindValue('evenement', $evenement->getId());
+                $statement->bindValue('user', $username);
+                $statement->execute();
+
+            } catch (\Exception $e){
+                $statementMinus = $connection->prepare("DELETE FROM evenement_utilisateur WHERE evenement_id = :evenement AND participant = :user");
+                $statementMinus->bindValue('evenement', $evenement->getId());
+                $statementMinus->bindValue('user', $username);
+                $statementMinus->execute();
+            };
 
             return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
         }
