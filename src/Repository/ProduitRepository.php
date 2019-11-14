@@ -146,7 +146,7 @@ class ProduitRepository extends ServiceEntityRepository
     public function findBySearch($recherche) {
         return $this->createQueryBuilder('a')
             ->andWhere('a.nom LIKE :val')
-            ->setParameter('val', $recherche)
+            ->setParameter('val', $recherche.'%')
             ->getQuery()
             ->getResult();
     }

@@ -17,7 +17,7 @@ class Commentaire
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="commentaire")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Image;
@@ -56,7 +56,7 @@ class Commentaire
 
     public function getImage(): ?Image
     {
-        return $this->Evenement;
+        return $this->Image;
     }
 
     public function setImage(?Image $Image): self

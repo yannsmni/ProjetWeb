@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Image;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
@@ -47,14 +48,14 @@ class Utilisateur
     }
 
     /**
-     * @return Collection|Evenement[]
+     * @return Collection|Image[]
      */
     public function getVote(): Collection
     {
         return $this->Vote;
     }
 
-    public function addVote(Evenement $vote): self
+    public function addVote(Image $vote): self
     {
         if (!$this->Vote->contains($vote)) {
             $this->Vote[] = $vote;
@@ -63,7 +64,7 @@ class Utilisateur
         return $this;
     }
 
-    public function removeVote(Evenement $vote): self
+    public function removeVote(Image $vote): self
     {
         if ($this->Vote->contains($vote)) {
             $this->Vote->removeElement($vote);

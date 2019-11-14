@@ -40,12 +40,14 @@ searchBar.addEventListener('keyup', function ()
             td3.innerText = data[j].prix;
             td3.classList.add('font-weight-bold');
             td4.innerText = data[j].quantite_vendu;
-            link1.setAttribute('href', '/administration/produits/edit/'+data[j].id)
+            link1.setAttribute('href', '/administration/produits/edit/'+data[j].Id)
             link1.innerText = "Modifier";
-            link1.classList.add('btn btn-primary');
-            link2.setAttribute('href', '/administration/produits/delete/'+data[j].id)
+            link1.classList.add('btn');
+            link1.classList.add('btn-primary');
+            link2.setAttribute('href', '/administration/produits/delete/'+data[j].Id)
             link2.innerText = "Supprimer";
-            link2.classList.add('btn btn-danger');
+            link2.classList.add('btn');
+            link2.classList.add('btn-danger');
 
             tr.appendChild(td1);
             tr.appendChild(td2);
