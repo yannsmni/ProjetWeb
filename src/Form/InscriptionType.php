@@ -3,8 +3,12 @@
 namespace App\Form;
 
 use App\Entity\UserSecurity;
+use Webmozart\Assert\Assert;
+use App\Security\User\WebserviceUser;
+use App\Controller\SecurityController;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -18,34 +22,20 @@ class InscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prenom', TextType::class, [
-                'constraints' => new NotBlank(),
-            ])
-            ->add('nom', TextType::class, [
-                'constraints' => new NotBlank(),
-            ])
-            ->add('email', EmailType::class, [
-                'constraints' => new NotBlank(),
-            ])
-            ->add('password', PasswordType::class, [
-                'constraints' => [new NotBlank(), new Length([
-                    'min' => 8,
-                    'minMessage' => "Veuillez saisir un mot de passe supèrieur à 8 caractères"])
-            ]])
-            ->add('confirm_password', PasswordType::class, [
-                'constraints' => [new NotBlank()
-            ]])
-            ->add('localisation', TextType::class, [
-                'constraints' => new NotBlank(),
-            ])    
+            ->add('prenom', TextType::class)
+            ->add('nom', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('password', PasswordType::class)
+            ->add('confirm_password', PasswordType::class)
+            ->add('localisation', TextType::class)    
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        // $resolver->setDefaults([
-        //     'data_class' => UserSecurity::class,
-        // ]);
+        $resolver->setDefaults([
+            'data_class' => WebserviceUser::class,
+        ]);
     }
 
     public function getBlockPrefix() {
