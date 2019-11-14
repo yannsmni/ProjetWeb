@@ -16,8 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PhotosController extends AbstractController {
 
-    public function __construct(ImageRepository $repository) {
+    public function __construct(ImageRepository $repository, ObjectManager $manager) {
         $this->repository = $repository;
+        $this->manager = $manager;
     }
 
     public function index(): Response 
