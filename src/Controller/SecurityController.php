@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
 
-    public function login(Request $request){
+    public function login(){
 
         return $this->render('security/connexion.html.twig');
     }
@@ -61,6 +61,10 @@ class SecurityController extends AbstractController
                     ]]);
 
             } else {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'L\'adresse email que vous avez saisi est déjà existante' 
+                );
                 return $this->redirectToRoute('security_inscription');
             }
 

@@ -22,6 +22,7 @@
     <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
     Vous pouvez également poster vos idées, n'hésitez pas !</p>
     <div class="row">
+        {% set id = 0 %}
         {% for evenement in upcommingEvents %}
         <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
             <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="...">
@@ -31,12 +32,13 @@
             <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
             <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
             <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p>  
-            <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participants | length }}</p>              
+            <p><span class="font-weight-bold">Nombre de participants :</span> {{ nombreParticipants[id][0]['COUNT(participant)'] }}</p>              
                 <div>
                     <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
                 </div>
             </div>
         </div>
+        {% set id = id + 1 %}
         {% endfor %}
     </div>
     <hr class="my-4">
@@ -51,6 +53,7 @@
     <p class="lead">Notre BDE organise de nombreux événements, chaque élève peut s'y inscrire, réagir et poster des photos. <br/> 
     Vous pouvez également poster vos idées, n'hésitez pas !</p>
     <div class="row">
+        {% set id = 0 %}
         {% for evenement in latestEvents %}
         <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 m-4">
             <img src="/assets/image/evenements/{{ evenement.filename }}" class="card-img-top" alt="...">
@@ -60,12 +63,13 @@
             <p><span class="font-weight-bold">Prix de l'événement :</span> {{ evenement.prix }} €</p>
             <p><span class="font-weight-bold">Date de l'événement :</span> Le {{ evenement.date|date("d M Y")}} à {{ evenement.date|date("G")}}h{{ evenement.date|date("i")}}</p>
             <p><span class="font-weight-bold">Type d'événement :</span> {{ evenement.statut }}</p> 
-            <p><span class="font-weight-bold">Nombre de participants :</span> {{ evenement.participants | length }}</p>               
+            <p><span class="font-weight-bold">Nombre de participants :</span> {{ nombreParticipants[id][0]['COUNT(participant)'] }}</p>               
                 <div>
                     <a class="btn btn-primary" href="{{ path('evenementId', {id: evenement.id}) }}">Informations</a>
                 </div>
             </div>
         </div>
+        {% set id = id + 1 %}
         {% endfor %}
     </div>
     <hr class="my-4">

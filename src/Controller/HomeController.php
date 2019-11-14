@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Cookie;
-use App\Entity\Evenement;
 use App\Entity\Produit;
-use App\Repository\EvenementRepository;
+use App\Entity\Evenement;
 use App\Repository\ProduitRepository;
+use App\Repository\EvenementRepository;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,25 +36,33 @@ class HomeController extends AbstractController {
             'first_visit' => $first_visit
         ]);
 
+        if(!empty($this->getUser())){
+            $user = $this->getUser();
+            $userEmail = $user->getUsername();
+            $req = 'http://127.0.0.1:9000/users/' . $userEmail;
+            $api = HttpClient::create();
+            $response = $api->request('GET', $req);
+            $rep = $response->toArray();
+            $userName = $rep[0]["nom"];
+            $userEmail = $rep[0]["email"];
+            $userRole = $rep[0]["role"];
 
-            $cookieNom = Cookie::create('name', 'test_nom', time() + 365*24*3600);
-            $cookieEmail = Cookie::create('e-mail', 'test_email', time() + 365*24*3600);
-            $cookieRole = Cookie::create('role', 'test_role', time() + 365*24*3600);
+            $cookieNom = Cookie::create('name', $userName, time() + 365*24*3600);
+            $cookieEmail = Cookie::create('e-mail', $userEmail, time() + 365*24*3600);
+            $cookieRole = Cookie::create('role', $userRole, time() + 365*24*3600);   
 
-        $responseNom->headers->setCookie($cookieNom);
-        $responseEmail->headers->setCookie($cookieEmail);
-        $responseRole->headers->setCookie($cookieRole);
+            $responseNom->headers->setCookie($cookieNom);
+            $responseEmail->headers->setCookie($cookieEmail);
+            $responseRole->headers->setCookie($cookieRole);
 
-        $responseNom->send();
-        $responseEmail->send();
-        $responseRole->send();
-
+            $responseNom->send();
+            $responseEmail->send();
+            $responseRole->send();
+        }
+        
         return $this->render('publicPages/accueil.html.twig', [
             'upcommingEvents' => $upcommingEvents,
-            'bestProducts' => $bestProducts,
-            'cookieNom' => $cookieNom,
-            'cookieEmail' => $cookieEmail,
-            'cookieRole' => $cookieRole
+            'bestProducts' => $bestProducts
         ]);
     }
 

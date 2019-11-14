@@ -16,8 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PhotosController extends AbstractController {
 
-    public function __construct(ImageRepository $repository) {
+    public function __construct(ImageRepository $repository, ObjectManager $manager) {
         $this->repository = $repository;
+        $this->manager = $manager;
     }
 
     public function index(): Response 
@@ -55,8 +56,7 @@ class PhotosController extends AbstractController {
             $manager->persist($commentaire);
             $manager->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $connection = $em->getConnection();
+            $connection = $manager->getConnection();
             $statement = $connection->prepare("UPDATE commentaire SET auteur = :user WHERE contenu = :contenu");
             $statement->bindValue('user', $username);
             $statement->bindValue('contenu', $commentaire->getContenu());
@@ -84,7 +84,7 @@ class PhotosController extends AbstractController {
     /**
      * @Route("/images/{id}/like", name="image_like")
      */
-    public function like(Request $request, Image $image){
+    public function like(Request $request, Image $image, ObjectManager $manager){
         $user = $this->getUser();
         $userEmail = $user->getUsername();
         $req = 'http://127.0.0.1:9000/users/' . $userEmail;
@@ -95,8 +95,7 @@ class PhotosController extends AbstractController {
         $rep = $response->toArray();
         $userId = $rep[0]["id"];
 
-        $em = $this->getDoctrine()->getManager();
-        $connection = $em->getConnection();
+        $connection = $manager->getConnection();
 
         try{
             $query = $connection->prepare("INSERT INTO image_utilisateur (utilisateur_id, image_id) VALUES (:userId, :imageId)");
@@ -104,7 +103,10 @@ class PhotosController extends AbstractController {
             $query->bindValue('imageId', $imageId);
             $query->execute();
         } catch (\Exception $e){
-            echo "Vous ne pouvez pas liker plusieurs fois la même photo";
+            $queryMinus = $connection->prepare("DELETE FROM image_utilisateur WHERE utilisateur_id = :userId AND image_id = :imageId");
+            $queryMinus->bindValue('userId', $userId);
+            $queryMinus->bindValue('imageId', $imageId);
+            $queryMinus->execute();
         };
         
 

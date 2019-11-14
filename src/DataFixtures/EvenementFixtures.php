@@ -7,7 +7,6 @@ use App\Entity\Evenement;
 use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Zend\Code\Scanner\Util;
 
 class EvenementFixtures extends Fixture
 {
@@ -42,11 +41,6 @@ class EvenementFixtures extends Fixture
                 
                 for($k=1; $k<2; $k++){
                     $commentaire = new Commentaire();
-    
-                    $now=new \DateTime();
-                    $interval = $now->diff($evenement->getDate());
-                    $days = $interval->days;
-                    $minimum = '-' . $days . 'days';
     
                     $commentaire->setContenu($faker->realText($maxNbChars = 254))
                                 ->setAuteur($faker->name);

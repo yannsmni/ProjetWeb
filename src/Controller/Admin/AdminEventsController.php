@@ -23,7 +23,7 @@ class AdminEventsController extends AbstractController {
         $this->em = $em;
     }
 
-    public function index(PaginatorInterface $paginator, Request $request): Response 
+    public function index(PaginatorInterface $paginator, Request $request, ObjectManager $em): Response 
     {        
         $recherche = new EvenementSearch();
         $search = new EvenementFiltre();
@@ -38,9 +38,21 @@ class AdminEventsController extends AbstractController {
             10
         );
 
+        $index = 0;
+
+        foreach ($allEvents as $evenement) {
+            $connection = $em->getConnection();
+            $statement = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
+            $statement->bindValue('evenement', $evenement->getId());
+            $statement->execute();            
+            $nombreParticipants[$index] = $statement->fetchAll();
+            $index += 1;
+        }
+
         return $this->render('adminPages/evenements.html.twig', [
             'allEvents' => $allEvents,
             'formFiltre' => $formFiltre->createView(),
+            'nombreParticipants' => $nombreParticipants,
             'formRecherche' => $formRecherche->createView()
         ]);
     }

@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <section>
+      <column>
+
+        <text font-size="20px" text-align="center">Commande provenant de : {{ user }}</mj-text>
+
+        </br>
+
+        <text font-size="20px">
+            {% for produit in panier %}
+                <text font-size="13px" text-align="center">{{ produit.produit }} : </mj-text>
+                <text font-size="13px" text-align="center">{{ produit.quantite }}</mj-text>
+                </br>
+            {% endfor %}
+        </text>
+
+      </column>
+    </section>
+  </body>
+</html>

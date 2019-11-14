@@ -4,22 +4,22 @@
 
 {% block body %}
 
-<h1 class="mt-4">Gestion des événements</h1>
+<div class="jumbotron jumbotron-fluid" style="background-color: #67657f;">
+    <h1 class="text-white text-center font-weight-bold">Gestion des événements</h1>
 
-<a href="{{ path('adminEventsAdd')}}" class="btn btn-success">Ajouter un événenement</a>
-
-<div class="container mt-4">
-    <div class="search_type my-4">
-        <h5>Personnaliser la recherche</h5>
-        {{ form_start(formRecherche) }}
-        <div class="search_bar">
-            {{ form_rest(formRecherche) }}
+    <div class="container mt-4">
+        <a href="{{ path('adminEventsAdd')}}" class="btn btn-success">Ajouter un événenement</a>
+        <div class="search_type my-4">
+            <h5>Personnalisez votre recherche</h5>
+            {{ form_start(formRecherche) }}
+            <div class="search_bar">
+                {{ form_rest(formRecherche) }}
+            </div>
+            {{ form_end(formRecherche) }}
         </div>
-        {{ form_end(formRecherche) }}
     </div>
-</div>
 
-<div class="container mt-4 admin_event_optional">
+    <div class="container mt-4 admin_event_optional">
         {{ form_start(formFiltre) }}
         <div class="form-row">
             <div class="col">
@@ -36,6 +36,7 @@
             </div>
         </div>
         {{ form_end(formFiltre) }}
+    </div>
 </div>
                      
 <div class="container-fluid mt-4">
@@ -54,6 +55,7 @@
         </thead>
         
         <tbody class="tbody_evenements">
+        {% set id = 0 %}
         {% for evenement in allEvents %}
             <tr class="admin_event">
                 <td class="font-weight-bold">{{ evenement.nom }}</td>
@@ -65,7 +67,7 @@
                     {% endif %}
                 </td>
                 <td>{{ evenement.statut }}</td>
-                <td>{{ evenement.participants | length }}</td>
+                <td>{{ nombreParticipants[id][0]['COUNT(participant)'] }}</td>
                 <td>{{ evenement.images | length }}</td>
                 <td>{{ evenement.date|date("d M Y")}}</td>
                 <td>{{ evenement.getDateCreation()|date("d M Y")}}</td>
@@ -74,6 +76,7 @@
                     <a href="{{ path('adminEventsDelete', {id: evenement.id}) }}" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
+        {% set id = id + 1 %}
         {% endfor %}
         </tbody>
     </table>

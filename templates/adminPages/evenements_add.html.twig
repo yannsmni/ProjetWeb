@@ -4,8 +4,11 @@
 
 {% block body %}
 
-<h1 class="mt-4">Ajout d'un événement</h1>
-
-{{ include ('adminPages/_form.html.twig', {form: form, button: 'Ajouter'}) }}
+<div class="jumbotron jumbotron-fluid" style="background-color: #67657f;">
+    <h1 class="text-white text-center font-weight-bold">Ajout d'un événement</h1>
+</div>
+<div class="container-fluid">
+    {{ include ('adminPages/_form.html.twig', {form: form, button: 'Ajouter'}) }}
+</div>
     
 {% endblock %}

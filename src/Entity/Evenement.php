@@ -49,10 +49,10 @@ class Evenement
      */
     private $Date;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
-     */
-    private $participants;
+    // /**
+    //  * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", cascade={"persist"})
+    //  */
+    // private $participant;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="Evenement")
@@ -90,7 +90,6 @@ class Evenement
         $this->Date_edit = new \DateTime();
         $this->Visible = true;
         $this->images = new ArrayCollection();
-        $this->participants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,36 +133,17 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getParticipants(): Collection
-    {
-        return $this->participants;
-    }
+    // public function getParticipant(): ?string
+    // {
+    //     return $this->participant;
+    // }
 
-    public function addParticipant(Utilisateur $participant): self
-    {
-        if (!$this->participants->contains($participant)) {
-            $this->participants[] = $participant;
-            $participant->setEvenement($this);
-        }
+    // public function setParticipant(string $participant): self
+    // {
+    //     $this->participant = $participant;
 
-        return $this;
-    }
-
-    public function removeParticipant(Utilisateur $participant): self
-    {
-        if ($this->participants->contains($participant)) {
-            $this->participants->removeElement($participant);
-            // set the owning side to null (unless already changed)
-            if ($participant->getEvenement() === $this) {
-                $participant->setEvenement(null);
-            }
-        }
-
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection|Image[]

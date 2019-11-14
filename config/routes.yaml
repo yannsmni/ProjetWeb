@@ -37,6 +37,10 @@ evenementsReportId:
   path: /evenements/{id}/report
   controller: App\Controller\EventsController::report
 
+evenementsDownloadCSVId:
+  path : /evenements/{id}/DownloadCSV
+  controller : App\Controller\EventsController::downloadCSV
+
 #evenementsDownloadPDF:
  # path: /evenements/{id}/dl-pdf
  # controller: App\Controller\EventsController::downloadPDF
@@ -176,3 +180,8 @@ security_deconnexion:
   path: /deconnexion
   controller: App\Controller\SecurityController::deconnexion
 
+#chemin relatif aux commentaires
+
+commentsReportId:
+  path: /commentaire/{id}/report
+  controller: App\Controller\CommentController::report

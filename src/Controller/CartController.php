@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Twig\Environment;
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpClient\HttpClient;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -152,7 +153,7 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/commander", name="cart_command")
      */
-    public function email(\Swift_Mailer $mailer, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager)
+    public function email(\Swift_Mailer $mailer, SessionInterface $session, ProduitRepository $produitRepository, ObjectManager $manager, Environment $renderer)
     {
         $user = $this->getUser();
         $userEmail = $user->getUsername();
@@ -198,7 +199,10 @@ class CartController extends AbstractController
         $message = (new \Swift_Message('Commande de l\'utilisateur ' . $userEmail))
             ->setFrom('noreply@server.com')
             ->setTo('bde@cesi.fr')
-            ->setBody($panierString + "Vous pourrez récupérer votre colis en salle 125 dans 8 jours");
+            ->setBody($renderer->render('emails/commande.html.twig', [
+                'panier' => $produitNames,
+                'user' => $userEmail
+            ]), 'text/html');
 
         $mailer->send($message);
 
