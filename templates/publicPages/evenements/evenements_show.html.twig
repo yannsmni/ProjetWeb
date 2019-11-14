@@ -67,7 +67,9 @@
             </div>
             <div class="mb-4">
                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{images.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
-                <a href="{{ path('evenementsReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                {% if is_granted('ROLE_CESI') %}
+                    <a href="{{ path('evenementsReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                {% endif %}
             </div>
             <div>
                 Nombre de likes : {{ images.vote | length }}

@@ -14,7 +14,11 @@
             <br/><p>{{ produit.description }} <span class="badge badge-pill badge-secondary">En stock</span></p>
             <h3>Prix : {{ produit.prix }} €</h3><br/>
             <div>
-                <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">Ajouter au panier</a>
+                {% if app.user %}
+                    <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success">Ajouter au panier</a>
+                {% else %}
+                    <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir acheter cet article</p>
+                {% endif %}
             </div>
         </div>
     </div>

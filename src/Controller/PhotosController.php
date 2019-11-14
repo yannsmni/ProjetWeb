@@ -83,7 +83,7 @@ class PhotosController extends AbstractController {
     /**
      * @Route("/images/{id}/like", name="image_like")
      */
-    public function like(Request $request, Image $image){
+    public function like(Request $request, Image $image, ObjectManager $manager){
         $user = $this->getUser();
         $userEmail = $user->getUsername();
         $req = 'http://127.0.0.1:9000/users/' . $userEmail;

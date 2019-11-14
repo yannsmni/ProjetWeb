@@ -177,10 +177,19 @@ class EventsController extends AbstractController {
             $username = $userPrenom . " " . $userNom;
 
             $connection = $manager->getConnection();
-            $statement = $connection->prepare("INSERT INTO evenement_utilisateur (evenement_id, participant) VALUES (:evenement, :user)");
-            $statement->bindValue('evenement', $evenement->getId());
-            $statement->bindValue('user', $username);
-            $statement->execute();
+            
+            try{
+                $statement = $connection->prepare("INSERT INTO evenement_utilisateur (evenement_id, participant) VALUES (:evenement, :user)");
+                $statement->bindValue('evenement', $evenement->getId());
+                $statement->bindValue('user', $username);
+                $statement->execute();
+
+            } catch (\Exception $e){
+                $statementMinus = $connection->prepare("DELETE FROM evenement_utilisateur WHERE evenement_id = :evenement AND participant = :user");
+                $statementMinus->bindValue('evenement', $evenement->getId());
+                $statementMinus->bindValue('user', $username);
+                $statementMinus->execute();
+            };
 
             return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
         }
