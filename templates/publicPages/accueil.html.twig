@@ -4,10 +4,6 @@
 
 {% block body %}
 
-    {% if cookie == false %}
-        <div data-toggle="modal" data-target="#exampleModal"></div>
-    {% endif %}
-
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4 font-weight-bold">BDE CESI Strasbourg</h1>
@@ -19,7 +15,14 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4 font-weight-bold">Présentation</h1>
-          <p class="lead">Ouais ouais ouais</p>
+
+          <p class="lead">En naviguant sur ce site, vous acceptez la présence de cookies. <br/>
+              Pour en savoir plus sur vos droits et données personnelles, cliquez sur le bouton ci dessous. <br/>
+          </p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cookie">
+                En savoir plus
+            </button>
+
         </div>
     </div>
 </div>
