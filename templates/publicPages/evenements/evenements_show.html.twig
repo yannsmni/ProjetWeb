@@ -33,9 +33,11 @@
                         <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
                     {% endif %}
                     {% if is_granted('ROLE_CESI') %}
-                    <a href="{{ path('evenementsReportId', {id: evenement.id}) }}" class="btn btn-danger">Signaler</a>
-                    <a href="{{ path('evenementsDownloadPDF', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en PDF</a>
-                    <a href="{{ path('evenementsDownloadCSV', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en CSV</a>
+                        <a href="{{ path('evenementsReportId', {id: evenement.id}) }}" class="btn btn-danger">Signaler</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_BDE') %}
+                        <a href="{{ path('evenementsDownloadPDF', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en PDF</a>
+                        <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en CSV</a>
                     {% endif %}
                 </div>
                 <div class="col-3">
@@ -62,8 +64,6 @@
                     </div>
                 </div>
             {% endfor %}
-            <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-primary my-4">CSV</a>
-            <a href="{{ path('evenementsDownloadPDFId', {id: evenement.id}) }}" class="btn btn-primary my-4">PDF</a>
         </div>
     </div>
     <hr class="my-4">

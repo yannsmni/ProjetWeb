@@ -21,11 +21,16 @@
                 </div>
                 <div class="container">
                     <div class="mb-4">
-                        <p class="card-text"><span class="font-weight-bold">Nombre de likes : </span>{{ image.vote | length }}
+                        {% if app.user %}
+                            <a href="{{ path('image_like', {id: image.id}) }}" class="btn btn-dark mr-2">Likes : {{ image.vote | length }}</a>
+                        {% else %}
+                            <p class="card-text"><span class="font-weight-bold">Nombre de likes : </span>{{ image.vote | length }}
+                        {% endif %}
                         <a href="{{ path('photosId', {id: image.id}) }}" class="btn btn-dark mr-2">Informations</a>
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{image.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
-                        <a class="btn btn-primary" data-toggle="collapse" target="_blank" rel="noopener noreferrer"  {#href="http://127.0.0.1:8000/assets/image/photos/{{ image.filename }}"#}href="{{ path('download_images', {id: image.id}) }}" download="{{ image.filename }}"{#href="{{ path('download_images', {id: image.id}) }}"#}>Télécharger la photo</a>
-                        
+                        {% if is_granted('ROLE_CESI') %}
+                            <a class="btn btn-primary" data-toggle="collapse" target="_blank" rel="noopener noreferrer"  {#href="http://127.0.0.1:8000/assets/image/photos/{{ image.filename }}"#}href="{{ path('download_images', {id: image.id}) }}" download="{{ image.filename }}"{#href="{{ path('download_images', {id: image.id}) }}"#}>Télécharger la photo</a>
+                        {% endif %}
                         {% if is_granted('ROLE_CESI') %}
                             <a href="{{ path('photosReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>
                         {% endif %}
