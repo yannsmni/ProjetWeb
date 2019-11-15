@@ -23,7 +23,7 @@ class PhotosController extends AbstractController {
 
     public function index(): Response 
     {        
-        $allImages = $this->repository->findAll();
+        $allImages = $this->repository->findVisibleImages();
 
         return $this->render('publicPages/photos.html.twig', [
             'allImages' => $allImages
@@ -69,16 +69,6 @@ class PhotosController extends AbstractController {
             'image' => $image,
             'form' => $form->createView()
         ]);
-    }
-
-    public function report(Image $image, ObjectManager $manager): Response
-    {
-        $image->setVisible(false);
-
-        $manager->persist($image);
-        $manager->flush();
-
-        return $this->redirectToRoute('photos');
     }
 
     /**

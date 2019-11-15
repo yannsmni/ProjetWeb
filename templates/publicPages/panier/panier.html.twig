@@ -50,7 +50,9 @@
             <a class="btn btn-primary mb-4" href="{{ path('cart_command') }}">Commander</a>
         </div>
     {% else %}
-    <p>Surprise, c'est vide !</p>
+    <div class="container-fluid" style="background-color: #ad9a91;">
+        <h5 class="text-center font-weight-bold py-4">Votre panier est vide</h5>
+    </div>
     {% endif %}
 </div>
 

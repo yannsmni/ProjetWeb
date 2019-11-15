@@ -35,13 +35,15 @@ class ShopController extends AbstractController {
         $goodies = $this->repository->findGoodies($search);
         $clothes = $this->repository->findClothes($search);
         $reductions = $this->repository->findReductions($search);
+        $bestProducts = $this->repository->findBestProducts();
 
         return $this->render('publicPages/boutique/boutique.html.twig', [
             'allProducts' => $allProducts,
             'goodies' => $goodies,
             'clothes' => $clothes,
             'reductions' => $reductions,
-            'ITProducts' => $ITProducts
+            'ITProducts' => $ITProducts,
+            'bestProducts' => $bestProducts
         ]);
     }
 

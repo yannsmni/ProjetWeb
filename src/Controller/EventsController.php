@@ -60,6 +60,7 @@ class EventsController extends AbstractController {
         $image = new Image();
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
+        $username = "visiteur";
 
         if (!empty($this->getUser())) {
             $user = $this->getUser();
@@ -242,16 +243,6 @@ class EventsController extends AbstractController {
         }
     }
 
-    public function report(Evenement $evenement, ObjectManager $manager): Response
-    {
-        $evenement->setVisible(false);
-
-        $manager->persist($evenement);
-        $manager->flush();
-
-        return $this->redirectToRoute('evenementsAll');
-    }
-
     public function downloadCSV(Evenement $evenement, ObjectManager $manager): Response 
     {
         $connection = $manager->getConnection();
@@ -284,7 +275,7 @@ class EventsController extends AbstractController {
         foreach ($participants as $participants) {
             $html2pdf->writeHTML('<p>Nom du participant :</p>'.implode($participants));
         }
-        $html2pdf->output("listeInscrits".$evenement->getId().".pdf", 'D');
+        $html2pdf->output('Liste-Inscrits-Evenement-'.$evenement->getId().'.pdf', 'D');
 
         return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);    
     }
