@@ -4,6 +4,8 @@
 
 {% block body %}
 
+{% set participe = '' %}
+
 <div class="jumbotron">
     <h1 class="display-4">{{ evenement.nom }} - {{ evenement.id }}</h1>
     <hr class="my-4">
@@ -26,7 +28,8 @@
         <div>
             <div class="row">
                 <div class="col-9">
-                    {% if app.user %}
+                    {% if app.user and evenement.date > now %}
+                    {# {% if app.user %} #}
                         <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
                     {% endif %}
                     {% if is_granted('ROLE_CESI') %}
@@ -48,13 +51,19 @@
         <h1>Participants ({{ nombreParticipants[0]['COUNT(participant)'] }})</h1>
         <div class="col">
             {% for participant in participants %}
+                {% if participant.participant == utilisateurParticipant %}
+                    {% set participe = true %}
+                {% else %}
+                    {% set participe = false %}
+                {% endif %}
                 <div class="card">
                     <div class="card-body">
                         <p>{{ participant.participant }}</p>
                     </div>
                 </div>
             {% endfor %}
-            <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-success">CSV</a>
+            <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-primary my-4">CSV</a>
+            <a href="{{ path('evenementsDownloadPDFId', {id: evenement.id}) }}" class="btn btn-primary my-4">PDF</a>
         </div>
     </div>
     <hr class="my-4">
@@ -102,13 +111,16 @@
                         {% endif %}
                     </div>
                 </div>
+                <div>
+                    Likes : {{ images.vote | length }}
+                </div>
                 {% if app.user %}
-                    <a href="{{ path('image_like', {id: images.id}) }}" class="btn btn-info">Likes : {{ images.vote | length }}</a>
+                    <a href="{{ path('image_like', {id: images.id}) }}" class="btn btn-info">Like</a>
                 {% endif %}
         </div>
         {% endfor %}
         <div class="my-4">
-            {% if app.user %}
+            {% if app.user and participe == true and evenement.date < now  %}
             <h5>Ajouter une image</h5>
             {{ form_start(imageForm) }}
             <div class="row">
@@ -121,6 +133,8 @@
                 <button type="submit" class="btn btn-primary">Poster</button>
             </div>
             {{ form_end(imageForm) }}
+            {% elseif app.user and participe == false %}
+            <p class="mt-4 font-weight-bold">Vous n'avez pas participé à cet évènement</p>
             {% else %}
             <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster une photo</p>
             {% endif %}
