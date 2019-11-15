@@ -16,6 +16,29 @@
     </div>
 </div>
 
+<div class="modal" tabindex="-1" role="dialog" id="Cookie">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Informations sur les cookies</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>En naviguant sur ce site, vous acceptez la présence de cookies. <br/>
+                    Pour en savoir plus sur vos droits et données personnelles, vous pouvez consulter nos informations relatives aux cookies
+                    en cliquant sur le bouton "Plus d'informations" ci dessous. <br/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" href="{{ path('legislation') }}">Plus d'informations</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="myButton">Accepter et fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="jumbotron jumbotron-fluid" style="background-image: url(assets/image/cesi.jpeg);">
     <div class="container">
         <div class="jumbotron">
