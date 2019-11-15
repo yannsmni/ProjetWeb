@@ -32,7 +32,7 @@
                             <a class="btn btn-primary" data-toggle="collapse" target="_blank" rel="noopener noreferrer"  {#href="http://127.0.0.1:8000/assets/image/photos/{{ image.filename }}"#}href="{{ path('download_images', {id: image.id}) }}" download="{{ image.filename }}"{#href="{{ path('download_images', {id: image.id}) }}"#}>Télécharger la photo</a>
                         {% endif %}
                         {% if is_granted('ROLE_CESI') %}
-                            <a href="{{ path('photosReportId', {id: image.id}) }}" class="btn btn-danger my-4">Signaler</a>
+                            <a href="{{ path('imagesReportId', {id: image.id}) }}" class="btn btn-danger my-4">Signaler</a>
                         {% endif %}
                     </div>
                 </div>

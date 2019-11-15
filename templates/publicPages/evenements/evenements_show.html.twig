@@ -78,7 +78,7 @@
             <div class="mb-4">
                     <a class="btn btn-primary ml-4" data-toggle="collapse" href="#collapseExample{{images.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
                 {% if is_granted('ROLE_CESI') %}
-                    <a href="{{ path('evenementsReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                    <a href="{{ path('imagesReportId', {id: images.id}) }}" class="btn btn-danger ml-4">Signaler</a>
                 {% endif %}
             </div>
             <div class="collapse" id="collapseExample{{images.id}}">
