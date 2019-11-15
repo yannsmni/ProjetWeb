@@ -30,6 +30,7 @@
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{image.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Commentaires</a>
                         {% if is_granted('ROLE_CESI') %}
                             <a class="btn btn-primary" data-toggle="collapse" target="_blank" rel="noopener noreferrer"  {#href="http://127.0.0.1:8000/assets/image/photos/{{ image.filename }}"#}href="{{ path('download_images', {id: image.id}) }}" download="{{ image.filename }}"{#href="{{ path('download_images', {id: image.id}) }}"#}>Télécharger la photo</a>
+                            <a href="{{ path('zipdownload') }}" class="btn btn-danger ml-4">Télécharger toutes les photos</a>
                         {% endif %}
                         {% if is_granted('ROLE_CESI') %}
                             <a href="{{ path('photosReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>

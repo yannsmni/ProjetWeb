@@ -38,4 +38,5 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_BDE }
         - { path: ^/accueil, roles: ROLE_ELEVE }
+        - { path: ^/photos/zipdownload, role: ROLE_CESI }
 
