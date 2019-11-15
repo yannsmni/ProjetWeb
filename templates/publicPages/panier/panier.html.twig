@@ -4,13 +4,16 @@
 {% endblock %}
 
 {% block body %}
-    <div class="bg-light p-3">
-        <h1>Votre panier</h1>
-    </div>
+
+<div class="container-fluid" style="background-color: #7c685c;">
+    <h1 class="text-center font-weight-bold py-4">Mon panier</h1>
+</div>
+
+<div class="container-fluid">
 
     {% if items | length > 0 %}
-        <table class="table"> 
-            <thread>
+        <table class="table table-striped text-center">
+            <thead class="thead-dark">
                 <tr>
                     <th>Produit</th>
                     <th>Prix</th>
@@ -23,9 +26,9 @@
                 {% for item in items %}
                     <tr>
                         <td> {{ item.produit.nom }} </td>
-                        <td> {{ item.produit.prix }} </td>
+                        <td class="font-weight-bold"> {{ item.produit.prix }} €</td>
                         <td> {{ item.quantity }} </td>
-                        <td> {{ item.produit.prix * item.quantity }} </td>
+                        <td> {{ item.produit.prix * item.quantity }} €</td>
                         <td>
                             <a href="{{ path('cart_remove', {'id': item.produit.id}) }}" class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash"></i>
@@ -37,18 +40,18 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="text-right">Total :</td>
-                    <td>{{ total }}</td>
-                    <td></td>
+                    <td colspan="3" class="text-right font-weight-bold">Total :</td>
+                    <td class="font-weight-bold">{{ total }} €</td>
                 </tr>
             </tfoot>
         </table>
         </br>
         <div>
-            <a class="btn btn-primary" href="{{ path('cart_command') }}">Commander</a>
+            <a class="btn btn-primary mb-4" href="{{ path('cart_command') }}">Commander</a>
         </div>
     {% else %}
     <p>Surprise, c'est vide !</p>
     {% endif %}
+</div>
 
 {% endblock %}
