@@ -24,7 +24,7 @@
                                 <a href="{{ path('image_like', {id: image.id}) }}" class="btn btn-info mr-4">Likes : {{ image.vote | length }}</a>
                                 {% endif %}
                                 {% if is_granted('ROLE_CESI') %}
-                                    <a href="{{ path('photosReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                                    <a href="{{ path('imagesReportId', {id: image.id}) }}" class="btn btn-danger ml-4">Signaler</a>
                                 {% endif %}
                             </div>
                         </div>

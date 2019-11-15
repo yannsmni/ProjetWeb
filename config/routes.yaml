@@ -32,9 +32,9 @@ evenementsRegisterId:
   path: /evenements/{id}/register
   controller: App\Controller\EventsController::register
 
-evenementsReportId:
-  path: /evenements/{id}/report
-  controller: App\Controller\EventsController::report
+# evenementsReportId:
+#   path: /evenements/{id}/report
+#   controller: App\Controller\EventsController::report
 
 evenementsDownloadCSVId:
   path : /evenements/{id}/DownloadCSV
@@ -182,9 +182,9 @@ security_deconnexion:
 
 #chemin relatif aux commentaires
 
-commentsReportId:
-  path: /commentaire/{id}/report
-  controller: App\Controller\CommentController::report
+# commentsReportId:
+#   path: /commentaire/{id}/report
+#   controller: App\Controller\CommentController::report
 
 #chemin relatif au profil
 
@@ -194,14 +194,14 @@ profile:
 
 #chemin relatif aux signalements
 
-reportEvent:
-  path: /report/event
+evenementsReportId:
+  path: /evenements/{id}/report
   controller: App\Controller\ReportController::reportEvent
 
-reportImage:
-  path: /report/image
+imagesReportId:
+  path: /image/{id}/report
   controller: App\Controller\ReportController::reportImage
 
-reportComment:
-  path: /report/comment
+commentsReportId:
+  path: /commentaire/{id}/report
   controller: App\Controller\ReportController::reportComment
