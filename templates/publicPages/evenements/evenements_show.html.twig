@@ -54,7 +54,8 @@
                     </div>
                 </div>
             {% endfor %}
-            <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-success">CSV</a>
+            <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-primary my-4">CSV</a>
+            <a href="{{ path('evenementsDownloadPDFId', {id: evenement.id}) }}" class="btn btn-primary my-4">PDF</a>
         </div>
     </div>
     <hr class="my-4">
