@@ -20,7 +20,28 @@
 </div>
 
 <div class="container">
-    <h1 class="display-4">Nos habits</h1>
+      <h1 class="display-4">Nos meilleures ventes</h1>
+        <p class="lead">Découvrez ici nos trois produits les plus appréciés des élèves et professeurs ! <br/>
+            Tous sont disponibles dans la boutique.</p>
+        <hr class="mr-4">
+    <div class="card-deck">
+        {% for produit in bestProducts %}
+            <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 m-4">
+                <img src="/assets/image/produits/{{ produit.filename }}" class="card-img-top" alt="{{ produit.description }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produit.nom }}</h5>
+                    <p class="card-text">Retrouvez ce produit et bien d'autres sur notre boutique. </p>
+                    <div>
+                        <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id, slug: produit.slug}) }}">Lien vers le produit</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <br/><h1 class="display-4">Nos habits</h1>
     <p class="lead"> Les habits sont le meilleur moyen de donner une visibilité à l'école. <br/>
     On propose régulièrement de nouveaux modèles, et toutes les tailles sont disponibles. <br/>
     Venez y faire un tour !</p>
