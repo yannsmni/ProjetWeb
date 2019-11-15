@@ -12,7 +12,7 @@ class ZipController extends AbstractController
 {
 
 public function zipDownloadDocumentsAction(ObjectManager $manager) {
-    $this->container->get('security.authorization_checker')->isGranted('ROLE_CESI');
+ 
 
     $connection = $manager->getConnection();
     $statement = $connection->prepare("SELECT filename FROM image");
