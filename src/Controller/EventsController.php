@@ -59,6 +59,7 @@ class EventsController extends AbstractController {
         $image = new Image();
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
+        $username = "visiteur";
 
         if (!empty($this->getUser())) {
             $user = $this->getUser();

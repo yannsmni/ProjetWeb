@@ -77,7 +77,9 @@
             <a class="btn btn-dark mb-4 mr-4" href="{{ path('boutique/accueil') }}">Retourner à la boutique</a>
         </div>
     {% else %}
-    <p>Surprise, c'est vide !</p>
+    <div class="container-fluid" style="background-color: #ad9a91;">
+        <h5 class="text-center font-weight-bold py-4">Votre panier est vide</h5>
+    </div>    
     {% endif %}
 </div>
 

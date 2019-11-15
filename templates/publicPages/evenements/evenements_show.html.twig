@@ -137,7 +137,7 @@
             {{ form_end(imageForm) }}
             {% elseif app.user and participe == false %}
             <p class="mt-4 font-weight-bold">Vous n'avez pas participé à cet évènement</p>
-            {% else %}
+            {% elseif not app.user %}
             <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster une photo</p>
             {% endif %}
         </div>
