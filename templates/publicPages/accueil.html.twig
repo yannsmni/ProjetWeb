@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid" style="background-color: #6bc5fa;">
     <div class="container">
       <h1 class="display-4 font-weight-bold">BDE CESI Strasbourg</h1>
       <p class="lead">En naviguant sur ce site, vous acceptez la présence de cookies. <br/>
@@ -81,7 +81,10 @@
           <div class="jumbotron jumbotron-fluid" style="background-color: #5c88da;">
               <div class="container">
                 <h1 class="display-4 font-weight-bold">Evénements</h1>
-                <p class="lead">Ouais ouais ouais</p>
+                <p class="lead">L'association BDE CESI Strasbourg organise de nombreux événements que vous pourrez retrouver sur le site, chaque membre possédant un compte peut s'y inscrire. Une fois l'événement passé, les membres peuvent également poster des photos sur les événements et les commenter.</p>
+                <div>
+                    <a class="btn btn-dark" href="{{ path('evenements') }}">Lien vers les événements</a>
+                </div>
                 <hr class="my-4">
                 <div class="row">
                   {% for evenement in upcommingEvents %}
@@ -107,6 +110,9 @@
                 <h1 class="display-4 font-weight-bold">Boutique</h1>
                 <p class="lead">Retrouvez tous vos produits préférés à l'image du BDE !<br/>
                 Voici nos trois produits les plus vendus : </p>
+                <div>
+                  <a class="btn btn-dark" href="{{ path('boutique/accueil') }}">Lien vers la boutique</a>
+                </div>
                 <hr class="my-4">
                 <div class="card-deck">
                     {% for produit in bestProducts %}
@@ -115,6 +121,9 @@
                       <div class="card-body">
                         <h5 class="card-title">{{ produit.nom }}</h5>
                         <p class="card-text">Retrouvez ce produit et bien d'autres sur notre boutique. </p>
+                          <div>
+                            <a class="btn btn-primary" href="{{ path('boutique/ID', {ID: produit.id, slug: produit.slug}) }}">Lien vers le produit</a>
+                          </div>
                       </div>
                     </div>
                     {% endfor %}
