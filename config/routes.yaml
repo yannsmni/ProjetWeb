@@ -121,7 +121,7 @@ adminCategoryHome:
   controller: App\Controller\Admin\AdminCategoryController::index
 
 adminCategoryAdd:
-  path: /administration/categories
+  path: /administration/categories/add
   controller: App\Controller\Admin\AdminCategoryController::add
 
 adminCategoryEdit:
