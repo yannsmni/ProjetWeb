@@ -285,7 +285,7 @@ class EventsController extends AbstractController {
         foreach ($participants as $participants) {
             $html2pdf->writeHTML('<p>Nom du participant :</p>'.implode($participants));
         }
-        $html2pdf->output("listeInscrits".$evenement->getId().".pdf", 'D');
+        $html2pdf->output('Liste-Inscrits-Evenement-'.$evenement->getId().'.pdf', 'D');
 
         return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);    
     }

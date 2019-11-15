@@ -8,7 +8,7 @@ use App\Entity\Commentaire;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventsController extends AbstractController {  
+class ReportController extends AbstractController {  
 
     public function __construct(ObjectManager $manager) {
         $this->manager = $manager;
