@@ -49,16 +49,11 @@ evenementsDownloadPDFId:
  # path: /evenements/{id}/dl-pdf
  # controller: App\Controller\EventsController::downloadPDF
 
-#evenementsDownloadCSV:
- # path: /evenements/{id}-dl-csv
- # controller: App\Controller\EventsController::downloadCSV
-
 #chemin relatif à la législation
 
 legislation:
   path: /legislation
   controller: App\Controller\HomeController::legislation
-
 
 #chemins relatifs à la boutique
 

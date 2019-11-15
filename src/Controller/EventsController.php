@@ -49,12 +49,13 @@ class EventsController extends AbstractController {
             'latestEvents' => $latestEvents,
             'upcommingEvents' => $upcommingEvents,
             'bestEvents' => $bestEvents,
-            'nombreParticipants' => $nombreParticipants
+            'nombreParticipants' => $nombreParticipants,
         ]);
     }
 
     public function show(Evenement $evenement, Request $request, ObjectManager $manager): Response
     {
+        $date = new \DateTime();
         $image = new Image();
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
@@ -68,6 +69,9 @@ class EventsController extends AbstractController {
             $response = $api->request('GET', $req);
             $rep = $response->toArray();
             $userId = $rep[0]["id"];
+            $userNom = $rep[0]["nom"];
+            $userPrenom = $rep[0]["prenom"];
+            $username = $userPrenom . " " . $userNom;
         }
 
         $connection = $manager->getConnection();
@@ -99,7 +103,9 @@ class EventsController extends AbstractController {
             'evenement' => $evenement,
             'participants' => $participants,
             'nombreParticipants' => $nombreParticipants,
-            'imageForm' => $imageForm->createView()
+            'imageForm' => $imageForm->createView(),
+            'now' => $date,
+            'utilisateurParticipant' => $username
         ]);
     }
 
