@@ -191,3 +191,17 @@ commentsReportId:
 profile:
   path: /profile
   controller: App\Controller\ProfileController::index
+
+#chemin relatif aux signalements
+
+reportEvent:
+  path: /report/event
+  controller: App\Controller\ReportController::reportEvent
+
+reportImage:
+  path: /report/image
+  controller: App\Controller\ReportController::reportImage
+
+reportComment:
+  path: /report/comment
+  controller: App\Controller\ReportController::reportComment

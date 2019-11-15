@@ -23,7 +23,7 @@ class PhotosController extends AbstractController {
 
     public function index(): Response 
     {        
-        $allImages = $this->repository->findAll();
+        $allImages = $this->repository->findVisibleImages();
 
         return $this->render('publicPages/photos.html.twig', [
             'allImages' => $allImages
