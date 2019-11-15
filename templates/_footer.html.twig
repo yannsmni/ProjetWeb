@@ -1,0 +1,61 @@
+<footer class="page-footer font-small text-white pt-4" style="background-color: black;">
+
+        <div class="container text-center text-md-left">
+      
+          <div class="row text-center text-md-left mt-3 pb-3">
+      
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">Bde Cesi</h6>
+              <img src="/assets/image/logo.png" alt="Logo du BDE">
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold text-white">Navigation</h6>
+                <p><a href="{{ path('evenements') }}" class="text-white">Evenements</a></p>
+                <p><a href="{{ path('boutique/accueil') }}" class="text-white">Boutique</a></p>
+                <p><a href="{{ path('photos') }}" class="text-white">Photos</a></p>
+                <p><a href="" class="text-white">Boîte à idées</a></p>
+                {% if is_granted('ROLE_BDE') %}
+                <p><a href="{{ path('administration') }}" class="text-white">Administration</a></p>
+                {% endif %}
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold text-white">Compte</h6>
+                {% if app.user %}
+                <p><a href="{{ path('profile') }}" class="text-white">Profil</a></p>
+                <p><a href="{{ path('security_deconnexion') }}" class="text-white">Déconnexion</a></p>
+                {% else %}
+                <p><a href="{{ path('security_connexion') }}" class="text-white">Connexion</a></p>
+                {% endif %}
+                <p><a href="{{ path('security_inscription') }}" class="text-white">Inscription</a></p>
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
+                <p><strong>1 allée des Foulons, 67380 Lingolsheim - France</strong></p>
+                <p><strong>bde-cesi-strasbourg@viacesi.fr</strong></p>
+                <p><strong>03 88 10 35 60</strong></p>
+            </div>
+          </div>
+          <hr style="border-color: white;">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8">
+              <p class="text-center text-md-left">© 2019 Copyright :
+                  <strong>BDE CESI</strong>
+              </p>
+            </div>
+            <div class="col-md-5 col-lg-4 ml-lg-0">
+              <div class="text-center text-md-right">
+                <ul class="list-unstyled list-inline">
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                            <a class="text-white" href="{{ path('legislation') }}">Mentions légales</a></i>
+                        </a>
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </footer>

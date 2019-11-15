@@ -4,6 +4,8 @@
 
 {% block body %}
 
+{% set participe = '' %}
+
 <div class="jumbotron">
     <h1 class="display-4">{{ evenement.nom }} - {{ evenement.id }}</h1>
     <hr class="my-4">
@@ -26,13 +28,16 @@
         <div>
             <div class="row">
                 <div class="col-9">
-                    {% if app.user %}
+                    {% if app.user and evenement.date > now %}
+                    {# {% if app.user %} #}
                         <a href="{{ path('evenementsRegisterId', {id: evenement.id}) }}" class="btn btn-success">M'inscrire</a>
                     {% endif %}
                     {% if is_granted('ROLE_CESI') %}
-                    <a href="{{ path('evenementsReportId', {id: evenement.id}) }}" class="btn btn-danger">Signaler</a>
-                    <a href="{{ path('evenementsDownloadPDF', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en PDF</a>
-                    <a href="{{ path('evenementsDownloadCSV', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en CSV</a>
+                        <a href="{{ path('evenementsReportId', {id: evenement.id}) }}" class="btn btn-danger">Signaler</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_BDE') %}
+                        <a href="{{ path('evenementsDownloadPDF', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en PDF</a>
+                        <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-danger">Télécharger en CSV</a>
                     {% endif %}
                 </div>
                 <div class="col-3">
@@ -46,20 +51,24 @@
     <hr class="my-4">
     <div>
         <h1>Participants ({{ nombreParticipants[0]['COUNT(participant)'] }})</h1>
-        <div class="col">
+        <div class="card-deck my-4">
             {% for participant in participants %}
-                <div class="card">
+                {% if participant.participant == utilisateurParticipant %}
+                    {% set participe = true %}
+                {% else %}
+                    {% set participe = false %}
+                {% endif %}
+                <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2">
                     <div class="card-body">
-                        <p>{{ participant.participant }}</p>
+                        <p class="text-center font-weight-bold">{{ participant.participant }}</p>
                     </div>
                 </div>
             {% endfor %}
-            <a href="{{ path('evenementsDownloadCSVId', {id: evenement.id}) }}" class="btn btn-success">CSV</a>
         </div>
     </div>
     <hr class="my-4">
     <div>
-        <h1>Photos de l'événement ({{ evenement.images | length }})</h1>
+        <h1 class="my-4">Photos de l'événement ({{ evenement.images | length }})</h1>
         {% for images in evenement.images %}
         <div class="card" style="width: 18rem;">
             <img src="/assets/image/photos/{{ images.filename }}" class="card-img-top" alt="{{ images.description }}">
@@ -102,26 +111,33 @@
                         {% endif %}
                     </div>
                 </div>
+                <div class="mx-2">
+                    <h5>{{ images.vote | length }} Likes</h5>
+                </div>
                 {% if app.user %}
-                    <a href="{{ path('image_like', {id: images.id}) }}" class="btn btn-info">Likes : {{ images.vote | length }}</a>
+                    <a href="{{ path('image_like', {id: images.id}) }}" class="btn btn-info">Like</a>
                 {% endif %}
         </div>
         {% endfor %}
         <div class="my-4">
-            {% if app.user %}
+            {% if app.user and participe == true and evenement.date < now  %}
             <h5>Ajouter une image</h5>
             {{ form_start(imageForm) }}
             <div class="row">
                 <div class="col-4">
                     {{ form_row(imageForm.imageFile) }}
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                     {{ form_row(imageForm.Description) }}
                 </div>
-                <button type="submit" class="btn btn-primary">Poster</button>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-primary">Poster</button>
+                </div>
             </div>
             {{ form_end(imageForm) }}
-            {% else %}
+            {% elseif app.user and participe == false %}
+            <p class="mt-4 font-weight-bold">Vous n'avez pas participé à cet évènement</p>
+            {% elseif not app.user %}
             <p class="mt-4 font-weight-bold">Connectez vous pour pouvoir poster une photo</p>
             {% endif %}
         </div>

@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+//require_once '../vendor/autoload.php';
+
+use Vendor\autoload;
 use App\Entity\Image;
 use App\Form\ImageType;
 use App\Entity\Evenement;
@@ -16,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Spipu\Html2Pdf\Html2Pdf;
 
 class EventsController extends AbstractController {  
 
@@ -47,15 +50,17 @@ class EventsController extends AbstractController {
             'latestEvents' => $latestEvents,
             'upcommingEvents' => $upcommingEvents,
             'bestEvents' => $bestEvents,
-            'nombreParticipants' => $nombreParticipants
+            'nombreParticipants' => $nombreParticipants,
         ]);
     }
 
     public function show(Evenement $evenement, Request $request, ObjectManager $manager): Response
     {
+        $date = new \DateTime();
         $image = new Image();
         $imageForm = $this->createForm(ImageType::class, $image);
         $imageForm->handleRequest($request);
+        $username = "visiteur";
 
         if (!empty($this->getUser())) {
             $user = $this->getUser();
@@ -66,6 +71,9 @@ class EventsController extends AbstractController {
             $response = $api->request('GET', $req);
             $rep = $response->toArray();
             $userId = $rep[0]["id"];
+            $userNom = $rep[0]["nom"];
+            $userPrenom = $rep[0]["prenom"];
+            $username = $userPrenom . " " . $userNom;
         }
 
         $connection = $manager->getConnection();
@@ -97,7 +105,9 @@ class EventsController extends AbstractController {
             'evenement' => $evenement,
             'participants' => $participants,
             'nombreParticipants' => $nombreParticipants,
-            'imageForm' => $imageForm->createView()
+            'imageForm' => $imageForm->createView(),
+            'now' => $date,
+            'utilisateurParticipant' => $username
         ]);
     }
 
@@ -171,9 +181,9 @@ class EventsController extends AbstractController {
             $date = new \DateTime();
             $date = $date->format('Y-m-d H:i:s');
             $index = 0;
+            $connection = $manager->getConnection();
 
             foreach ($allEvents as $evenement) {
-                $connection = $manager->getConnection();
                 $statement = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
                 $statement2 = $connection->prepare("SELECT * FROM evenement, evenement_utilisateur WHERE evenement_utilisateur.participant = :user AND evenement.date >= :dateNow AND evenement.id = evenement_utilisateur.evenement_id ORDER BY evenement.date DESC");
                 $statement3 = $connection->prepare("SELECT * FROM evenement, evenement_utilisateur WHERE evenement_utilisateur.participant = :user AND evenement.date <= :dateNow AND evenement.id = evenement_utilisateur.evenement_id ORDER BY evenement.date DESC");
@@ -243,14 +253,15 @@ class EventsController extends AbstractController {
         return $this->redirectToRoute('evenementsAll');
     }
 
-    public function downloadCSV(Evenement $evenement, ObjectManager $manager): Response {
+    public function downloadCSV(Evenement $evenement, ObjectManager $manager): Response 
+    {
         $connection = $manager->getConnection();
         $statement = $connection->prepare("SELECT participant FROM evenement_utilisateur WHERE evenement_id = :evenement");
         $statement->bindValue('evenement', $evenement->getId());
         $statement->execute();
         $participants = $statement->fetchAll();
 
-        $fp = fopen("listeInscrits".$evenement->getId().".csv", 'w');
+        $fp = fopen('Liste-Inscrits-Evenement-'.$evenement->getId().".csv", 'w');
         foreach ($participants as $participants) {
             fputcsv($fp, $participants, ';');
         }
@@ -259,9 +270,23 @@ class EventsController extends AbstractController {
         return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);
     }
 
-    /*public function downloadPDF() {
+    public function downloadPDF(Evenement $evenement, ObjectManager $manager): Response 
+    {
+        $connection = $manager->getConnection();
+        $statement = $connection->prepare("SELECT participant FROM evenement_utilisateur WHERE evenement_id = :evenement");
+        $statement->bindValue('evenement', $evenement->getId());
+        $statement->execute();
+        $participants = $statement->fetchAll();
 
+        $html2pdf = new Html2Pdf('P', 'A4', 'fr');
+        $html2pdf->pdf->SetTitle('Liste-Inscrits-Evenement-'.$evenement->getId().'.pdf');
+        $html2pdf->pdf->SetDisplayMode('fullpage');
+        $html2pdf->writeHTML("<h1>Participants à l'événement: </h1>");
+        foreach ($participants as $participants) {
+            $html2pdf->writeHTML('<p>Nom du participant :</p>'.implode($participants));
+        }
+        $html2pdf->output("listeInscrits".$evenement->getId().".pdf", 'D');
 
-        return $this->render('publicPages/evenements/evenements_dl.html.twig');
-    }*/
+        return $this->redirectToRoute('evenementId', ['id' => $evenement->getId()]);    
+    }
 }

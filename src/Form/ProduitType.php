@@ -22,7 +22,7 @@ class ProduitType extends AbstractType
                     'placeholder' => 'Nom du produit'
                 ]
             ])
-            ->add('Description', IntegerType::class, [
+            ->add('Description', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Description du produit'
                 ]

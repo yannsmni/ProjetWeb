@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
 
 class AdminCategoryController extends AbstractController {
 
@@ -28,7 +29,7 @@ class AdminCategoryController extends AbstractController {
 
     public function add(Request $request)
     {        
-        $categorie = new Category();
+        $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
