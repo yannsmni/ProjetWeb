@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-require_once '../vendor/autoload.php';
+//require_once '../vendor/autoload.php';
 
+use Vendor\autoload;
 use App\Entity\Image;
 use App\Form\ImageType;
 use App\Entity\Evenement;
