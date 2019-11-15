@@ -2,7 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-
 accueil:
   path: /
   controller: App\Controller\HomeController::index
@@ -81,15 +80,17 @@ boutique/categorie/reductions:
   path: /boutique/reduction
   controller: App\Controller\ShopController::reduction
 
-administration:
-  path: /administration
-  controller: App\Controller\Admin\AdminHomeController::index
-
 boutique/ID:
   path: boutique/{slug}-{ID}/description
   controller: App\Controller\ShopController::show
   requirements:
     slug: '[a-z0-9\-]*'
+
+#chemins relatifs à la partie admin
+
+administration:
+  path: /administration
+  controller: App\Controller\Admin\AdminHomeController::index
 
 #chemins relatifs à la partie admin - event
 
@@ -184,3 +185,9 @@ security_deconnexion:
 commentsReportId:
   path: /commentaire/{id}/report
   controller: App\Controller\CommentController::report
+
+#chemin relatif au profil
+
+profile:
+  path: /profile
+  controller: App\Controller\ProfileController::index

@@ -19,6 +19,17 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
+    public function findLatestVisibleImages()
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.Visible = true')
+            ->orderBy('i.Date_edit', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Image[] Returns an array of Image objects
     //  */

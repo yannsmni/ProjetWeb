@@ -4,16 +4,23 @@
 
 {% block body %}
 
-<div class="jumbotron jumbotron-fluid" style="background-color: #6bc5fa;">
-    <div class="container">
-      <h1 class="display-4 font-weight-bold">BDE CESI Strasbourg</h1>
-      <p class="lead">En naviguant sur ce site, vous acceptez la présence de cookies. <br/>
-        Pour en savoir plus sur vos droits et données personnelles, cliquez sur le bouton ci dessous. <br/>
-      </p>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cookie">
-          Cookies
-      </button>
-    </div>
+<div class="jumbotron jumbotron-fluid" style="background-color: #7c685c;">
+  <div class="row">
+      <div class="col-3 text-center">
+          <img src="/assets/image/logo.png" alt="Logo du BDE">
+      </div>
+      <div class="col-9">
+          <div class="container">
+              <h1 class="display-4 font-weight-bold">BDE CESI Strasbourg</h1>
+              <p class="lead">En naviguant sur ce site, vous acceptez la présence de cookies. <br/>
+                  Pour en savoir plus sur vos droits et données personnelles, cliquez sur le bouton ci dessous. <br/>
+              </p>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cookie">
+                  Cookies
+              </button>
+          </div>
+      </div>
+  </div>
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" id="Cookie">
@@ -117,7 +124,7 @@
                 <div class="card-deck">
                     {% for produit in bestProducts %}
                     <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 m-4">
-                        <br/><img src="/assets/image/produits/{{ produit.filename }}" class="card-img-top" alt="{{ produit.description }}">
+                      <img src="/assets/image/produits/{{ produit.filename }}" class="card-img-top" alt="{{ produit.description }}">
                       <div class="card-body">
                         <h5 class="card-title">{{ produit.nom }}</h5>
                         <p class="card-text">Retrouvez ce produit et bien d'autres sur notre boutique. </p>
@@ -135,42 +142,28 @@
           <div class="jumbotron jumbotron-fluid" style="background-color: #ea7600">
               <div class="container">
                 <h1 class="display-4 font-weight-bold">Photos</h1>
-                <p class="lead">Ouais ouais ouais</p>
+                <p class="lead">Retrouvez toutes les photos de nos événements directement dans la galerie, vous pourrez également les commenter et liker dès que vous êtes connecté !</p>
+                  <div>
+                    <a class="btn btn-dark" href="{{ path('photos') }}">Lien vers la galerie photos</a>
+                  </div>
                 <hr class="my-4">
                 <div class="card-deck">
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
+                    {% for image in latestImages %}
+                    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 m-4">
+                        <img src="/assets/image/photos/{{ image.filename }}" class="card-img-top" alt="{{ image.description }}">
+                        <div class="card-footer text-muted">
+                            <p class="text-dark">Le {{ image.getDateEdit()|date("d M Y")}} à {{ image.getDateEdit()|date("G")}}h{{ image.getDateEdit()|date("i")}}</p>
+                        </div>
                     </div>
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                  </div>
-              </div>
+                    {% endfor %}
+                </div>
           </div>
       </div>
       <div class="carousel-item">
           <div class="jumbotron jumbotron-fluid" style="background-color: #b5bd00">
               <div class="container">
                 <h1 class="display-4 font-weight-bold">Boîte à idée</h1>
-                <p class="lead">Ouais ouais ouais</p>
+                <p class="lead">Work in Progress</p>
                 <hr class="my-4">
                 <div class="card-deck">
                     <div class="card">

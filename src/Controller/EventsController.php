@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 use App\Entity\Image;
 use App\Form\ImageType;
@@ -179,9 +179,9 @@ class EventsController extends AbstractController {
             $date = new \DateTime();
             $date = $date->format('Y-m-d H:i:s');
             $index = 0;
+            $connection = $manager->getConnection();
 
             foreach ($allEvents as $evenement) {
-                $connection = $manager->getConnection();
                 $statement = $connection->prepare("SELECT COUNT(participant) FROM evenement_utilisateur WHERE evenement_id = :evenement");
                 $statement2 = $connection->prepare("SELECT * FROM evenement, evenement_utilisateur WHERE evenement_utilisateur.participant = :user AND evenement.date >= :dateNow AND evenement.id = evenement_utilisateur.evenement_id ORDER BY evenement.date DESC");
                 $statement3 = $connection->prepare("SELECT * FROM evenement, evenement_utilisateur WHERE evenement_utilisateur.participant = :user AND evenement.date <= :dateNow AND evenement.id = evenement_utilisateur.evenement_id ORDER BY evenement.date DESC");
