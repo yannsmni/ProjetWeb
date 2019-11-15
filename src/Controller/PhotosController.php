@@ -71,16 +71,6 @@ class PhotosController extends AbstractController {
         ]);
     }
 
-    public function report(Image $image, ObjectManager $manager): Response
-    {
-        $image->setVisible(false);
-
-        $manager->persist($image);
-        $manager->flush();
-
-        return $this->redirectToRoute('photos');
-    }
-
     /**
      * @Route("/images/{id}/like", name="image_like")
      */

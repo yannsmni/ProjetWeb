@@ -243,16 +243,6 @@ class EventsController extends AbstractController {
         }
     }
 
-    public function report(Evenement $evenement, ObjectManager $manager): Response
-    {
-        $evenement->setVisible(false);
-
-        $manager->persist($evenement);
-        $manager->flush();
-
-        return $this->redirectToRoute('evenementsAll');
-    }
-
     public function downloadCSV(Evenement $evenement, ObjectManager $manager): Response 
     {
         $connection = $manager->getConnection();
