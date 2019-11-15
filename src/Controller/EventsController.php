@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-require_once 'C:\Users\Clément\Documents\CESI\3eme_semestre\BLOC_2\ProjetWebBDE\ProjetWeb\vendor\autoload.php';
+require_once '../vendor/autoload.php';
 
 use App\Entity\Image;
 use App\Form\ImageType;

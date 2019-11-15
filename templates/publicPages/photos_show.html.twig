@@ -50,7 +50,9 @@
                                         {{commentaire.contenu}}
                                         </div>
                                         <div class="col-3">
+                                        {% if is_granted('ROLE_CESI') %}
                                             <a href="{{ path('commentsReportId', {id: commentaire.id}) }}" class="btn btn-danger ml-4">Signaler</a>
+                                        {% endif %}
                                         </div>
                                     </div>
                                     {% endif %}
